@@ -1,10 +1,9 @@
-import React from 'react';
-import '@/components/Header.css'; // Importa los estilos
+import '@/components/Header.css';
 import logo from '../assets/logo.png'; 
 
 const Header = () => {
   return (
-    <header className="header">
+    <header className=" bg-black bg-opacity-60 flex justify-between p-2">
       <div className="logo-container">
         <img src={logo} alt="Logo del negocio" className="logo" />
       </div>

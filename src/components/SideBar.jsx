@@ -14,7 +14,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-64 bg-gray-800 text-white h-full p-2 max-w-sm shadow-md overflow-hidden mt-4">
+    <div className="w-64 bg-gray-800 text-white h-full p-2 max-w-sm shadow-md overflow-hidden">
       <ul>
         {buttons.map((button, index) => (
           <li key={index} className="mb-2">
