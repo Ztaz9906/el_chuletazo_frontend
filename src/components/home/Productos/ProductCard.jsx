@@ -1,5 +1,6 @@
-import {Box, Button, Flex, Image, Input, Text, VStack} from '@chakra-ui/react';
+import {Box, Button, Flex, Image, Input, Text, Tooltip, VStack} from '@chakra-ui/react';
 import {useState} from "react";
+import {ShoppingCart} from "lucide-react";
 
 const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
 	const handleIncrement = () => onChange(Math.min(value + 1, max));
@@ -29,7 +30,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
 					onChange(Math.max(min, Math.min(newValue, max)));
 				}}
 				textAlign="center"
-				w="50px"
+				w="100px"
 				border="none"
 				borderRadius={0}
 			/>
@@ -71,9 +72,11 @@ const ProductCard = ({ producto }) => {
 
 				<Flex justifyContent="space-between" alignItems="center" w="full" mt={4}>
 					<Text fontSize="lg" fontWeight="bold"> $ {producto.default_price.unit_amount/100} {producto.default_price.currency.toUpperCase()}/lb</Text>
-					<Button bg="green.500" color="white" px={4} py={2} rounded="md" _hover={{ bg: "green.600" }}>
-						Añadir al carrito
-					</Button>
+					<Box bg="green.500" color="white" px={4} py={2} rounded="md" _hover={{ bg: "green.600" }}>
+						<Tooltip label={'Agregar al carrito'} hasArrow >
+							<ShoppingCart />
+						</Tooltip>
+					</Box>
 				</Flex>
 			</VStack>
 		</Box>
