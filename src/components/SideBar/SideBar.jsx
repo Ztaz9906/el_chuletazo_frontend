@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import {useState} from 'react';
 import mp_visa from '@/assets/ic_VISA.png';
 import mp_mastercard from '@/assets/ic_mastercard.png';
 
@@ -14,7 +14,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-64 bg-gray-800 text-white h-full p-2 max-w-sm shadow-md overflow-hidden">
+    <div className="w-64 bg-gray-800 text-white h-screen p-2 max-w-sm shadow-md overflow-hidden">
       <ul>
         {buttons.map((button, index) => (
           <li key={index} className="mb-2">

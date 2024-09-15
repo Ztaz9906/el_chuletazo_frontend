@@ -1,12 +1,12 @@
-import '@/components/BackPrincipal.css';
-import Header from "@/components/Header.jsx";
+import '@/components/header/BackPrincipal.css';
+import Header from "@/components/header/Header.jsx";
 
 const BackPrincipal = () => {
   return (
       <div className="background flex flex-col">
           <Header/>
           <div className="flex-grow flex flex-col justify-center p-4 md:p-8 relative z-10">
-              <h1 className="text-white text-xl sm:text-2xl md:text-4xl font-rounded leading-tight mb-4">
+              <h1 className="text-white text-xl sm:text-2xl md:text-4xl md:leading-[50px] leading-[50px] mb-4">
                   Adquiere de forma rápida y sencilla<br/>
                   los productos que necesita<br/>
               </h1>
