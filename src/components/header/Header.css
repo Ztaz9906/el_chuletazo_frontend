@@ -31,8 +31,8 @@
 }
 
 .header-button:hover {
-  background-color: white;
-  color: black;
+  /*background-color: rgb(161, 222, 187);*/
+  color: green;
 }
 
 @media (max-width: 768px) {

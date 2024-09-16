@@ -35,6 +35,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
         roundedLeft="md"
         _hover={{ bg: "gray.400" }}
         fontSize="sm"
+        textColor={"#525252"}
       >
         -
       </Button>
@@ -67,6 +68,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
         roundedRight="md"
         _hover={{ bg: "gray.400" }}
         fontSize="sm"
+        textColor={"#525252"}
       >
         +
       </Button>

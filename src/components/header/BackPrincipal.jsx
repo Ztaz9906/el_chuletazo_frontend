@@ -10,7 +10,7 @@ const BackPrincipal = ({children}) => {
                   Adquiere de forma rápida y sencilla<br/>
                   los productos que necesita<br/>
               </h1>
-              <h1 className="text-white text-[14px]">
+              <h1 className="text-gray-300 text-[14px]">
                   En nuestra tienda online usted podrá comprar y enviar productos a sus familiares y amigos en Cuba
               </h1>
           </div>
