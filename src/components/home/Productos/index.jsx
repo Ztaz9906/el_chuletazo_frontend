@@ -1,7 +1,7 @@
 import ProductCard from "@/components/home/Productos/ProductCard.jsx";
 import { useGetProductoQuery } from "@/servicios/api/productos/index.js";
 import { useEffect } from "react";
-import { Grid } from "@chakra-ui/react";
+import { Flex, Grid } from "@chakra-ui/react";
 
 export default function Index() {
   // Directly call useGetProductoQuery to get data, isLoading, and error
@@ -18,12 +18,12 @@ export default function Index() {
   }, [isLoading, data, error]); // Only runs when these values change
 
   return (
-    <Grid templateColumns={"repeat(3,1fr)"} gap={4} p={2}>
+    <Flex justify={"space-evenly"} gap={4} p={8}>
       {!isLoading &&
         data &&
         data.map((producto, index) => (
           <ProductCard key={index} producto={producto} />
         ))}
-    </Grid>
+    </Flex>
   );
 }

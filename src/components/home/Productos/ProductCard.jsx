@@ -79,8 +79,8 @@ const ProductCard = ({ producto }) => {
 
   return (
     <Box
-      w="300px"
-      h="400px"
+      w="250px"
+      h="350px"
       bg="gray.400"
       shadow="md"
       overflow="hidden"
