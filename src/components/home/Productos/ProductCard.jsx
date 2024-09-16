@@ -65,8 +65,8 @@ const ProductCard = ({ producto }) => {
 	return (
 		<Box maxW="xs" mx="auto" bg="gray.400" shadow="md" overflow="hidden" mt={4}>
 			
-			<Box p={2}>
-				<Image w="full" h="36" objectFit="cover" src={producto.image} alt={producto.name} />
+			<Box p={2} maxW="220px" minW="200px" h="150px" >
+				<Image objectFit="cover" src={producto.image} alt={producto.name} />
 			</Box>
 
 			<VStack spacing={2} p={0}>
