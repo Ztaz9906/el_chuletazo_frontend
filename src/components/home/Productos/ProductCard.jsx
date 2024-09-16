@@ -26,7 +26,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
     >
       <Button
         onClick={handleDecrement}
-        bg="gray.300"
+        bg="main.10"
         px={1}
         py={0}
         h="full"
@@ -59,7 +59,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
 
       <Button
         onClick={handleIncrement}
-        bg="gray.300"
+        bg="main.10"
         px={1}
         h="full"
         minW="20px"
@@ -98,18 +98,18 @@ const ProductCard = ({ producto }) => {
         />
       </Box>
 
-      <VStack spacing={2} p={2} flex={1} justifyContent="space-between">
+      <VStack spacing={2} flex={1} justifyContent="space-between">
         <Flex
-          bg="main.10"
+          bg="#bce6d7"
           alignItems="center"
           p={2}
-          rounded="md"
+          rounded="xs"
           w="full"
           justifyContent="space-between"
         >
           <Text
             fontSize="sm"
-            color="white"
+            color="black"
             fontWeight="bold"
             isTruncated
             maxW="60%"
@@ -123,16 +123,19 @@ const ProductCard = ({ producto }) => {
           {producto.description}
         </Text>
 
-        <Flex justifyContent="space-between" alignItems="center" w="full">
-          <Text fontSize="md" fontWeight="bold">
+        <Flex justifyContent="space-between" alignItems="center" w="full"  p={2}>
+          
+          <Text fontSize="md" fontWeight="bold" textColor={"green"}>
             $ {(producto.default_price.unit_amount / 100).toFixed(2)}{" "}
             {producto.default_price.currency.toUpperCase()}/lb
           </Text>
+
           <Tooltip label="Agregar al carrito" hasArrow>
+
             <Button
-              bg="green.500"
+              bg="main.10"
               color="white"
-              px={3}
+              px={1}
               py={2}
               rounded="md"
               _hover={{ bg: "green.600" }}

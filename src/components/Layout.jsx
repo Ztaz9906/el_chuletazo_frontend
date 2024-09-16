@@ -15,7 +15,7 @@ const Layout = () => {
         <MyTabs/>
       </BackPrincipal>
       <div className="flex">
-        <Box overflowY={'auto'} bg="#ffffe9" w="full">
+        <Box overflowY={'auto'} bg="#fff4dc" w="full">
           <Outlet/>
         </Box>
       </div>
