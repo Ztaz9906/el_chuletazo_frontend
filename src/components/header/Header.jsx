@@ -3,7 +3,7 @@ import logo from '../../assets/logo.png';
 
 const Header = () => {
   return (
-    <header className=" bg-black bg-opacity-60 flex justify-between p-2">
+    <header className=" bg-black bg-opacity-30 flex justify-between p-2">
       <div className="logo-container m-2">
         <img src={logo} alt="Logo del negocio" className="logo w-13 h-10 object-contain"/>
       </div>

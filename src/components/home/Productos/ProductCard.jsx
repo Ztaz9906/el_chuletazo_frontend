@@ -78,29 +78,29 @@ const ProductCard = ({ producto }) => {
   const [quantity, setQuantity] = useState(0);
 
   return (
-    <Box
+    <Box  /*Contenedor general de los productos*/
       w="250px"
       h="350px"
-      bg="gray.400"
+      bg="white"
       shadow="md"
       overflow="hidden"
       borderRadius="md"
       display="flex"
       flexDirection="column"
     >
-      <Box p={3} h="200px">
+      <Box p={3} h="200px"/*Contenedor de la imagen del producto*/> 
         <Image
           objectFit="contain"
           w="100%"
           h="100%"
           src={producto.image}
-          alt={producto.name}
+          alt={producto.name}   /**Nombre del producto */
         />
       </Box>
 
-      <VStack spacing={3} p={3} flex={1} justifyContent="space-between">
+      <VStack spacing={2} p={2} flex={1} justifyContent="space-between">
         <Flex
-          bg="main.800"
+          bg="main.10"
           alignItems="center"
           p={2}
           rounded="md"

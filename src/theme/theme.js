@@ -3,6 +3,7 @@ import {extendTheme} from "@chakra-ui/react";
 
 const colors = {
 	main: {
+		10: "#28b463",
 		50: "#e6fae4",
 		100: "#c2f2be",
 		200: "#9dea97",

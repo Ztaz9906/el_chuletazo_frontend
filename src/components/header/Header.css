@@ -1,14 +1,12 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background-color: rgba(1, 1, 1, 1); /* Negro con 80% de opacidad */
+  align-items: center; 
   padding: 10px 20px;
   width: 100%;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
-  opacity: 60%;
 }
 
 .logo-container {

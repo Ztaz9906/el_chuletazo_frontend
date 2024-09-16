@@ -11,8 +11,9 @@ const Layout = () => {
 
   return (
     <div className="layout flex flex-col">
-      <BackPrincipal />
-      <MyTabs/>
+      <BackPrincipal>
+        <MyTabs/>
+      </BackPrincipal>
       <div className="flex">
         <Box overflowY={'auto'} bg="#ffffe9" w="full">
           <Outlet/>

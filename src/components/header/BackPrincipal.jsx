@@ -1,7 +1,7 @@
 import '@/components/header/BackPrincipal.css';
 import Header from "@/components/header/Header.jsx";
 
-const BackPrincipal = () => {
+const BackPrincipal = ({children}) => {
   return (
       <div className="background flex flex-col">
           <Header/>
@@ -14,6 +14,7 @@ const BackPrincipal = () => {
                   En nuestra tienda online usted podrá comprar y enviar productos a sus familiares y amigos en Cuba
               </h1>
           </div>
+          {children}
       </div>
   );
 };
