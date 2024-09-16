@@ -1,9 +1,8 @@
 import BackPrincipal from '@/components/header/BackPrincipal.jsx';
-
-import SideBar from '@/components/SideBar/SideBar.jsx';
 import {Outlet} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {Box} from "@chakra-ui/react";
+import MyTabs from '@/components/tab_bar/tab_bar.jsx';
 
 const Layout = () => {
     const user = useSelector(state => state.user);
@@ -13,8 +12,8 @@ const Layout = () => {
   return (
     <div className="layout flex flex-col">
       <BackPrincipal />
+      <MyTabs/>
       <div className="flex">
-        <SideBar/>
         <Box overflowY={'auto'} bg="#ffffe9" w="full">
           <Outlet/>
         </Box>

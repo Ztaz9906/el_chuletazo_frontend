@@ -10,12 +10,10 @@ const BackPrincipal = () => {
                   Adquiere de forma rápida y sencilla<br/>
                   los productos que necesita<br/>
               </h1>
-          </div>
-          <header className="p-3 bg-black bg-opacity-60 ">
               <h1 className="text-white text-[14px]">
                   En nuestra tienda online usted podrá comprar y enviar productos a sus familiares y amigos en Cuba
               </h1>
-          </header>
+          </div>
       </div>
   );
 };
