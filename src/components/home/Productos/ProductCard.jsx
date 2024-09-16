@@ -7,72 +7,82 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
 	const handleDecrement = () => onChange(Math.max(value - 1, min));
 
 	return (
-		<Flex alignItems="center" bg="orange.100" rounded="md" shadow="inner">
-			<Button
-				onClick={handleDecrement}
-				bg="gray.300"
-				color="gray.700"
-				px={2}
-				py={1}
-				borderRadius={0}
-				roundedLeft="md"
-				_hover={{ bg: "gray.400" }}
-			>
-				-
-			</Button>
-			<Input
-				px={4}
-				bg={'orange.100'}
-				shadow={'innerCustom'}
-				value={value}
-				onChange={(e) => {
-					const newValue = parseInt(e.target.value) || 0;
-					onChange(Math.max(min, Math.min(newValue, max)));
-				}}
-				textAlign="center"
-				w="100px"
-				border="none"
-				borderRadius={0}
-			/>
-			<Button
-				onClick={handleIncrement}
-				bg="gray.300"
-				color="gray.700"
-				px={2}
-				py={1}
-				borderRadius={0}
-				roundedRight="md"
-				_hover={{ bg: "gray.400" }}
-			>
-				+
-			</Button>
+		<Flex alignItems="center" bg="orange.100" rounded="md" shadow="inner" maxW="80px" h="30px">
+		  <Button
+			onClick={handleDecrement}
+			bg="gray.300"
+			px={1}
+			py={0}
+			h="full"
+			minW="20px"
+			borderRadius={0}
+			roundedLeft="md"
+			_hover={{ bg: "gray.400" }}
+			fontSize="sm"
+		  >
+			-
+		  </Button>
+	  
+		  <Input
+			px={1}
+			minW="20px"
+			bg="orange.100"
+			shadow="innerCustom"
+			value={value}
+			onChange={(e) => {
+			  const newValue = parseInt(e.target.value) || 0;
+			  onChange(Math.max(min, Math.min(newValue, max)));
+			}}
+			textAlign="center"
+			w="30px"
+			h="full"
+			border="none"
+			borderRadius={0}
+			fontSize="sm"
+		  />
+	  
+		  <Button
+			onClick={handleIncrement}
+			bg="gray.300"
+			px={1}
+			h="full"
+			minW="20px"
+			borderRadius={0}
+			roundedRight="md"
+			_hover={{ bg: "gray.400" }}
+			fontSize="sm"
+		  >
+			+
+		  </Button>
 		</Flex>
-	);
+	  );
+	  
 };
 
 const ProductCard = ({ producto }) => {
 	const [quantity, setQuantity] = useState(0);
 	console.log(producto)
 	return (
-		<Box maxW="sm" mx="auto" bg="gray.400" shadow="md" rounded="lg" overflow="hidden" mt={4}>
+		<Box maxW="xs" mx="auto" bg="gray.400" shadow="md" overflow="hidden" mt={4}>
+			
 			<Box p={2}>
-				<Image w="full" h="48" objectFit="cover" src={producto.image} alt={producto.name} />
+				<Image w="full" h="36" objectFit="cover" src={producto.image} alt={producto.name} />
 			</Box>
 
-			<VStack spacing={4} p={2}>
-				<Flex bg="main.800" alignItems="center" p={4} rounded="md" w="full">
-					<Text fontSize="xl" color="white" fontWeight="bold" mr={4}>{producto.name}</Text>
+			<VStack spacing={2} p={0}>
+				<Flex bg="main.800" alignItems="center" p={2} rounded="xs" w="full">
+					<Text fontSize="xs" color="white" fontWeight="bold" mr={14}>{producto.name}</Text>
 					<CustomNumberInput
 						value={quantity}
 						onChange={setQuantity}
 					/>
 				</Flex>
 
-				<Text mt={4} line>{producto.description}</Text>
+				<Text mt={2} line fontSize="sm">{producto.description}</Text>
 
-				<Flex justifyContent="space-between" alignItems="center" w="full" mt={4}>
-					<Text fontSize="lg" fontWeight="bold"> $ {producto.default_price.unit_amount/100} {producto.default_price.currency.toUpperCase()}/lb</Text>
-					<Box bg="green.500" color="white" px={4} py={2} rounded="md" _hover={{ bg: "green.600" }}>
+				<Flex justifyContent="space-between" alignItems="center" w="full" mt={2}>
+					<Text fontSize="md" fontWeight="bold"> $ {producto.default_price.unit_amount/100} {producto.default_price.currency.toUpperCase()}/lb</Text>
+					<Box bg="green.500" color="white" px={2} py={1} rounded="md" _hover={{ bg: "green.600" }}>
 						<Tooltip label={'Agregar al carrito'} hasArrow >
 							<ShoppingCart />
 						</Tooltip>

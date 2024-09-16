@@ -15,9 +15,9 @@ const Layout = () => {
       <BackPrincipal />
       <div className="flex">
         <SideBar/>
-         <Box overflowY={'auto'}>
-            <Outlet/>
-         </Box>
+        <Box overflowY={'auto'} bg="#ffffe9">
+          <Outlet/>
+        </Box>
       </div>
     </div>
   );
