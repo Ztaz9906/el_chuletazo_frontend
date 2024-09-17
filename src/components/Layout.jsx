@@ -1,27 +1,38 @@
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Box } from '@chakra-ui/react';
 import BackPrincipal from '@/components/header/BackPrincipal.jsx';
-import {Outlet} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {Box} from "@chakra-ui/react";
 import MyTabs from '@/components/tab_bar/tab_bar.jsx';
+import Footer from '@/components/footer/Footer.jsx'; 
 
 const Layout = () => {
-    const user = useSelector(state => state.user);
+  const user = useSelector(state => state.user);
 
-    console.log(user);
+  console.log(user);
 
   return (
-    <div className="layout flex flex-col">
+    <div className="layout flex flex-col min-h-screen">
       <BackPrincipal>
-        <MyTabs/>
+        <MyTabs />
       </BackPrincipal>
-      <div className="flex">
-        <Box overflowY={'auto'} bg="#fff4dc" w="full">
-          <Outlet/>
+      <div className="flex-grow">
+        <Box
+          overflowY="auto"
+          w="full"
+          backgroundImage="url('/src/assets/fondo_2.png')"
+          backgroundSize="cover"
+          backgroundPosition="center"
+        >
+          <Outlet />
+          <Footer />
         </Box>
       </div>
+      
     </div>
   );
 };
 
 export default Layout;
+
 
