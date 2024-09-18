@@ -8,9 +8,11 @@ import {
   Image,
   Link,
   Spinner,
+  Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google"; // Importa el botón de Google
 import { initialValues } from "@/components/auth/login/schema/initialValues.js";
 import { validationSchema } from "@/components/auth/login/schema/validations.js";
 
@@ -25,6 +27,7 @@ export default function Login() {
   const toast = useToast();
   const [loginMutation] = useLoginMutation();
   const navigate = useNavigate();
+
   const handleSubmit = async (values, actions) => {
     try {
       await loginMutation(values);
@@ -34,7 +37,6 @@ export default function Login() {
         duration: 3000,
         isClosable: true,
       });
-      // Aquí iría la redirección después del login exitoso
       navigate("/productos");
     } catch (error) {
       toast({
@@ -47,6 +49,21 @@ export default function Login() {
     } finally {
       actions.setSubmitting(false);
     }
+  };
+
+  const handleGoogleSuccess = (response) => {
+    console.log("Login con Google exitoso:", response);
+    // Lógica para manejar el login exitoso
+  };
+
+  const handleGoogleFailure = (error) => {
+    console.error("Error de login con Google:", error);
+    toast({
+      title: "Error al iniciar sesión con Google",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   return (
@@ -87,7 +104,18 @@ export default function Login() {
             >
               {({ isSubmitting }) => (
                 <Form>
-                  <VStack spacing={2}>
+                  <VStack
+                    spacing={2}
+                    justifyContent={"center"}
+                    align={"center"}
+                  >
+                    <GoogleOAuthProvider clientId="TU_GOOGLE_CLIENT_ID">
+                      <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={handleGoogleFailure}
+                      />
+                    </GoogleOAuthProvider>
+                    <Text color={"white"}>O</Text>
                     <LoginForm />
                     <Button
                       type="submit"
