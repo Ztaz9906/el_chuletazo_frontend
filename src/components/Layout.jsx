@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Box } from "@chakra-ui/react";
 import BackPrincipal from "@/components/header/BackPrincipal.jsx";
-import MyTabs from "@/components/tab_bar/tab_bar.jsx";
+import NavBar from "@/components/nav_bar/NavBar.jsx";
 import Footer from "@/components/footer/Footer.jsx";
 
 const Layout = () => {
@@ -13,7 +13,7 @@ const Layout = () => {
   return (
     <div className="layout flex flex-col min-h-screen">
       <BackPrincipal>
-        <MyTabs />
+        <NavBar />
       </BackPrincipal>
       <div className="flex-grow">
         <Box
@@ -32,5 +32,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
-
