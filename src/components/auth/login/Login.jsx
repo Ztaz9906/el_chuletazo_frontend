@@ -4,7 +4,9 @@ import {
   Button,
   Center,
   Container,
+  Divider,
   Heading,
+  HStack,
   Image,
   Link,
   Spinner,
@@ -115,7 +117,11 @@ export default function Login() {
                         onError={handleGoogleFailure}
                       />
                     </GoogleOAuthProvider>
-                    <Text color={"white"}>O</Text>
+                    <HStack align={"center"} justify={"center"} width="100%">
+                      <Divider borderColor="white" width="40%" />
+                      <Text color={"white"}>O</Text>
+                      <Divider borderColor="white" width="40%" />
+                    </HStack>
                     <LoginForm />
                     <Button
                       type="submit"
