@@ -19,11 +19,12 @@ import fondo from "@/assets/fondo_1.png";
 
 import LoginForm from "@/components/auth/login/form/LoginForm";
 import { useLoginMutation } from "@/servicios/api/auth/login/login.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const toast = useToast();
   const [loginMutation] = useLoginMutation();
-
+  const navigate = useNavigate();
   const handleSubmit = async (values, actions) => {
     try {
       await loginMutation(values);
@@ -34,6 +35,7 @@ export default function Login() {
         isClosable: true,
       });
       // Aquí iría la redirección después del login exitoso
+      navigate("/productos");
     } catch (error) {
       toast({
         title: "Error de inicio de sesión",

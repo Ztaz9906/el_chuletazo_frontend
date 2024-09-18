@@ -1,13 +1,12 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { Box } from '@chakra-ui/react';
-import BackPrincipal from '@/components/header/BackPrincipal.jsx';
-import MyTabs from '@/components/tab_bar/tab_bar.jsx';
-import Footer from '@/components/footer/Footer.jsx'; 
+import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Box } from "@chakra-ui/react";
+import BackPrincipal from "@/components/header/BackPrincipal.jsx";
+import MyTabs from "@/components/tab_bar/tab_bar.jsx";
+import Footer from "@/components/footer/Footer.jsx";
 
 const Layout = () => {
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
 
   console.log(user);
 
@@ -33,3 +32,5 @@ const Layout = () => {
 };
 
 export default Layout;
+
+

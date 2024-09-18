@@ -29,9 +29,12 @@ export default function Index() {
       {!isLoading &&
         data &&
         data.map((producto, index) => (
-          <ProductCard key={index} producto={producto} showAnimation={showAnimation} />
+          <ProductCard
+            key={index}
+            producto={producto}
+            showAnimation={showAnimation}
+          />
         ))}
     </Grid>
   );
 }
-
