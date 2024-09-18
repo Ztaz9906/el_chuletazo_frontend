@@ -8,7 +8,7 @@ const Header = () => {
         <img src={logo} alt="Logo del negocio" className="logo w-13 h-10 object-contain"/>
       </div>
       <div className="button-container">
-        <button className="header-button">Iniciar Sesión</button>
+        <button className="header-button">Iniciar Sesion</button>
         <button className="header-button">Registrarse</button>
       </div>
     </header>

@@ -28,11 +28,8 @@ const Layout = () => {
           <Footer />
         </Box>
       </div>
-      
     </div>
   );
 };
 
 export default Layout;
-
-
