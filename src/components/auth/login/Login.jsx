@@ -1,4 +1,3 @@
-import React from "react";
 import { Form, Formik } from "formik";
 import {
   Box,
@@ -14,7 +13,6 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { initialValues } from "@/components/auth/login/schema/initialValues.js";
 import { validationSchema } from "@/components/auth/login/schema/validations.js";
 import logo from "@/assets/logo.png";
@@ -25,6 +23,8 @@ import {
   useLoginMutation,
 } from "@/servicios/api/auth/login/login.js";
 import { useNavigate } from "react-router-dom";
+import CustomGoogleLogin from "@/components/auth/google/GoogleLogin.jsx";
+import React from "react";
 
 export default function Login() {
   const toast = useToast();
@@ -54,43 +54,6 @@ export default function Login() {
       actions.setSubmitting(false);
     }
   };
-
-  const handleGoogleSuccess = async (response) => {
-    try {
-      const result = await googleLoginMutation(response.credential).unwrap();
-      console.log(result); // This should log the user object you want
-      toast({
-        title: "Inicio de sesión con Google exitoso",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-      navigate("/productos");
-    } catch (error) {
-      console.error("Error during Google login:", error);
-      toast({
-        title: "Error al iniciar sesión con Google",
-        description: error.message,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    }
-  };
-
-  const handleGoogleFailure = (error) => {
-    console.error("Error de login con Google:", error);
-    toast({
-      title: "Error al iniciar sesión con Google",
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-    });
-  };
-
-  function onClickHandler() {
-    console.log("Sign in with Google button clicked...");
-  }
 
   const buttonColors = {
     elegant: {
@@ -159,16 +122,7 @@ export default function Login() {
                       <Text color={"white"}>O</Text>
                       <Divider borderColor="white" width="40%" />
                     </HStack>
-                    <GoogleOAuthProvider clientId="665085313287-7ab0oh62l1uflo2ngpfau2tcgtjqpqb2.apps.googleusercontent.com">
-                      <GoogleLogin
-                        onSuccess={handleGoogleSuccess}
-                        onError={handleGoogleFailure}
-                        click_listener={onClickHandler}
-                        shape={"pill"}
-                        size={"large"}
-                        useOneTap={true}
-                      />
-                    </GoogleOAuthProvider>
+                    <CustomGoogleLogin />
                     <HStack align={"center"} justify={"center"} width="100%">
                       <Text
                         color={"white"}

@@ -22,7 +22,7 @@ import logo from "@/assets/logo.png";
 import fondo from "@/assets/fondo_1.png";
 import { usePostUserMutation } from "@/servicios/api/user";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import CustomGoogleLogin from "@/components/auth/google/GoogleLogin.jsx";
 
 export default function SignUp() {
   const toast = useToast();
@@ -66,21 +66,21 @@ export default function SignUp() {
     }
   };
   const handleGoogleSuccess = (response) => {
-    console.log("Login con Google exitoso:", response);
+    console.log("Login con google exitoso:", response);
     // Lógica para manejar el login exitoso
   };
 
   const handleGoogleFailure = (error) => {
-    console.error("Error de login con Google:", error);
+    console.error("Error de login con google:", error);
     toast({
-      title: "Error al iniciar sesión con Google",
+      title: "Error al iniciar sesión con google",
       status: "error",
       duration: 3000,
       isClosable: true,
     });
   };
   function onClickHandler() {
-    console.log("Sign in with Google button clicked...");
+    console.log("Sign in with google button clicked...");
   }
   const buttonColors = {
     elegant: {
@@ -147,16 +147,7 @@ export default function SignUp() {
                       <Text color={"white"}>O</Text>
                       <Divider borderColor="white" width="40%" />
                     </HStack>
-                    <GoogleOAuthProvider clientId="665085313287-7ab0oh62l1uflo2ngpfau2tcgtjqpqb2.apps.googleusercontent.com">
-                      <GoogleLogin
-                        onSuccess={handleGoogleSuccess}
-                        onError={handleGoogleFailure}
-                        click_listener={onClickHandler}
-                        shape={"pill"}
-                        size={"large"}
-                        text="signup_with"
-                      />
-                    </GoogleOAuthProvider>
+                    <CustomGoogleLogin />
                     <HStack align={"center"} justify={"center"} width="100%">
                       <Text
                         color={"white"}

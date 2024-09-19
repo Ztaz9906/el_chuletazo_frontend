@@ -42,13 +42,13 @@ const loginEndpoint = loginApi.injectEndpoints({
               dispatch(setUser(response.data.user));
             } else {
               console.error(
-                "Invalid response from Google login:",
+                "Invalid response from google login:",
                 response.data,
               );
             }
           })
           .catch((error) => {
-            console.error("Google login error:", error);
+            console.error("google login error:", error);
           });
       },
       invalidatesTags: [{ type: "Login", id: "LIST" }],
