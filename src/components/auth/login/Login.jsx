@@ -1,3 +1,4 @@
+import React from "react";
 import { Form, Formik } from "formik";
 import {
   Box,
@@ -5,7 +6,6 @@ import {
   Center,
   Container,
   Divider,
-  Heading,
   HStack,
   Image,
   Link,
@@ -14,25 +14,27 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google"; // Importa el botón de Google
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { initialValues } from "@/components/auth/login/schema/initialValues.js";
 import { validationSchema } from "@/components/auth/login/schema/validations.js";
-
 import logo from "@/assets/logo.png";
 import fondo from "@/assets/fondo_1.png";
-
 import LoginForm from "@/components/auth/login/form/LoginForm";
-import { useLoginMutation } from "@/servicios/api/auth/login/login.js";
+import {
+  useGoogleLoginMutation,
+  useLoginMutation,
+} from "@/servicios/api/auth/login/login.js";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const toast = useToast();
   const [loginMutation] = useLoginMutation();
+  const [googleLoginMutation] = useGoogleLoginMutation();
   const navigate = useNavigate();
 
   const handleSubmit = async (values, actions) => {
     try {
-      await loginMutation(values);
+      await loginMutation(values).unwrap();
       toast({
         title: "Inicio de sesión exitoso",
         status: "success",
@@ -53,9 +55,27 @@ export default function Login() {
     }
   };
 
-  const handleGoogleSuccess = (response) => {
-    console.log("Login con Google exitoso:", response);
-    // Lógica para manejar el login exitoso
+  const handleGoogleSuccess = async (response) => {
+    try {
+      const result = await googleLoginMutation(response.credential).unwrap();
+      console.log(result); // This should log the user object you want
+      toast({
+        title: "Inicio de sesión con Google exitoso",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      navigate("/productos");
+    } catch (error) {
+      console.error("Error during Google login:", error);
+      toast({
+        title: "Error al iniciar sesión con Google",
+        description: error.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   const handleGoogleFailure = (error) => {
@@ -66,6 +86,20 @@ export default function Login() {
       duration: 3000,
       isClosable: true,
     });
+  };
+
+  function onClickHandler() {
+    console.log("Sign in with Google button clicked...");
+  }
+
+  const buttonColors = {
+    elegant: {
+      bg: "#4A0E0E",
+      hover: "#3D0C0C",
+    },
+    modern: {
+      bg: "#FF4500",
+    },
   };
 
   return (
@@ -90,15 +124,6 @@ export default function Login() {
             <Center mb={2} borderRadius={8} mt={4}>
               <Image src={logo} alt="Logo del negocio" h={"10vh"} />
             </Center>
-            <Heading
-              as="h1"
-              size="lg"
-              textAlign="center"
-              color={"white"}
-              mb={4}
-            >
-              Iniciar Sesión
-            </Heading>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -107,36 +132,64 @@ export default function Login() {
               {({ isSubmitting }) => (
                 <Form>
                   <VStack
-                    spacing={2}
+                    spacing={4}
                     justifyContent={"center"}
                     align={"center"}
                   >
-                    <GoogleOAuthProvider clientId="TU_GOOGLE_CLIENT_ID">
-                      <GoogleLogin
-                        onSuccess={handleGoogleSuccess}
-                        onError={handleGoogleFailure}
-                      />
-                    </GoogleOAuthProvider>
+                    <LoginForm />
+                    <Button
+                      type="submit"
+                      mt={3}
+                      isLoading={isSubmitting}
+                      loadingText="Iniciando sesión"
+                      spinner={<Spinner />}
+                      w={"40%"}
+                      bg={buttonColors.elegant.bg}
+                      color="white"
+                      _hover={{
+                        bg: buttonColors.elegant.hover,
+                      }}
+                      borderRadius="full"
+                      fontWeight="bold"
+                    >
+                      Iniciar Sesión
+                    </Button>
                     <HStack align={"center"} justify={"center"} width="100%">
                       <Divider borderColor="white" width="40%" />
                       <Text color={"white"}>O</Text>
                       <Divider borderColor="white" width="40%" />
                     </HStack>
-                    <LoginForm />
-                    <Button
-                      type="submit"
-                      colorScheme="green"
-                      width="full"
-                      isLoading={isSubmitting}
-                      loadingText="Iniciando sesión"
-                      spinner={<Spinner />}
-                      w={"40%"}
-                    >
-                      Iniciar Sesión
-                    </Button>
-                    <Link href={"/sign-up"} color={"white"}>
-                      Registrarse
-                    </Link>
+                    <GoogleOAuthProvider clientId="665085313287-7ab0oh62l1uflo2ngpfau2tcgtjqpqb2.apps.googleusercontent.com">
+                      <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={handleGoogleFailure}
+                        click_listener={onClickHandler}
+                        shape={"pill"}
+                        size={"large"}
+                        useOneTap={true}
+                      />
+                    </GoogleOAuthProvider>
+                    <HStack align={"center"} justify={"center"} width="100%">
+                      <Text
+                        color={"white"}
+                        fontWeight={"medium"}
+                        fontSize={"14px"}
+                      >
+                        No tienes cuenta?
+                      </Text>
+                      <Link
+                        href={"/sign-up"}
+                        color={"white"}
+                        fontWeight={"semibold"}
+                        _hover={{
+                          color: buttonColors.modern.bg,
+                          textDecoration: "underline",
+                        }}
+                        fontSize={"14px"}
+                      >
+                        Registrarse
+                      </Link>
+                    </HStack>
                   </VStack>
                 </Form>
               )}

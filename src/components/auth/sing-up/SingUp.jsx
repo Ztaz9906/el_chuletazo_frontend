@@ -5,10 +5,13 @@ import {
   Button,
   Center,
   Container,
+  Divider,
   Heading,
+  HStack,
   Image,
   Link,
   Spinner,
+  Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -19,6 +22,7 @@ import logo from "@/assets/logo.png";
 import fondo from "@/assets/fondo_1.png";
 import { usePostUserMutation } from "@/servicios/api/user";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 export default function SignUp() {
   const toast = useToast();
@@ -61,7 +65,32 @@ export default function SignUp() {
       actions.setSubmitting(false);
     }
   };
+  const handleGoogleSuccess = (response) => {
+    console.log("Login con Google exitoso:", response);
+    // Lógica para manejar el login exitoso
+  };
 
+  const handleGoogleFailure = (error) => {
+    console.error("Error de login con Google:", error);
+    toast({
+      title: "Error al iniciar sesión con Google",
+      status: "error",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+  function onClickHandler() {
+    console.log("Sign in with Google button clicked...");
+  }
+  const buttonColors = {
+    elegant: {
+      bg: "#4A0E0E", // Burdeos oscuro
+      hover: "#3D0C0C", // Burdeos más oscuro
+    },
+    modern: {
+      bg: "#FF4500", // Naranja-rojo
+    },
+  };
   return (
     <Box
       backgroundImage={`url(${fondo})`}
@@ -94,22 +123,61 @@ export default function SignUp() {
             >
               {({ isSubmitting }) => (
                 <Form>
-                  <VStack spacing={2}>
+                  <VStack spacing={4}>
                     <SingUpForm />
                     <Button
                       type="submit"
-                      colorScheme="green"
-                      width="full"
+                      mt={3}
+                      w="40%"
                       isLoading={isSubmitting || isLoading}
                       loadingText="Enviando"
                       spinner={<Spinner />}
-                      w={"40%"}
+                      bg={buttonColors.elegant.bg}
+                      _hover={{
+                        bg: buttonColors.elegant.hover,
+                      }}
+                      color={"white"}
+                      borderRadius="full"
+                      fontWeight="bold"
                     >
                       Registrarse
                     </Button>
-                    <Link href={"/login"} color={"white"}>
-                      Iniciar Sesión
-                    </Link>
+                    <HStack align={"center"} justify={"center"} width="100%">
+                      <Divider borderColor="white" width="40%" />
+                      <Text color={"white"}>O</Text>
+                      <Divider borderColor="white" width="40%" />
+                    </HStack>
+                    <GoogleOAuthProvider clientId="665085313287-7ab0oh62l1uflo2ngpfau2tcgtjqpqb2.apps.googleusercontent.com">
+                      <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={handleGoogleFailure}
+                        click_listener={onClickHandler}
+                        shape={"pill"}
+                        size={"large"}
+                        text="signup_with"
+                      />
+                    </GoogleOAuthProvider>
+                    <HStack align={"center"} justify={"center"} width="100%">
+                      <Text
+                        color={"white"}
+                        fontWeight={"medium"}
+                        fontSize={"14px"}
+                      >
+                        Ya tienes cuenta?
+                      </Text>
+                      <Link
+                        href={"/login"}
+                        color={"white"}
+                        fontWeight={"semibold"}
+                        _hover={{
+                          color: buttonColors.modern.bg,
+                          textDecoration: "underline",
+                        }}
+                        fontSize={"14px"}
+                      >
+                        Iniciar Sesión
+                      </Link>
+                    </HStack>
                   </VStack>
                 </Form>
               )}
