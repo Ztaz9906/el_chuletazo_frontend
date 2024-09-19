@@ -9,14 +9,13 @@ export default function Index() {
 
   useEffect(() => {
     if (!isLoading && data) {
-      console.log("Products data:", data); // Log products to the console
+      console.log("Products data:", data); 
     }
 
     if (error) {
-      console.error("Error fetching products:", error); // Log any errors
+      console.error("Error fetching products:", error); 
     }
 
-    // Check if the animation has already been shown
     const animationShown = localStorage.getItem("animationShown");
     if (!animationShown) {
       setShowAnimation(true);

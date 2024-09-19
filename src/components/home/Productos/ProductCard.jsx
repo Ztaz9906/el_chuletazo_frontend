@@ -27,7 +27,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
     >
       <Button
         onClick={handleDecrement}
-        bg="main.10"
+        bg="#b5c4bf"
         px={1}
         py={0}
         h="full"
@@ -44,7 +44,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
       <Input
         px={1}
         minW="20px"
-        bg="orange.100"
+        bg="white"
         shadow="innerCustom"
         value={value}
         onChange={(e) => {
@@ -61,7 +61,7 @@ const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
 
       <Button
         onClick={handleIncrement}
-        bg="main.10"
+        bg="#b5c4bf"
         px={1}
         h="full"
         minW="20px"
@@ -144,17 +144,19 @@ const ProductCard = ({ producto }) => {
 
             <Tooltip label="Agregar al carrito" hasArrow>
               <Button
-                bg="main.10"
-                color="white"
+                bg="white"
+                color="main.10"
                 px={1}
                 py={2}
                 rounded="md"
-                _hover={{ bg: "green.600" }}
+                _hover={{ bg: "main.10", color: "white" }}
                 leftIcon={<ShoppingCart size={18} />}
+                iconSpacing={0.5}
               >
                 Agregar
               </Button>
             </Tooltip>
+
           </Flex>
         </VStack>
       </Box>
@@ -163,5 +165,3 @@ const ProductCard = ({ producto }) => {
 };
 
 export default ProductCard;
-
-
