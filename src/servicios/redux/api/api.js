@@ -1,11 +1,12 @@
 // Export individual APIs
-import { loginApi } from "@/servicios/api/auth/login/login.js";
-import { logoutApi } from "@/servicios/api/auth/logout/logout.js";
-import { productoApi } from "@/servicios/api/productos/productoApi.js";
-import { userApi } from "@/servicios/api/user/api.js";
 
 // Collect all API slices
-export const apiSlices = [loginApi, logoutApi, productoApi, userApi];
+import { loginApi } from "@/servicios/redux/api/auth/login/login.js";
+import { logoutApi } from "@/servicios/redux/api/auth/logout/logout.js";
+import { api } from "@/servicios/redux/api/productos/api.js";
+import { userApi } from "@/servicios/redux/api/user/api.js";
+
+export const apiSlices = [loginApi, logoutApi, api, userApi];
 
 // You want to create a helper for easier store setup
 export const setupApiSlices = {

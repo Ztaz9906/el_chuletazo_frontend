@@ -1,7 +1,8 @@
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import { useGoogleLoginMutation } from "@/servicios/api/auth/login/login.js";
+
 import { useNavigate } from "react-router-dom";
 import { Box, useToast } from "@chakra-ui/react";
+import { useGoogleLoginMutation } from "@/servicios/redux/api/auth/login/login.js";
 
 export default function CustomGoogleLogin({ useOneTap }) {
   const [googleLoginMutation] = useGoogleLoginMutation();

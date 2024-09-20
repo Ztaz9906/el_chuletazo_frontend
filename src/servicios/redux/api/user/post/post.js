@@ -1,4 +1,4 @@
-import { userApi } from "@/servicios/api/user/api.js";
+import { userApi } from "@/servicios/redux/api/user/api.js";
 
 const userPostEndpoint = userApi.injectEndpoints({
   endpoints: (builder) => ({

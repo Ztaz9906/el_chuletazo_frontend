@@ -1,4 +1,3 @@
-import React from "react";
 import { Form, Formik } from "formik";
 import {
   Box,
@@ -20,15 +19,23 @@ import { validationSchema } from "@/components/auth/sing-up/schema/validations.j
 import SingUpForm from "@/components/auth/sing-up/form/SingUpForm.jsx";
 import logo from "@/assets/logo.png";
 import fondo from "@/assets/fondo_1.png";
-import { usePostUserMutation } from "@/servicios/api/user";
 import { useNavigate } from "react-router-dom";
 import CustomGoogleLogin from "@/components/auth/google/GoogleLogin.jsx";
+import { usePostUserMutation } from "@/servicios/redux/api/user/index.js";
 
 export default function SignUp() {
   const toast = useToast();
   const navigate = useNavigate();
   const [postUser, { isLoading }] = usePostUserMutation();
-
+  const buttonColors = {
+    elegant: {
+      bg: "#4A0E0E",
+      hover: "#3D0C0C",
+    },
+    modern: {
+      bg: "#FF4500",
+    },
+  };
   const handleSubmit = async (values, actions) => {
     const { confirm_password, ...userData } = values;
     try {
@@ -65,32 +72,7 @@ export default function SignUp() {
       actions.setSubmitting(false);
     }
   };
-  const handleGoogleSuccess = (response) => {
-    console.log("Login con google exitoso:", response);
-    // Lógica para manejar el login exitoso
-  };
 
-  const handleGoogleFailure = (error) => {
-    console.error("Error de login con google:", error);
-    toast({
-      title: "Error al iniciar sesión con google",
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-    });
-  };
-  function onClickHandler() {
-    console.log("Sign in with google button clicked...");
-  }
-  const buttonColors = {
-    elegant: {
-      bg: "#4A0E0E", // Burdeos oscuro
-      hover: "#3D0C0C", // Burdeos más oscuro
-    },
-    modern: {
-      bg: "#FF4500", // Naranja-rojo
-    },
-  };
   return (
     <Box
       backgroundImage={`url(${fondo})`}

@@ -16,8 +16,9 @@ import {
 import { useSelector } from "react-redux";
 import logo from "../../assets/logo.png";
 import { LogOutIcon, Settings } from "lucide-react";
-import { useLogoutMutation } from "@/servicios/api/auth/logout/logout.js";
+
 import { useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "@/servicios/redux/api/auth/logout/logout.js";
 
 const Header = () => {
   const user = useSelector((state) => state.user);

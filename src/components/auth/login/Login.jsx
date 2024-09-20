@@ -18,18 +18,13 @@ import { validationSchema } from "@/components/auth/login/schema/validations.js"
 import logo from "@/assets/logo.png";
 import fondo from "@/assets/fondo_1.png";
 import LoginForm from "@/components/auth/login/form/LoginForm";
-import {
-  useGoogleLoginMutation,
-  useLoginMutation,
-} from "@/servicios/api/auth/login/login.js";
 import { useNavigate } from "react-router-dom";
 import CustomGoogleLogin from "@/components/auth/google/GoogleLogin.jsx";
-import React from "react";
+import { useLoginMutation } from "@/servicios/redux/api/auth/login/login.js";
 
 export default function Login() {
   const toast = useToast();
   const [loginMutation] = useLoginMutation();
-  const [googleLoginMutation] = useGoogleLoginMutation();
   const navigate = useNavigate();
 
   const handleSubmit = async (values, actions) => {

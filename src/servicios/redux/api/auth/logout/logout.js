@@ -1,5 +1,5 @@
-import { createApiSlice } from "@/servicios/api/base/base.js";
-import { removeUser } from "@/servicios/redux/userSlice.js";
+import { createApiSlice } from "@/servicios/redux/api/base/base.js";
+import { removeUser } from "@/servicios/redux/slices/userSlice.js";
 
 export const logoutApi = createApiSlice({
   reducerPath: "logoutApi",

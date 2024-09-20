@@ -1,5 +1,5 @@
-import { createApiSlice } from "@/servicios/api/base/base.js";
-import { setUser } from "@/servicios/redux/userSlice.js";
+import { createApiSlice } from "@/servicios/redux/api/base/base.js";
+import { setUser } from "@/servicios/redux/slices/userSlice.js";
 
 export const loginApi = createApiSlice({
   reducerPath: "loginApi",

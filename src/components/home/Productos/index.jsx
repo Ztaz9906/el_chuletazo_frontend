@@ -1,7 +1,7 @@
-import ProductCard from "@/components/home/Productos/ProductCard.jsx";
-import { useGetProductoQuery } from "@/servicios/api/productos/index.js";
 import { useEffect, useState } from "react";
+import ProductCard from "@/components/home/Productos/ProductCard.jsx";
 import { Grid } from "@chakra-ui/react";
+import { useGetProductoQuery } from "@/servicios/redux/api/productos/get/get.js";
 
 export default function Index() {
   const { isLoading, data, error } = useGetProductoQuery();
@@ -9,11 +9,11 @@ export default function Index() {
 
   useEffect(() => {
     if (!isLoading && data) {
-      console.log("Products data:", data); 
+      console.log("Products data:", data);
     }
 
     if (error) {
-      console.error("Error fetching products:", error); 
+      console.error("Error fetching products:", error);
     }
 
     const animationShown = localStorage.getItem("animationShown");
@@ -27,9 +27,9 @@ export default function Index() {
     <Grid templateColumns="repeat(5, 1fr)" gap={4} p={8}>
       {!isLoading &&
         data &&
-        data.map((producto, index) => (
+        data.map((producto) => (
           <ProductCard
-            key={index}
+            key={producto.id}
             producto={producto}
             showAnimation={showAnimation}
           />
