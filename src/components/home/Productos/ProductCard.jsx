@@ -29,7 +29,9 @@ const ProductCard = ({ producto }) => {
       quantity: quantity,
     };
     console.log("Product added to cart:", productCard);
+    if (quantity === 0) return;
     dispatch(addProduct(productCard));
+    setQuantity(0);
   };
   return (
     <motion.div
@@ -104,6 +106,7 @@ const ProductCard = ({ producto }) => {
                 leftIcon={<ShoppingCart size={18} />}
                 iconSpacing={0.5}
                 onClick={handleAddToCart}
+                isDisabled={quantity === 0}
               >
                 Agregar
               </Button>
