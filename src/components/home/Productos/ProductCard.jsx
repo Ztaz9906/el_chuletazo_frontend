@@ -59,7 +59,7 @@ const ProductCard = ({ producto }) => {
 
         <VStack spacing={2} flex={1} justifyContent="space-between">
           <Flex
-            bg="#bce6d7"
+            bg="main.5"
             alignItems="center"
             p={2}
             rounded="xs"
