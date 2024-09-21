@@ -50,7 +50,7 @@ export default function ModalProductCard({ product }) {
         shadow={"md"}
         w={"100%"}
         borderRadius={"5px"}
-        p={1}
+        p={3}
         bg={"white"}
       >
         <VStack align="start" spacing={2} flex={1}>

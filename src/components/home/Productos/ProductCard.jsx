@@ -3,10 +3,14 @@ import {
   Button,
   Flex,
   Image,
-  Input,
   Text,
   Tooltip,
   VStack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ShoppingCart } from "lucide-react";
@@ -121,66 +125,31 @@ const ProductCard = ({ producto }) => {
 export default ProductCard;
 
 export const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
-  const handleIncrement = () => onChange(Math.min(value + 1, max));
-  const handleDecrement = () => onChange(Math.max(value - 1, min));
-
   return (
-    <Flex
-      alignItems="center"
-      bg="orange.100"
-      rounded="md"
-      shadow="inner"
+    <NumberInput
+      bg={"white"}
+      size="sm"
       maxW="80px"
-      h="30px"
+      value={value}
+      onChange={(valueString) => {
+        const newValue = parseInt(valueString) || 0;
+        onChange(Math.max(min, Math.min(newValue, max)));
+      }}
+      min={min}
+      max={max}
     >
-      <Button
-        onClick={handleDecrement}
-        bg="#b5c4bf"
-        px={1}
-        py={0}
-        h="full"
-        minW="20px"
-        borderRadius={0}
-        roundedLeft="md"
-        _hover={{ bg: "gray.400" }}
-        fontSize="sm"
-        textColor={"#525252"}
-      >
-        -
-      </Button>
-
-      <Input
-        px={1}
-        minW="20px"
-        bg="white"
-        shadow="innerCustom"
-        value={value}
-        onChange={(e) => {
-          const newValue = parseInt(e.target.value) || 0;
-          onChange(Math.max(min, Math.min(newValue, max)));
-        }}
+      <NumberInputField
         textAlign="center"
-        w="30px"
-        h="full"
-        border="none"
-        borderRadius={0}
         fontSize="sm"
       />
-
-      <Button
-        onClick={handleIncrement}
-        bg="#b5c4bf"
-        px={1}
-        h="full"
-        minW="20px"
-        borderRadius={0}
-        roundedRight="md"
-        _hover={{ bg: "gray.400" }}
-        fontSize="sm"
-        textColor={"#525252"}
-      >
-        +
-      </Button>
-    </Flex>
+      <NumberInputStepper>
+        <NumberIncrementStepper 
+          bg={"white"}
+          _active={{ bg: "gray.300"}}/>
+        <NumberDecrementStepper 
+          bg={"white"}
+          _active={{ bg: "gray.300"}}/>
+      </NumberInputStepper>
+    </NumberInput>
   );
 };
