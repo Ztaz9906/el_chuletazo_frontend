@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Button, HStack } from "@chakra-ui/react";
-import ModalCart from "@/components/nav_bar/ModalCart.jsx";
+import ModalCart from "@/components/home/Productos/ModalCart.jsx";
 
 function NavBar() {
   const [activeButton, setActiveButton] = useState(null);
