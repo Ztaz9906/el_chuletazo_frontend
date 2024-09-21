@@ -87,10 +87,8 @@ export default function ModalCart() {
               <Text fontWeight="bold">Total:</Text>
               <Text>${total.toFixed(2)}</Text>
               <Spacer />
-              <Button textColor={"green"} mr={3} onClick={onClose}>
-                Cerrar
-              </Button>
-              <Button variant="ghost" textColor={"green"}>Comprar</Button>
+              <Button textColor={"white"} bg="main.10" mr={3} onClick={onClose}>Cerrar</Button>
+              <Button bg="main.10" textColor={"white"}>Comprar</Button>
             </HStack>
           </ModalFooter>
         </ModalContent>

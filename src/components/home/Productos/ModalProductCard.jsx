@@ -1,11 +1,46 @@
-import { Button, HStack, Image, Text, VStack, Spacer, Box, Tooltip } from "@chakra-ui/react";
+import { Button, HStack, Image, Text, VStack, Spacer, Box, Tooltip, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay } from "@chakra-ui/react";
 import { CustomNumberInput } from "@/components/home/Productos/ProductCard.jsx";
 import { deleteProduct, editQuantity } from "@/servicios/redux/slices/productSliece.js";
 import { useDispatch } from "react-redux";
 import { Trash2 } from "lucide-react";
+import { useRef, useState } from "react";
 
 export default function ModalProductCard({ product }) {
   const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
+  const [tempQuantity, setTempQuantity] = useState(product.quantity);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleQuantityChange = (value) => {
+    if (value === 0) {
+      setIsDeleting(true);
+      onOpen();
+    } else {
+      setTempQuantity(value);
+      dispatch(editQuantity({ id: product.id, quantity: value }));
+    }
+  };
+
+  const handleRemoveProduct = () => {
+    dispatch(deleteProduct(product.id));
+    onClose();
+  };
+
+  const handleKeepProduct = () => {
+    if (isDeleting) {
+      setTempQuantity(1);
+      dispatch(editQuantity({ id: product.id, quantity: 1 }));
+    } else {
+      setTempQuantity(product.quantity);
+    }
+    onClose();
+  };
+
+  const handleDeleteClick = () => {
+    setIsDeleting(false);
+    onOpen();
+  };
 
   return (
     <Box position="relative" w="full">
@@ -37,17 +72,12 @@ export default function ModalProductCard({ product }) {
           <Spacer />
           <HStack spacing={2} alignSelf="flex-end">
             <CustomNumberInput
-              value={product.quantity}
-              onChange={(value) => {
-                dispatch(editQuantity({ id: product.id, quantity: value }));
-                if (value === 0) {
-                  dispatch(deleteProduct(product.id));
-                }
-              }}
+              value={tempQuantity}
+              onChange={handleQuantityChange}
             />
             <Tooltip label="Eliminar Producto" hasArrow>
               <Trash2
-                onClick={() => dispatch(deleteProduct(product.id))}
+                onClick={handleDeleteClick}
                 cursor={"pointer"}
                 color="red"
               />
@@ -55,6 +85,33 @@ export default function ModalProductCard({ product }) {
           </HStack>
         </VStack>
       </HStack>
+
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Eliminar Producto
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              ¿Estás seguro de que deseas quitar este producto del carrito?
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={handleKeepProduct}>
+                Mantener
+              </Button>
+              <Button colorScheme="red" onClick={handleRemoveProduct} ml={3}>
+                Quitar
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Box>
   );
 }
