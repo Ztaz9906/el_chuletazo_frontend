@@ -1,43 +1,35 @@
-// src/features/cart/cartSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  products: [],
+  cart: [],
 };
 
-const cartSlice = createSlice({
-  name: "cart",
+const productSlice = createSlice({
+  name: 'product',
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      const existingProduct = state.products.find(
-        (product) => product.id === action.payload.id,
-      );
-
+      const product = action.payload;
+      const existingProduct = state.cart.find(item => item.id === product.id);
       if (existingProduct) {
-        existingProduct.quantity += action.payload.quantity;
+        existingProduct.quantity += product.quantity;
       } else {
-        state.products.push(action.payload);
+        state.cart.push(product);
       }
     },
-    deleteProduct: (state, action) => {
-      state.products = state.products.filter(
-        (product) => product.id !== action.payload.id,
-      );
-    },
-    editQuantity: (state, action) => {
-      const product = state.products.find(
-        (product) => product.id === action.payload.id,
-      );
-
+    updateQuantity: (state, action) => {
+      const { id, quantity } = action.payload;
+      const product = state.cart.find(item => item.id === id);
       if (product) {
-        product.quantity = action.payload.quantity;
+        product.quantity = quantity;
       }
+    },
+    removeProduct: (state, action) => {
+      const id = action.payload;
+      state.cart = state.cart.filter(item => item.id !== id);
     },
   },
 });
 
-// Exportar las acciones para usarlas en los componentes
-export const { addProduct, deleteProduct, editQuantity } = cartSlice.actions;
-// Exportar el reducer para integrarlo en el store
-export default cartSlice.reducer;
+export const { addProduct, updateQuantity, removeProduct } = productSlice.actions;
+export default productSlice.reducer;
