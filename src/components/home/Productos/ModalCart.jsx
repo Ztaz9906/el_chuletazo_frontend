@@ -18,15 +18,24 @@ import {
 import { ShoppingCart } from "lucide-react";
 import ModalProductCard from "@/components/home/Productos/ModalProductCard.jsx";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import fondo from "@/assets/fondo_2.png"; 
 
 export default function ModalCart() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cart = useSelector((state) => state.cart.products);
+  const navigate = useNavigate();
 
   const total = cart.reduce((sum, product) => {
     return sum + (product.default_price.unit_amount / 100) * product.quantity;
   }, 0);
+
+  const handleComprarClick = () => {
+    if (cart.length > 0) {
+      navigate("/pedidos");
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -88,7 +97,7 @@ export default function ModalCart() {
               <Text>${total.toFixed(2)}</Text>
               <Spacer />
               <Button textColor={"white"} bg="main.10" mr={3} onClick={onClose}>Cerrar</Button>
-              <Button bg="main.10" textColor={"white"}>Comprar</Button>
+              <Button bg="main.10" textColor={"white"} onClick={handleComprarClick}>Comprar</Button>
             </HStack>
           </ModalFooter>
         </ModalContent>
