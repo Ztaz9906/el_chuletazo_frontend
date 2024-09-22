@@ -7,7 +7,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Select } from "chakra-react-select";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react"; /**
+ * @typedef {Object} Option
+ * @property {string} label
+ * @property {string} value
+ */
 
 /**
  * @typedef {Object} Option
@@ -113,7 +117,9 @@ const SelectField = ({
           }),
         }}
         components={{
-          DropdownIndicator: () => <ChevronDown size="10px" />,
+          DropdownIndicator: () => (
+            <ChevronDown size="18px" color={"#646A7A"} />
+          ),
         }}
         selectedOptionStyle="check"
         colorScheme="brand"

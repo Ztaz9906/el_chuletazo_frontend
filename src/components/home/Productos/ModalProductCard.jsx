@@ -1,6 +1,25 @@
-import { Button, HStack, Image, Text, VStack, Spacer, Box, Tooltip, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Center, Flex } from "@chakra-ui/react";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Box,
+  Button,
+  HStack,
+  Image,
+  Spacer,
+  Text,
+  Tooltip,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { CustomNumberInput } from "@/components/home/Productos/ProductCard.jsx";
-import { deleteProduct, editQuantity } from "@/servicios/redux/slices/productSliece.js";
+import {
+  deleteProduct,
+  editQuantity,
+} from "@/servicios/redux/slices/productSliece.js";
 import { useDispatch } from "react-redux";
 import { Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
@@ -65,7 +84,7 @@ export default function ModalProductCard({ product }) {
             {product.default_price.currency.toUpperCase()}/lb
           </Text>
         </VStack>
-        
+
         <VStack align="start" spacing={4} flex={2}>
           <Text fontWeight="bold">{product.name}</Text>
           <Text fontSize="sm">{product.description}</Text>
@@ -86,32 +105,32 @@ export default function ModalProductCard({ product }) {
         </VStack>
       </HStack>
 
-        <AlertDialog
-          isOpen={isOpen}
-          leastDestructiveRef={cancelRef}
-          onClose={onClose}
-        >
-          <AlertDialogOverlay>
-            <AlertDialogContent>
-              <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                Eliminar Producto del Carrito
-              </AlertDialogHeader>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Eliminar Producto del Carrito
+            </AlertDialogHeader>
 
-              <AlertDialogBody>
-                ¿Está seguro de que desea eliminar este producto del carrito?
-              </AlertDialogBody>
+            <AlertDialogBody>
+              ¿Está seguro de que desea eliminar este producto del carrito?
+            </AlertDialogBody>
 
-              <AlertDialogFooter>
-                <Button ref={cancelRef} onClick={handleKeepProduct}>
-                  Mantener
-                </Button>
-                <Button colorScheme="red" onClick={handleRemoveProduct} ml={3}>
-                  Eliminar
-                </Button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialogOverlay>
-        </AlertDialog>
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={handleKeepProduct}>
+                Mantener
+              </Button>
+              <Button colorScheme="red" onClick={handleRemoveProduct} ml={3}>
+                Eliminar
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Box>
   );
 }

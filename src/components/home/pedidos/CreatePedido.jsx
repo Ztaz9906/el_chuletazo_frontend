@@ -1,26 +1,25 @@
 import {
   Box,
-  Button,
+  Flex,
   Image,
-  Text,
-  VStack,
   Table,
   TableContainer,
-  Thead,
   Tbody,
-  Tfoot,
-  Tr,
-  Th,
   Td,
-  Flex,
+  Text,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
+import ContactForm from "@/components/home/pedidos/form/ContactForm.jsx";
 
 const CreatePedido = () => {
   const cart = useSelector((state) => state.cart.products);
 
   if (cart.length === 0) {
-    return null; 
+    return null;
   }
 
   const total = cart.reduce((sum, product) => {
@@ -29,7 +28,9 @@ const CreatePedido = () => {
 
   return (
     <Box p={5}>
-      <Text fontSize="2xl" mb={5} align="center">Confirmar Pedido</Text>
+      <Text fontSize="2xl" mb={5} align="center">
+        Confirmar Pedido
+      </Text>
       <Box maxW="800px" mx="auto">
         <TableContainer>
           <Table
@@ -66,7 +67,9 @@ const CreatePedido = () => {
                     ${(product.default_price.unit_amount / 100).toFixed(2)}
                   </Td>
                   <Td isNumeric>
-                    ${((product.default_price.unit_amount / 100) *
+                    $
+                    {(
+                      (product.default_price.unit_amount / 100) *
                       product.quantity
                     ).toFixed(2)}
                   </Td>
@@ -83,9 +86,7 @@ const CreatePedido = () => {
           </Table>
         </TableContainer>
         <Flex mt={5} justifyContent="flex-end">
-          <Button bg="main.10" textColor="white">
-            Enviar a Pagar
-          </Button>
+          <ContactForm />
         </Flex>
       </Box>
     </Box>
