@@ -1,4 +1,4 @@
-import { Button, HStack, Image, Text, VStack, Spacer, Box, Tooltip, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay } from "@chakra-ui/react";
+import { Button, HStack, Image, Text, VStack, Spacer, Box, Tooltip, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Center, Flex } from "@chakra-ui/react";
 import { CustomNumberInput } from "@/components/home/Productos/ProductCard.jsx";
 import { deleteProduct, editQuantity } from "@/servicios/redux/slices/productSliece.js";
 import { useDispatch } from "react-redux";
@@ -86,32 +86,32 @@ export default function ModalProductCard({ product }) {
         </VStack>
       </HStack>
 
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Eliminar Producto
-            </AlertDialogHeader>
+        <AlertDialog
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Eliminar Producto del Carrito
+              </AlertDialogHeader>
 
-            <AlertDialogBody>
-              ¿Estás seguro de que deseas quitar este producto del carrito?
-            </AlertDialogBody>
+              <AlertDialogBody>
+                ¿Está seguro de que desea eliminar este producto del carrito?
+              </AlertDialogBody>
 
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={handleKeepProduct}>
-                Mantener
-              </Button>
-              <Button colorScheme="red" onClick={handleRemoveProduct} ml={3}>
-                Quitar
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={handleKeepProduct}>
+                  Mantener
+                </Button>
+                <Button colorScheme="red" onClick={handleRemoveProduct} ml={3}>
+                  Eliminar
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
     </Box>
   );
 }
