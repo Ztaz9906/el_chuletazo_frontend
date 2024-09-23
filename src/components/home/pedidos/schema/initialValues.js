@@ -11,7 +11,6 @@ export const initialValues = {
   guardarDestinatario: false,
   nombreEnvio: "",
   apellidosEnvio: "",
-  direccionEnvio: "",
   telefonoEnvio: "",
   direccionFacturacionIgual: false,
   productos: [],

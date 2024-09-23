@@ -30,7 +30,7 @@ client.interceptors.request.use(
         if (token && shouldRefresh.needRefresh) {
           if (!shouldRefresh.valid) {
             const refreshToken = sessionStorage.getItem("refresh");
-            const response = await client.post("/api/token/refresh/", {
+            const response = await client.post("/token/refresh/", {
               refresh: refreshToken,
             });
 
@@ -45,7 +45,6 @@ client.interceptors.request.use(
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("refresh");
         sessionStorage.removeItem("user");
-        sessionStorage.removeItem("institucion");
 
         window.location
           .replace(`${window.location.origin}/login`)

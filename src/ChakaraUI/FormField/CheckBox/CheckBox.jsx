@@ -17,7 +17,7 @@ const CheckboxField = ({ name, label }) => (
           color={"#646A7A"}
           css={{
             "& .chakra-checkbox__control": {
-              borderWidth: "1px",
+              borderWidth: "0.5px",
               borderColor: "#646A7A",
             },
           }}

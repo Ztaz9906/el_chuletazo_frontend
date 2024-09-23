@@ -22,7 +22,6 @@ export const validationSchema = Yup.object().shape({
   guardarDestinatario: Yup.boolean(),
   nombreEnvio: Yup.string().required("Ingrese su nombre"),
   apellidosEnvio: Yup.string().required("Ingrese sus apellidos"),
-  direccionEnvio: Yup.string().required("Ingrese su dirección"),
   telefonoEnvio: Yup.string()
     .matches(/^[0-9]+$/, "Ingrese solo números")
     .min(8, "El número debe tener al menos 8 dígitos")

@@ -10,14 +10,73 @@ import {
   ModalOverlay,
   Tooltip,
   useDisclosure,
-  VStack,
 } from "@chakra-ui/react";
 import { UserPlus } from "lucide-react";
-import { Form, Formik } from "formik";
 import SelectField from "@/ChakaraUI/FormField/SelectField/SelectField.jsx";
+import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios/index.js";
+import { useFormikContext } from "formik";
+import { useState } from "react";
+import { formConfig } from "@/components/home/pedidos/schema/formConfig.js";
 
 export default function RecipientModalAutocomplete() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isLoading, data, error } = useGetDestinatarioQuery();
+  const { values, setFieldValue } = useFormikContext(); // Para autocompletar los campos del formulario
+  const [selectedRecipientCI, setSelectedRecipientCI] = useState(null); // Guardar CI del destinatario seleccionado
+
+  const handleAutoComplete = () => {
+    setSelectedRecipientCI(values["recipient"]); // Guardar CI del destinatario seleccionado
+    if (selectedRecipientCI && data) {
+      // Buscar el destinatario correspondiente por CI
+      const destinatarioSeleccionado = data.find(
+        (destinatario) => destinatario.ci === selectedRecipientCI,
+      );
+
+      if (destinatarioSeleccionado) {
+        // Autocompletar los campos del formulario con el destinatario seleccionado
+        setFieldValue(
+          formConfig.destinatario.nombre.name,
+          destinatarioSeleccionado.nombre,
+        );
+        setFieldValue(
+          formConfig.destinatario.apellidos.name,
+          destinatarioSeleccionado.apellidos,
+        );
+        setFieldValue(
+          formConfig.destinatario.direccion.direccion.name,
+          destinatarioSeleccionado.direccion,
+        );
+        setFieldValue(
+          formConfig.destinatario.direccion.numeroCasa.name,
+          destinatarioSeleccionado.numero_casa,
+        );
+        setFieldValue(
+          formConfig.destinatario.telefonoFijo.name,
+          destinatarioSeleccionado.telefono_fijo,
+        );
+        setFieldValue(
+          formConfig.destinatario.telefonoCelular.name,
+          destinatarioSeleccionado.telefono_celular,
+        );
+        setFieldValue(
+          formConfig.destinatario.carneIdentidad.name,
+          destinatarioSeleccionado.ci,
+        );
+        setFieldValue(
+          formConfig.destinatario.direccion.provincia.name,
+          destinatarioSeleccionado.provincia,
+        );
+        setFieldValue(
+          formConfig.destinatario.direccion.municipio.name,
+          destinatarioSeleccionado.municipio,
+        );
+
+        // Cerrar el modal después de autocompletar
+        onClose();
+      }
+    }
+  };
+
   return (
     <>
       <Tooltip
@@ -33,38 +92,29 @@ export default function RecipientModalAutocomplete() {
           <ModalHeader>Completar Destinatario</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Formik
-              initialValues={{ recipient: "" }}
-              onSubmit={(values) => console.log(values)}
-            >
-              {() => (
-                <Form>
-                  <VStack spacing={4} align="stretch">
-                    <SelectField
-                      options={[
-                        { value: "1", label: "Destinatario 1" },
-                        { value: "2", label: "Destinatario 2" },
-                        { value: "3", label: "Destinatario 3" },
-                        { value: "4", label: "Destinatario 4" },
-                        { value: "5", label: "Destinatario 5" },
-                        { value: "6", label: "Destinatario 6" },
-                        { value: "7", label: "Destinatario 7" },
-                      ]}
-                      name="recipient"
-                      label="Destinatarios Guardados"
-                      placeholder="Seleccione un destinatario"
-                    />
-                  </VStack>
-                </Form>
-              )}
-            </Formik>
+            {/* Select para destinatarios guardados */}
+            <SelectField
+              options={
+                data
+                  ? data.map((destinatario) => ({
+                      value: destinatario.ci, // El value es el CI del destinatario
+                      label: `${destinatario.nombre} ${destinatario.apellidos}`, // Mostrar el nombre completo
+                    }))
+                  : []
+              }
+              name="recipient"
+              label="Destinatarios Guardados"
+              placeholder="Seleccione un destinatario"
+            />
           </ModalBody>
           <ModalFooter>
             <HStack w="full">
               <Button colorScheme="gray" mr={3} onClick={onClose}>
                 Cerrar
               </Button>
-              <Button colorScheme="blue">Agregar</Button>
+              <Button colorScheme="blue" onClick={handleAutoComplete}>
+                Autocompletar
+              </Button>
             </HStack>
           </ModalFooter>
         </ModalContent>
