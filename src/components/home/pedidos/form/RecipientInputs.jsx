@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
 
 const RecipientInputs = () => {
-  const { isLoading, data: provincias, error } = useGetProvinciaQuery();
+  const { data: provincias } = useGetProvinciaQuery();
   const [municipios, setMunicipios] = useState([]); // Para los municipios del select
   const { values } = useFormikContext(); // Para obtener y actualizar los valores del form
 

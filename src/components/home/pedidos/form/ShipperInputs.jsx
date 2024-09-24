@@ -10,8 +10,23 @@ import { formConfig } from "@/components/home/pedidos/schema/formConfig.js";
 import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
 import CheckboxField from "@/ChakaraUI/FormField/CheckBox/CheckBox.jsx";
 import { Edit } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useFormikContext } from "formik";
 
 const ShipperInputs = () => {
+  const user = useSelector((state) => state.user);
+  const [editing, setEditing] = useState(false);
+  const { setFieldValue } = useFormikContext();
+
+  useEffect(() => {
+    if (!editing) {
+      setFieldValue(formConfig.usuarioEnvio.nombre.name, user.first_name);
+      setFieldValue(formConfig.usuarioEnvio.apellidos.name, user.last_name);
+      setFieldValue(formConfig.usuarioEnvio.telefono.name, user.phone);
+    }
+  }, []);
+
   return (
     <VStack spacing={2} shadow={"md"} borderRadius={"5px"} p={2} bg={"white"}>
       <HStack justify={"space-between"} w={"full"}>
@@ -24,7 +39,7 @@ const ShipperInputs = () => {
             size={24}
             color="#646A7A"
             cursor="pointer"
-            onClick={() => console.log("editando")}
+            onClick={() => setEditing(!editing)}
           />
         </Tooltip>
       </HStack>
@@ -33,14 +48,17 @@ const ShipperInputs = () => {
         <InputField
           name={formConfig.usuarioEnvio.nombre.name}
           label={formConfig.usuarioEnvio.nombre.label}
+          readOnly={!editing}
         />
         <InputField
           name={formConfig.usuarioEnvio.apellidos.name}
           label={formConfig.usuarioEnvio.apellidos.label}
+          readOnly={!editing}
         />
         <InputField
           name={formConfig.usuarioEnvio.telefono.name}
           label={formConfig.usuarioEnvio.telefono.label}
+          readOnly={!editing}
         />
         <GridItem display="flex" alignItems="end" h={"100%"}>
           <CheckboxField
