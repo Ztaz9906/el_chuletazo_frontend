@@ -2,39 +2,58 @@ import { Box, Button, Container } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import RecipientInputs from "@/components/home/pedidos/form/RecipientInputs.jsx";
 import ShipperInputs from "@/components/home/pedidos/form/ShipperInputs.jsx";
-import { initialValues } from "@/components/home/pedidos/schema/initialValues.js";
-import { validationSchema } from "@/components/home/pedidos/schema/validations.js";
+import { initialValues } from "@/components/home/pedidos/form/schema/initialValues.js";
+import { validationSchema } from "@/components/home/pedidos/form/schema/validations.js";
 import { usePostDestinatarioMutation } from "@/servicios/redux/api/Destinatarios/index.js";
 import { useSelector } from "react-redux";
-// Asegúrate de importar correctamente tu hook de mutación
-// import { usePostPedidoMutation } from "@/services/api";
+import { usePostPedidoMutation } from "@/servicios/redux/api/Pedidos/index.js";
 
 const ContactForm = () => {
   const user = useSelector((state) => state.user);
-  // Descomentar y usar el hook si tienes configurado RTK Query o algún sistema de API
-  // const [postPedido, { isLoading }] = usePostPedidoMutation();
-  const [postDestinatario, { isLoading }] = usePostDestinatarioMutation();
+  const cart = useSelector((state) => state.cart);
+  const [postPedido] = usePostPedidoMutation();
+  const [postDestinatario] = usePostDestinatarioMutation();
   async function handleSubmit(values, actions) {
     try {
-      console.log(values);
+      const destinatario = {
+        direccion: values.direccion,
+        ci: values.carneIdentidad,
+        provincia: values.provincia,
+        apellidos: values.apellidos,
+        municipio: values.municipio,
+        nombre: values.nombre,
+        numero_casa: values.numeroCasa,
+        telefono_celular: values.telefonoCelular,
+        telefono_fijo: values.telefonoFijo,
+      };
+      const total = cart.products.reduce((sum, product) => {
+        return (
+          sum + (product.default_price.unit_amount / 100) * product.quantity
+        );
+      }, 0);
+      let res = values.destinatarios;
       if (values.guardarDestinatario) {
-        const destinatario = {
-          direccion: values.direccion,
-          ci: values.carneIdentidad,
-          provincia: values.provincia,
-          apellidos: values.apellidos,
-          municipio: values.municipio,
-          nombre: values.nombre,
-          numero_casa: values.numeroCasa,
-          telefono_celular: values.telefonoCelular,
-          telefono_fijo: values.telefonoFijo,
-          usuario: [user.id],
-        };
         console.log("Guardando destinatario...", destinatario);
-        await postDestinatario(destinatario);
+        res = await postDestinatario(destinatario);
       }
-      // Enviar datos a la API o backend
-      // await postPedido(values);
+      console.log("Destinatario guardado", res);
+      const productos = cart.products.map((product) => {
+        return {
+          stripe_product_id: product.stripe_product_id,
+          price: product.default_price.stripe_price_id,
+          quantity: product.quantity,
+        };
+      });
+      const pedido = {
+        destinatario_id: res.data.id,
+        customer_id: user.customer_id,
+        total: total,
+        productos: productos,
+        success_url: "http://localhost:3000/pedidos",
+        cancel_url: "http://localhost:3000/pedidos",
+      };
+      console.log("Enviando pedido...", pedido);
+      await postPedido(pedido);
       actions.resetForm();
     } catch (error) {
       console.log(error);

@@ -14,4 +14,5 @@ export const initialValues = {
   telefonoEnvio: "",
   direccionFacturacionIgual: false,
   productos: [],
+  destinatarios: "",
 };

@@ -15,8 +15,8 @@ import { UserPlus } from "lucide-react";
 import SelectField from "@/ChakaraUI/FormField/SelectField/SelectField.jsx";
 import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios/index.js";
 import { useFormikContext } from "formik";
-import { useState } from "react";
-import { formConfig } from "@/components/home/pedidos/schema/formConfig.js";
+import { useEffect, useState } from "react";
+import { formConfig } from "@/components/home/pedidos/form/schema/formConfig.js";
 
 export default function RecipientModalAutocomplete() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,14 +24,16 @@ export default function RecipientModalAutocomplete() {
   const { values, setFieldValue } = useFormikContext(); // Para autocompletar los campos del formulario
   const [selectedRecipientCI, setSelectedRecipientCI] = useState(null); // Guardar CI del destinatario seleccionado
 
+  useEffect(() => {
+    setSelectedRecipientCI(values.destinatarios);
+  }, [values.destinatarios, selectedRecipientCI]);
+
   const handleAutoComplete = () => {
-    setSelectedRecipientCI(values["recipient"]); // Guardar CI del destinatario seleccionado
     if (selectedRecipientCI && data) {
       // Buscar el destinatario correspondiente por CI
       const destinatarioSeleccionado = data.find(
-        (destinatario) => destinatario.ci === selectedRecipientCI,
+        (destinatario) => destinatario.id === selectedRecipientCI,
       );
-
       if (destinatarioSeleccionado) {
         // Autocompletar los campos del formulario con el destinatario seleccionado
         setFieldValue(
@@ -70,10 +72,12 @@ export default function RecipientModalAutocomplete() {
           formConfig.destinatario.direccion.municipio.name,
           destinatarioSeleccionado.municipio,
         );
-
-        // Cerrar el modal después de autocompletar
         onClose();
+      } else {
+        console.error("Recipient not found");
       }
+    } else {
+      console.error("Data not available");
     }
   };
 
@@ -97,13 +101,13 @@ export default function RecipientModalAutocomplete() {
               options={
                 data
                   ? data.map((destinatario) => ({
-                      value: destinatario.ci, // El value es el CI del destinatario
+                      value: destinatario.id, // El value es el CI del destinatario
                       label: `${destinatario.nombre} ${destinatario.apellidos}`, // Mostrar el nombre completo
                     }))
                   : []
               }
-              name="recipient"
-              label="Destinatarios Guardados"
+              name={formConfig.destinatarios.name}
+              label={formConfig.destinatarios.label}
               placeholder="Seleccione un destinatario"
             />
           </ModalBody>

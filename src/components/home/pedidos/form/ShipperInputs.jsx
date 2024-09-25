@@ -6,7 +6,7 @@ import {
   Tooltip,
   VStack,
 } from "@chakra-ui/react";
-import { formConfig } from "@/components/home/pedidos/schema/formConfig.js";
+import { formConfig } from "@/components/home/pedidos/form/schema/formConfig.js";
 import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
 import CheckboxField from "@/ChakaraUI/FormField/CheckBox/CheckBox.jsx";
 import { Edit } from "lucide-react";
@@ -23,7 +23,10 @@ const ShipperInputs = () => {
     if (!editing) {
       setFieldValue(formConfig.usuarioEnvio.nombre.name, user.first_name);
       setFieldValue(formConfig.usuarioEnvio.apellidos.name, user.last_name);
-      setFieldValue(formConfig.usuarioEnvio.telefono.name, user.phone);
+      setFieldValue(
+        formConfig.usuarioEnvio.telefono.name,
+        user.phone | undefined,
+      );
     }
   }, []);
 

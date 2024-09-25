@@ -1,5 +1,5 @@
 import { Grid, GridItem, HStack, Text, VStack } from "@chakra-ui/react";
-import { formConfig } from "@/components/home/pedidos/schema/formConfig.js";
+import { formConfig } from "@/components/home/pedidos/form/schema/formConfig.js";
 import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
 import CheckboxField from "@/ChakaraUI/FormField/CheckBox/CheckBox.jsx";
 import SelectField from "@/ChakaraUI/FormField/SelectField/SelectField.jsx";

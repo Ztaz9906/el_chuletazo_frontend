@@ -80,4 +80,9 @@ export const formConfig = {
       type: "checkbox",
     },
   },
+  destinatarios: {
+    name: "destinatarios",
+    label: "Destinatario",
+    errorMsg: "Seleccione un destinatario",
+  },
 };
