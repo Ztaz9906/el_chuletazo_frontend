@@ -79,7 +79,7 @@ const ContactForm = () => {
                   textColor="white"
                   isLoading={isSubmitting} // Desactiva el botón y muestra el estado de carga
                 >
-                  Enviar a Pagar
+                  Confirmar Pedido
                 </Button>
               </Box>
             </Form>

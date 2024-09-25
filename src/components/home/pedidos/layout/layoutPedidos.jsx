@@ -3,6 +3,7 @@ import Footer from "@/components/footer/Footer.jsx";
 import CreatePedido from "@/components/home/pedidos/CreatePedido.jsx";
 import Header from "@/components/header/Header.jsx";
 import fondo from "@/assets/fondo_1.png";
+import ListaProductosUsuarios from "@/components/home/pedidos/ListaPedidosUsuarios.jsx";
 
 const LayoutPedidos = () => {
   return (

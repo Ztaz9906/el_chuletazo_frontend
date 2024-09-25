@@ -4,6 +4,7 @@ import Login from "@/components/auth/login/Login.jsx";
 import SingUp from "@/components/auth/sing-up/SingUp.jsx";
 import Index from "@/components/home/Productos/index.jsx";
 import LayoutPedidos from "@/components/home/pedidos/layout/layoutPedidos.jsx";
+import ListaPedidosUsuarios from "@/components/home/pedidos/ListaPedidosUsuarios.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "pedidos",
     element: <LayoutPedidos />,
+  },
+  {
+    path: "lista_pedidos_usuarios",
+    element: <ListaPedidosUsuarios />,
   },
   {
     path: "login",

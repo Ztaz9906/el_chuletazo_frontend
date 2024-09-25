@@ -1,3 +1,5 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Box,
   Flex,
@@ -11,10 +13,9 @@ import {
   Th,
   Thead,
   Tr,
-} from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import ContactForm from "@/components/home/pedidos/form/ContactForm.jsx";
-import ModalCart from "../Productos/ModalCart";
+} from '@chakra-ui/react';
+import ContactForm from '@/components/home/pedidos/form/ContactForm.jsx';
+import ModalCart from '../Productos/ModalCart';
 
 const CreatePedido = () => {
   const cart = useSelector((state) => state.cart.products);
@@ -29,11 +30,11 @@ const CreatePedido = () => {
 
   return (
     <Box p={5}>
-      <Flex justify={"space-between"} w={"full"}>
+      <Flex justify={'space-between'} w={'full'}>
         <Text fontSize="2xl" mb={5} align="center">
-          Confirmar Pedido
+          Pedido
         </Text>
-        <ModalCart textColor="main.10"/>
+        <ModalCart textColor="main.10" />
       </Flex>
       <Box maxW="full" mx="auto">
         <TableContainer>

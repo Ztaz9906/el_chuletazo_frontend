@@ -24,7 +24,7 @@ function NavBar() {
               key={index}
               bg={
                 activeButton === index
-                  ? "linear-gradient(to top, #28b463 50%, transparent 100%)"
+                  ? "main.10"
                   : "transparent"
               }
               color="white"
