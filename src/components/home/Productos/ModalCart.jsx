@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import fondo from "@/assets/fondo_2.png"; 
 
-export default function ModalCart() {
+export default function ModalCart({ textColor = "white" }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cart = useSelector((state) => state.cart.products);
   const navigate = useNavigate();
@@ -42,13 +42,13 @@ export default function ModalCart() {
       <Button
         bg="transparent"
         onClick={onOpen}
-        color="white"
+        color={textColor}
         borderBottom="2px solid transparent"
         borderRadius="0"
         _hover={{
           borderBottom: "2px solid",
           borderColor: "main.10",
-          color: "white",
+          color: textColor,
         }}
         h="10"
         leftIcon={<Icon as={ShoppingCart} />}
