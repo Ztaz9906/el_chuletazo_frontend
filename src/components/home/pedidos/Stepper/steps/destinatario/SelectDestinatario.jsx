@@ -21,8 +21,10 @@ const SelectDestinatario = () => {
   const [selectedDestinatario, setSelectedDestinatario] = useState(null);
 
   useEffect(() => {
-    const selected = data.find((dest) => dest.id === values.destinatarios);
-    setSelectedDestinatario(selected);
+    if (values.destinatarios) {
+      const selected = data.find((dest) => dest.id === values.destinatarios);
+      setSelectedDestinatario(selected);
+    }
   }, [values.destinatarios, data]);
 
   return (
