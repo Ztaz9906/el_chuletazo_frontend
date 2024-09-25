@@ -1,20 +1,16 @@
+import React from "react";
 import MultiStepperForm from "@/ChakaraUI/Stepper/Stepper.jsx";
-import {
-  Box,
-  Button,
-  Center,
-  Heading,
-  Stack,
-  StackItem,
-} from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Heading, Stack } from "@chakra-ui/react";
 import { Check } from "lucide-react";
+import ProductsList from "@/components/home/pedidos/Stepper/steps/productos/ProductsList.jsx";
+import SelectDestinatario from "@/components/home/pedidos/Stepper/steps/destinatario/SelectDestinatario.jsx";
 
 const getActiveStep = (activeStep, formConfig) => {
   switch (activeStep) {
     case 0:
-      return <div>Paso 1</div>;
+      return <ProductsList />;
     case 1:
-      return <div>Paso 2</div>;
+      return <SelectDestinatario />;
     case 2:
       return <div>Paso 3</div>;
     case 3:
@@ -39,7 +35,7 @@ const getActiveStep = (activeStep, formConfig) => {
             >
               Hecho
             </Heading>
-            <Heading fontWeight={"ligth"} size={"sm"} textColor={"gray.500"}>
+            <Heading fontWeight={"light"} size={"sm"} textColor={"gray.500"}>
               Hemos terminado de recoger toda la información necesaria
             </Heading>
           </Center>
@@ -47,6 +43,7 @@ const getActiveStep = (activeStep, formConfig) => {
       );
   }
 };
+
 export default function MyForm() {
   const steps = [
     {
@@ -54,7 +51,7 @@ export default function MyForm() {
       description: "Productos seleccionados para la compra",
     },
     { title: "Destinatario", description: "Seleccione un destinatario" },
-    { title: "Remitente", description: "Datos dle remitente" },
+    { title: "Remitente", description: "Datos del remitente" },
     { title: "Confirmacion", description: "Verifique todos los datos" },
   ];
 
@@ -76,9 +73,28 @@ export default function MyForm() {
       handleSubmit={handleSubmit}
     >
       {({ stepper, formikProps }) => (
-        <Stack gap={4}>
-          {getActiveStep(stepper.activeStep)}
-          <StackItem display={"flex"} justifyContent={"space-between"} pt={3}>
+        <Flex direction="column" h="calc(100vh - 200px)">
+          <Box flex="1" overflow="hidden">
+            <Box
+              h="100%"
+              overflowY="auto"
+              css={{
+                "&::-webkit-scrollbar": {
+                  width: "0px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  background: "none",
+                  borderRadius: "4px",
+                },
+                "&::-webkit-scrollbar-thumb:hover": {
+                  background: "none",
+                },
+              }}
+            >
+              {getActiveStep(stepper.activeStep)}
+            </Box>
+          </Box>
+          <Stack direction="row" justifyContent="space-between" pt={2}>
             <Button
               onClick={() => {
                 if (stepper.activeStep === 0) {
@@ -87,30 +103,30 @@ export default function MyForm() {
                   stepper.goToPrevious();
                 }
               }}
-              colorScheme={"red"}
+              colorScheme="red"
               borderRadius={0}
-              textTransform={"uppercase"}
-              fontSize={"sm"}
-              fontWeight={"base"}
+              textTransform="uppercase"
+              fontSize="sm"
+              fontWeight="base"
             >
               {stepper.activeStep === 0 ? "cancelar" : "anterior"}
             </Button>
             <Button
               // isLoading={isMutatingE}
               // isDisabled={!isValid}
-              fontWeight={"base"}
-              colorScheme={"green"}
-              type={"submit"}
-              borderRadius={"5px"}
-              textTransform={"uppercase"}
-              fontSize={"sm"}
+              fontWeight="base"
+              colorScheme="green"
+              type="submit"
+              borderRadius="5px"
+              textTransform="uppercase"
+              fontSize="sm"
             >
-              {steps.length !== stepper.activeStep
+              {steps.length !== stepper.activeStep + 1
                 ? "siguiente"
                 : "Confirmar Pedido"}
             </Button>
-          </StackItem>
-        </Stack>
+          </Stack>
+        </Flex>
       )}
     </MultiStepperForm>
   );

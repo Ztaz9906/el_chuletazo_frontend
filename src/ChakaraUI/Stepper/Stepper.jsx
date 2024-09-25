@@ -1,19 +1,55 @@
+import React from "react";
 import {
   Box,
   Divider,
   Flex,
   Step,
-  StepDescription,
   StepIcon,
   StepIndicator,
   StepNumber,
   Stepper,
   StepSeparator,
   StepStatus,
-  StepTitle,
+  Text,
+  useBreakpointValue,
   useSteps,
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
+
+const ResponsiveStepContent = ({ title, description, isMobile }) => (
+  <Flex
+    direction="column"
+    alignItems={isMobile ? "center" : "flex-start"}
+    flexGrow={1}
+    minWidth="0"
+    mr={isMobile ? 0 : 4}
+    mt={isMobile ? 2 : 0}
+    textAlign={isMobile ? "center" : "left"}
+  >
+    <Text
+      as="span"
+      fontSize={["clamp(12px, 2.5vw, 14px)"]}
+      fontWeight="bold"
+      mb={1}
+      whiteSpace="normal"
+      overflow="hidden"
+      textOverflow="ellipsis"
+      maxWidth="100%"
+    >
+      {title}
+    </Text>
+    <Text
+      fontSize={["clamp(10px, 2vw, 12px)"]}
+      color="gray.600"
+      whiteSpace="normal"
+      overflow="hidden"
+      textOverflow="ellipsis"
+      maxWidth="100%"
+    >
+      {description}
+    </Text>
+  </Flex>
+);
 
 function MultiStepperForm({
   steps,
@@ -27,11 +63,18 @@ function MultiStepperForm({
     count: steps.length,
   });
 
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
-    <Flex direction={"column"} gap={6}>
-      <Stepper index={stepper.activeStep}>
+    <Flex direction={isMobile ? "row" : "column"} gap={6}>
+      <Stepper
+        index={stepper.activeStep}
+        orientation={isMobile ? "vertical" : "horizontal"}
+        height={isMobile ? "auto" : "100px"}
+        gap="0"
+      >
         {steps.map((step, index) => (
-          <Step key={index}>
+          <Step key={index} flexShrink={0}>
             <StepIndicator>
               <StepStatus
                 complete={<StepIcon />}
@@ -39,11 +82,14 @@ function MultiStepperForm({
                 active={<StepNumber />}
               />
             </StepIndicator>
-            <Box flexShrink="0">
-              <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription>
+            <Box flexShrink={1} minWidth="0" maxWidth="100%">
+              <ResponsiveStepContent
+                title={step.title}
+                description={step.description}
+                isMobile={isMobile}
+              />
             </Box>
-            <StepSeparator />
+            {!isMobile && <StepSeparator />}
           </Step>
         ))}
       </Stepper>
@@ -58,7 +104,11 @@ function MultiStepperForm({
         onSubmit={(values, actions) => handleSubmit(values, actions, stepper)}
       >
         {(formikProps) => {
-          return <Form>{children({ stepper, formikProps })}</Form>;
+          return (
+            <Form style={{ height: "100%" }}>
+              {children({ stepper, formikProps })}
+            </Form>
+          );
         }}
       </Formik>
     </Flex>

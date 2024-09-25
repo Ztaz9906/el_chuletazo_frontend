@@ -1,6 +1,6 @@
 import { Box, Button, Container } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import RecipientInputs from "@/components/home/pedidos/form/RecipientInputs.jsx";
+import DestinatarioInputs from "@/components/home/pedidos/Stepper/steps/destinatario/DestinatarioInputs.jsx";
 import ShipperInputs from "@/components/home/pedidos/form/ShipperInputs.jsx";
 import { initialValues } from "@/components/home/pedidos/form/schema/initialValues.js";
 import { validationSchema } from "@/components/home/pedidos/form/schema/validations.js";
@@ -71,7 +71,7 @@ const ContactForm = () => {
           {({ isSubmitting }) => (
             <Form>
               <Box display="flex" flexDirection="column" gap={4}>
-                <RecipientInputs />
+                <DestinatarioInputs />
                 <ShipperInputs />
                 <Button
                   type="submit"
