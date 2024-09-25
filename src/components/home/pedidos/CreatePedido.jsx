@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import ContactForm from "@/components/home/pedidos/form/ContactForm.jsx";
+import ModalCart from "../Productos/ModalCart";
 
 const CreatePedido = () => {
   const cart = useSelector((state) => state.cart.products);
@@ -28,14 +29,17 @@ const CreatePedido = () => {
 
   return (
     <Box p={5}>
-      <Text fontSize="2xl" mb={5} align="center">
-        Confirmar Pedido
-      </Text>
-      <Box maxW="800px" mx="auto">
+      <Flex justify={"space-between"} w={"full"}>
+        <Text fontSize="2xl" mb={5} align="center">
+          Confirmar Pedido
+        </Text>
+        <ModalCart textColor="main.10"/>
+      </Flex>
+      <Box maxW="full" mx="auto">
         <TableContainer>
           <Table
             variant="simple"
-            bg="rgba(255, 255, 255, 0.6)"
+            bg="rgba(255, 255, 255, 0.8)"
             borderRadius="md"
             boxShadow="xl"
           >
