@@ -3,7 +3,17 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 export default function Product({ product }) {
   console.log(product);
   return (
-    <Flex w="full" alignItems="center" mb={4}>
+    <Flex
+      w="full"
+      alignItems="center"
+      mb={4}
+      border="1px solid"
+      borderColor="gray.200"
+      borderRadius="md"
+      boxShadow="md"
+      p={4}
+      bg="white"
+    >
       <Box w="100px" h="60px" mr={3} flexShrink={0}>
         <Image
           objectFit="cover"
