@@ -27,13 +27,12 @@ export default function ProductsList() {
         p={1}
         position="sticky"
         top={0}
-        bg="white"
         zIndex={1}
         borderBottom="1px solid"
         borderColor="gray.200"
       >
         <Text fontSize="20px" fontWeight="semiboldbold" mb={1}>
-          Pagar a EL Chuletazo
+          Pagar a El Chuletazo
         </Text>
         <Text fontSize="24px" fontWeight="bold" color="green.500">
           {total.toFixed(2)} US$

@@ -57,7 +57,7 @@ export default function MainStepper() {
       title: "Productos",
       description: "Productos seleccionados para la compra",
     },
-    { title: "Destinatario", description: "Seleccione un destinatario" },
+    { title: "Destinatario", description: "Seleccione un destinatario"},
     { title: "Remitente", description: "Datos del remitente" },
     { title: "Confirmacion", description: "Verifique todos los datos" },
   ];
@@ -99,21 +99,31 @@ export default function MainStepper() {
       validateOnMount={true}
     >
       {({ stepper, formikProps }) => (
-        <Flex direction="column" h="calc(100vh - 200px)">
+        <Flex
+          direction="column"
+          h="calc(100vh - 200px)"
+          p={4}
+          bg="rgba(255, 255, 255, 0.6)"
+          boxShadow="lg"
+          mt={0}
+          mr={4} 
+          mb={4} 
+          ml={4} 
+        >
           <Box flex="1" overflow="hidden">
             <Box
               h="100%"
               overflowY="auto"
               css={{
                 "&::-webkit-scrollbar": {
-                  width: "0px",
+                  width: "8px",
                 },
                 "&::-webkit-scrollbar-thumb": {
-                  background: "none",
+                  background: "#c1c1c1",
                   borderRadius: "4px",
                 },
                 "&::-webkit-scrollbar-thumb:hover": {
-                  background: "none",
+                  background: "#a8a8a8",
                 },
               }}
             >

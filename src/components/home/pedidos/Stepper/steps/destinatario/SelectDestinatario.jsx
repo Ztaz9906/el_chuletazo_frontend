@@ -27,9 +27,9 @@ const SelectDestinatario = () => {
   }, [values.destinatario_id, data]);
 
   return (
-    <Box width="100%" mt={8}>
+    <Box width="100%" mt={8} >
       {data && data.length === 0 ? (
-        <Center>
+        <Center> 
           <DestinatarioModal />
           {errors.destinatario_id && (
             <Text color="red.500">{errors.destinatario_id}</Text>
