@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Box, Flex, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import Product from "@/components/home/pedidos/Stepper/steps/productos/Product.jsx";
 import { useFormikContext } from "formik";
+import { useEffect } from "react";
 
 export default function ProductsList() {
   const { setFieldValue } = useFormikContext();
