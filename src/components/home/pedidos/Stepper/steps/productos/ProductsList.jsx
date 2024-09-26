@@ -55,7 +55,7 @@ export default function ProductsList() {
         }}
       >
         <VStack spacing={4} align="stretch" w="full" mx="auto" p={4}>
-          <SimpleGrid columns={2} spacing={4}>
+          <SimpleGrid columns={3} spacing={4}>
             {productos.map((product) => (
               <Product key={product.id} product={product} />
             ))}
