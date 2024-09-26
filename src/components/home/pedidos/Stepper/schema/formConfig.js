@@ -53,36 +53,18 @@ export const formConfig = {
       type: "checkbox",
     },
   },
-  usuarioEnvio: {
-    nombre: {
-      name: "nombreEnvio",
-      label: "Nombre",
-      errorMsg: "Ingrese su nombre",
-    },
-    apellidos: {
-      name: "apellidosEnvio",
-      label: "Apellidos",
-      errorMsg: "Ingrese sus apellidos",
-    },
-    direccion: {
-      name: "direccionEnvio",
-      label: "Dirección",
-      errorMsg: "Ingrese su dirección",
-    },
-    telefono: {
-      name: "telefonoEnvio",
-      label: "Teléfono",
-      errorMsg: "Ingrese su número de teléfono",
-    },
-    direccionFacturacionIgual: {
-      name: "direccionFacturacionIgual",
-      label: "La dirección de facturación es la misma que la de casa",
-      type: "checkbox",
-    },
+  remitenteValidado: {
+    name: "remitenteValidado",
+    label: "Remitente validado",
   },
-  destinatarios: {
-    name: "destinatarios",
+  destinatario_id: {
+    name: "destinatario_id",
     label: "Destinatario",
     errorMsg: "Seleccione un destinatario",
+  },
+  direccionFacturacionIgual: {
+    name: "direccionFacturacionIgual",
+    label: "La dirección de facturación es la misma que la de casa",
+    type: "checkbox",
   },
 };

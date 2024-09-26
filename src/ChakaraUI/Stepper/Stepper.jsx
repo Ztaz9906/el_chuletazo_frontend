@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Divider,
@@ -96,12 +95,9 @@ function MultiStepperForm({
       <Divider />
       <Formik
         initialValues={initialValues}
-        validationSchema={
-          Array.isArray(validations)
-            ? validations[stepper.activeStep]
-            : validations
-        }
+        validationSchema={validations[stepper.activeStep]}
         onSubmit={(values, actions) => handleSubmit(values, actions, stepper)}
+        validateOnMount={true}
       >
         {(formikProps) => {
           return (

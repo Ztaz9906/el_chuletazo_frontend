@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Center, Grid, HStack, Text, VStack } from "@chakra-ui/react";
 import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios/index.js";
 import SelectField from "@/ChakaraUI/FormField/SelectField/SelectField.jsx";
-import { formConfig } from "@/components/home/pedidos/form/schema/formConfig.js";
+import { formConfig } from "@/components/home/pedidos/Stepper/schema/formConfig.js";
 import DestinatarioModal from "@/components/home/pedidos/Stepper/steps/destinatario/DestinatarioModal.jsx";
 import { useFormikContext } from "formik";
 
@@ -17,21 +17,23 @@ const DetailsItem = ({ label, value }) => (
 
 const SelectDestinatario = () => {
   const { data } = useGetDestinatarioQuery();
-  const { values } = useFormikContext();
+  const { values, errors } = useFormikContext();
   const [selectedDestinatario, setSelectedDestinatario] = useState(null);
-
   useEffect(() => {
-    if (values.destinatarios) {
-      const selected = data.find((dest) => dest.id === values.destinatarios);
+    if (values.destinatario_id) {
+      const selected = data.find((dest) => dest.id === values.destinatario_id);
       setSelectedDestinatario(selected);
     }
-  }, [values.destinatarios, data]);
+  }, [values.destinatario_id, data]);
 
   return (
     <Box width="100%" mt={8}>
       {data && data.length === 0 ? (
         <Center>
           <DestinatarioModal />
+          {errors.destinatario_id && (
+            <Text color="red.500">{errors.destinatario_id}</Text>
+          )}
         </Center>
       ) : (
         <VStack spacing={6} align="stretch">
@@ -45,8 +47,8 @@ const SelectDestinatario = () => {
                     }))
                   : []
               }
-              name={formConfig.destinatarios.name}
-              label={formConfig.destinatarios.label}
+              name={formConfig.destinatario_id.name}
+              label={formConfig.destinatario_id.label}
               placeholder="Seleccione un destinatario"
             />
             <Center alignItems={"flex-end"}>

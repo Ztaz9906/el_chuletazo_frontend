@@ -1,9 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import Footer from "@/components/footer/Footer.jsx";
-import CreatePedido from "@/components/home/pedidos/CreatePedido.jsx";
 import Header from "@/components/header/Header.jsx";
 import fondo from "@/assets/fondo_1.png";
-import ListaProductosUsuarios from "@/components/home/pedidos/ListaPedidosUsuarios.jsx";
+import MainStepper from "@/components/home/pedidos/Stepper/MainStepper.jsx";
 
 const LayoutPedidos = () => {
   return (
@@ -24,7 +23,7 @@ const LayoutPedidos = () => {
           backgroundSize="cover"
           backgroundPosition="center"
         >
-          <CreatePedido />
+          <MainStepper />
           <Footer />
         </Box>
       </div>

@@ -17,19 +17,16 @@ const productoGetEndpoint = destinatarioApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({
-                type: "Destinatario",
-                id,
-              })),
-              { type: "Destinatario", id: "LIST" },
-            ]
-          : [{ type: "Destinatario", id: "LIST" }],
+      providesTags: (result) => {
+        if (result) {
+          return [{ type: "Destinatario", id: result.id }];
+        } else {
+          return [{ type: "Destinatario", id: "LIST" }];
+        }
+      },
     }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetDestinatarioByIdQuery } = productoGetEndpoint;
+export const { useLazyGetDestinatarioByIdQuery } = productoGetEndpoint;

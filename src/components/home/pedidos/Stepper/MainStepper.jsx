@@ -1,20 +1,25 @@
-import React from "react";
 import MultiStepperForm from "@/ChakaraUI/Stepper/Stepper.jsx";
 import { Box, Button, Center, Flex, Heading, Stack } from "@chakra-ui/react";
 import { Check } from "lucide-react";
 import ProductsList from "@/components/home/pedidos/Stepper/steps/productos/ProductsList.jsx";
 import SelectDestinatario from "@/components/home/pedidos/Stepper/steps/destinatario/SelectDestinatario.jsx";
+import RemitenteInputs from "@/components/home/pedidos/Stepper/steps/remitente/RemitenteInputs.jsx";
+import ConfirmationStep from "@/components/home/pedidos/Stepper/steps/confirmacion/ConfirmationStep.jsx";
+import { initialValues } from "@/components/home/pedidos/Stepper/schema/initialValues.js";
+import { validationSchema } from "@/components/home/pedidos/Stepper/schema/validations.js";
+import { useSelector } from "react-redux";
+import { usePostPedidoMutation } from "@/servicios/redux/api/Pedidos/index.js";
 
-const getActiveStep = (activeStep, formConfig) => {
+const getActiveStep = (activeStep) => {
   switch (activeStep) {
     case 0:
       return <ProductsList />;
     case 1:
       return <SelectDestinatario />;
     case 2:
-      return <div>Paso 3</div>;
+      return <RemitenteInputs />;
     case 3:
-      return <div>Paso 4</div>;
+      return <ConfirmationStep />;
     default:
       return (
         <Center flexDirection={"column"} gap={2}>
@@ -44,7 +49,9 @@ const getActiveStep = (activeStep, formConfig) => {
   }
 };
 
-export default function MyForm() {
+export default function MainStepper() {
+  const user = useSelector((state) => state.user);
+  const [postPedido] = usePostPedidoMutation();
   const steps = [
     {
       title: "Productos",
@@ -55,22 +62,41 @@ export default function MyForm() {
     { title: "Confirmacion", description: "Verifique todos los datos" },
   ];
 
-  const initialValues = {
-    name: "",
-    email: "",
-  };
-
-  const handleSubmit = (values, actions, stepper) => {
-    // Lógica de envío del formulario
-    console.log(values);
-    stepper.goToNext();
+  const handleSubmit = async (values, actions, stepper) => {
+    // Verifica si es el último paso
+    if (stepper.activeStep === steps.length) {
+      try {
+        // Realiza la petición al backend
+        const pedido = {
+          destinatario_id: values.destinatario_id,
+          customer_id: user.customer_id,
+          total: values.total,
+          productos: values.productos,
+          success_url: "http://localhost:3000/pedidos",
+          cancel_url: "http://localhost:3000/",
+        };
+        const res = await postPedido(pedido).unwrap();
+        if (res && res.checkout_url) {
+          // Redirige a la URL de Stripe
+          localStorage.removeItem("cart");
+          window.location.href = res.checkout_url;
+        }
+      } catch (error) {
+        console.error("Error al confirmar el pedido:", error);
+      }
+    } else {
+      // Avanza al siguiente paso
+      stepper.goToNext();
+    }
   };
 
   return (
     <MultiStepperForm
       steps={steps}
       initialValues={initialValues}
+      validations={validationSchema}
       handleSubmit={handleSubmit}
+      validateOnMount={true}
     >
       {({ stepper, formikProps }) => (
         <Flex direction="column" h="calc(100vh - 200px)">
@@ -104,7 +130,6 @@ export default function MyForm() {
                 }
               }}
               colorScheme="red"
-              borderRadius={0}
               textTransform="uppercase"
               fontSize="sm"
               fontWeight="base"
@@ -112,8 +137,7 @@ export default function MyForm() {
               {stepper.activeStep === 0 ? "cancelar" : "anterior"}
             </Button>
             <Button
-              // isLoading={isMutatingE}
-              // isDisabled={!isValid}
+              isDisabled={!formikProps.isValid}
               fontWeight="base"
               colorScheme="green"
               type="submit"
@@ -121,7 +145,7 @@ export default function MyForm() {
               textTransform="uppercase"
               fontSize="sm"
             >
-              {steps.length !== stepper.activeStep + 1
+              {steps.length !== stepper.activeStep
                 ? "siguiente"
                 : "Confirmar Pedido"}
             </Button>

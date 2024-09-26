@@ -1,14 +1,25 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { Box, Flex, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import Product from "@/components/home/pedidos/Stepper/steps/productos/Product.jsx";
+import { useFormikContext } from "formik";
 
 export default function ProductsList() {
+  const { setFieldValue } = useFormikContext();
   const productos = useSelector((state) => state.cart.products);
   const total = productos.reduce((sum, product) => {
     return sum + (product.default_price.unit_amount / 100) * product.quantity;
   }, 0);
-
+  const products = productos.map((product) => {
+    return {
+      stripe_product_id: product.stripe_product_id,
+      price: product.default_price.stripe_price_id,
+      quantity: product.quantity,
+    };
+  });
+  useEffect(() => {
+    setFieldValue("total", total);
+    setFieldValue("productos", products);
+  }, []);
   return (
     <Flex direction="column" h="100%" overflow="hidden">
       <Box

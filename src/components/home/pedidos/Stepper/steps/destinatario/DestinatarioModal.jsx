@@ -36,7 +36,6 @@ export default function DestinatarioModal() {
         telefono_fijo: values.telefonoFijo,
       };
 
-      console.log("Guardando destinatario...", destinatario);
       await postDestinatario(destinatario);
       actions.resetForm();
       onClose();

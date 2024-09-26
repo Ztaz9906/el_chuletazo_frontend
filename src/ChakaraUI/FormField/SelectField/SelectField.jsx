@@ -4,6 +4,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Icon,
   Text,
 } from "@chakra-ui/react";
 import { Select } from "chakra-react-select";
@@ -118,7 +119,9 @@ const SelectField = ({
         }}
         components={{
           DropdownIndicator: () => (
-            <ChevronDown size="18px" color={"#646A7A"} />
+            <Icon mr={2} boxSize="18px" color={"#646A7A"}>
+              <ChevronDown />
+            </Icon>
           ),
         }}
         selectedOptionStyle="check"

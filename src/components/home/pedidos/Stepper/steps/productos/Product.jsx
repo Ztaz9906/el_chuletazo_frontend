@@ -1,7 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 export default function Product({ product }) {
-  console.log(product);
   return (
     <Flex w="full" alignItems="center" mb={4}>
       <Box w="100px" h="60px" mr={3} flexShrink={0}>

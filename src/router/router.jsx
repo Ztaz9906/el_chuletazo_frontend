@@ -5,7 +5,6 @@ import SingUp from "@/components/auth/sing-up/SingUp.jsx";
 import Index from "@/components/home/Productos/index.jsx";
 import LayoutPedidos from "@/components/home/pedidos/layout/layoutPedidos.jsx";
 import ListaPedidosUsuarios from "@/components/home/pedidos/ListaPedidosUsuarios.jsx";
-import Main from "@/components/home/pedidos/Stepper/main.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
   {
     path: "lista_pedidos_usuarios",
     element: <ListaPedidosUsuarios />,
-  },
-  {
-    path: "stepper",
-    element: <Main />,
   },
   {
     path: "login",

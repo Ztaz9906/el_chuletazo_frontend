@@ -1,10 +1,11 @@
 import { Grid } from "@chakra-ui/react";
-import { formConfig } from "@/components/home/pedidos/form/schema/formConfig.js";
+
 import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
 import SelectField from "@/ChakaraUI/FormField/SelectField/SelectField.jsx";
 import { useGetProvinciaQuery } from "@/servicios/redux/api/nomencladores/Provincias/index.js";
 import { useEffect, useState } from "react";
 import { useFormikContext } from "formik";
+import { formConfig } from "@/components/home/pedidos/Stepper/steps/destinatario/schema/formConfig.js";
 
 const DestinatarioInputs = () => {
   const { data: provincias } = useGetProvinciaQuery();
