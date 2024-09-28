@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode"; // Importar jwt_decode como valor por de
 
 //const baseUrl = process.env.REACT_APP_BACKEND_URL;
 export const baseUrl = "https://autentication-system.vercel.app/api/";
-// const localUrl = "http://127.0.0.1:8000/api/";
+//const localUrl = "http://127.0.0.1:8000/api/";
 const client = axios.create({
   baseURL: baseUrl,
   headers: {
@@ -60,6 +60,42 @@ client.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  },
+);
+
+client.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    let message = "Ocurrió un error inesperado";
+
+    if (error.response) {
+      const { data, status } = error.response;
+
+      if (typeof data === "string") {
+        message = data;
+      } else if (typeof data === "object") {
+        if (data.detail) {
+          message = data.detail;
+        } else if (data.non_field_errors) {
+          message = data.non_field_errors[0];
+        } else if (data.message) {
+          message = data.message;
+        } else {
+          message = Object.entries(data)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join(". ");
+        }
+      }
+
+      error.status = status;
+    } else if (error.request) {
+      message = "No se pudo conectar con el servidor";
+    } else {
+      message = error.message;
+    }
+
+    error.message = message;
     return Promise.reject(error);
   },
 );

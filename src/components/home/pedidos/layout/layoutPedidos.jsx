@@ -1,12 +1,11 @@
 import { Box } from "@chakra-ui/react";
-import Footer from "@/components/footer/Footer.jsx";
 import Header from "@/components/header/Header.jsx";
 import fondo from "@/assets/fondo_1.png";
-import MainStepper from "@/components/home/pedidos/Stepper/MainStepper.jsx";
+import { Outlet } from "react-router-dom";
 
 const LayoutPedidos = () => {
   return (
-    <div className="layout flex flex-col min-h-screen">
+    <div className="fixed top-0 left-0 right-0 z-10">
       <Box
         backgroundImage={`url(${fondo})`}
         backgroundSize="cover"
@@ -17,14 +16,14 @@ const LayoutPedidos = () => {
       </Box>
       <div className="flex-grow">
         <Box
-          overflowY="auto"
           w="full"
           backgroundImage="url('/src/assets/fondo_2.png')"
           backgroundSize="cover"
           backgroundPosition="center"
         >
-          <MainStepper />
-          <Footer />
+          <Box px={8} py={2} w={"full"} h={"100vh"}>
+            <Outlet />
+          </Box>
         </Box>
       </div>
     </div>

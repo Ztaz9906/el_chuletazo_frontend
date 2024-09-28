@@ -2,10 +2,7 @@ import * as Yup from "yup";
 import { formConfig } from "@/components/auth/sing-up/schema/form.js";
 
 export const validationSchema = Yup.object().shape({
-  [formConfig.username.name]: Yup.string()
-    .required("Este campo es requerido")
-    .matches(/^[a-zA-Z0-9]+$/, formConfig.username.errorMsg)
-    .required(formConfig.username.errorMsg),
+  [formConfig.phone.name]: Yup.string().required("Este campo es requerido"),
   [formConfig.email.name]: Yup.string()
     .email(formConfig.email.errorMsg)
     .required(formConfig.email.errorMsg),

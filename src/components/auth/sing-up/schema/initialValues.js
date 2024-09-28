@@ -1,7 +1,7 @@
 import { formConfig } from "@/components/auth/sing-up/schema/form.js";
 
 export const initialValues = {
-  [formConfig.username.name]: "",
+  [formConfig.phone.name]: "",
   [formConfig.email.name]: "",
   [formConfig.password.name]: "",
   [formConfig.confirm_password.name]: "",

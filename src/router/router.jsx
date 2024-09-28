@@ -4,7 +4,8 @@ import Login from "@/components/auth/login/Login.jsx";
 import SingUp from "@/components/auth/sing-up/SingUp.jsx";
 import Index from "@/components/home/Productos/index.jsx";
 import LayoutPedidos from "@/components/home/pedidos/layout/layoutPedidos.jsx";
-import ListaPedidosUsuarios from "@/components/home/pedidos/ListaPedidosUsuarios.jsx";
+import MainStepper from "@/components/home/pedidos/Stepper/MainStepper.jsx";
+import ListaPedidos from "@/components/home/pedidos/table/ListaPedidos.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,17 @@ const router = createBrowserRouter([
   },
   {
     path: "pedidos",
-    element: <LayoutPedidos />,
-  },
-  {
-    path: "lista_pedidos_usuarios",
-    element: <ListaPedidosUsuarios />,
+    element: <LayoutPedidos />, // Ahora "pedidos" tiene un path explícito
+    children: [
+      {
+        path: "",
+        element: <ListaPedidos />, // Esta será la ruta /pedidos
+      },
+      {
+        path: "confirmar_pedido",
+        element: <MainStepper />, // Esta será la ruta /pedidos/confirmar_pedido
+      },
+    ],
   },
   {
     path: "login",

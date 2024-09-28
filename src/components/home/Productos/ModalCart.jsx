@@ -1,5 +1,7 @@
 import {
+  Badge,
   Button,
+  HStack,
   Icon,
   Modal,
   ModalBody,
@@ -8,18 +10,16 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spacer,
   Text,
   useDisclosure,
   VStack,
-  HStack,
-  Spacer,
-  Badge,
 } from "@chakra-ui/react";
 import { ShoppingCart } from "lucide-react";
 import ModalProductCard from "@/components/home/Productos/ModalProductCard.jsx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import fondo from "@/assets/fondo_2.png"; 
+import fondo from "@/assets/fondo_2.png";
 
 export default function ModalCart({ textColor = "white" }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,7 +32,7 @@ export default function ModalCart({ textColor = "white" }) {
 
   const handleComprarClick = () => {
     if (cart.length > 0) {
-      navigate("/pedidos");
+      navigate("/pedidos/confirmar_pedido");
       onClose();
     }
   };
@@ -75,8 +75,8 @@ export default function ModalCart({ textColor = "white" }) {
           bgImage={`url(${fondo})`}
           bgSize="cover"
           bgPosition="center"
-          maxH="80vh" 
-          maxW="600px" 
+          maxH="80vh"
+          maxW="600px"
         >
           <ModalHeader>Mi Carrito</ModalHeader>
           <ModalCloseButton />
@@ -96,8 +96,16 @@ export default function ModalCart({ textColor = "white" }) {
               <Text fontWeight="bold">Total:</Text>
               <Text>${total.toFixed(2)}</Text>
               <Spacer />
-              <Button textColor={"white"} bg="main.10" mr={3} onClick={onClose}>Cerrar</Button>
-              <Button bg="main.10" textColor={"white"} onClick={handleComprarClick}>Comprar</Button>
+              <Button textColor={"white"} bg="main.10" mr={3} onClick={onClose}>
+                Cerrar
+              </Button>
+              <Button
+                bg="main.10"
+                textColor={"white"}
+                onClick={handleComprarClick}
+              >
+                Comprar
+              </Button>
             </HStack>
           </ModalFooter>
         </ModalContent>

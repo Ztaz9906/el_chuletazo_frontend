@@ -2,7 +2,9 @@ import * as Yup from "yup";
 
 export const validationSchema = [
   // Step 0: No validation
-  Yup.object().shape({}),
+  Yup.object().shape({
+    productos: Yup.array().min(1, "Seleccione al menos un producto"),
+  }),
 
   // Step 1: Validation for destinatario
   Yup.object().shape({

@@ -11,20 +11,20 @@ const SingUpForm = () => {
   return (
     <Grid templateColumns={"repeat(2,1fr)"} gap={3}>
       <InputField
-        name={formConfig.username.name}
-        label={formConfig.username.label}
-        placeholder="Ingrese su nombre de usuario"
-        labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
-        required
-      />
-      <InputField
         name={formConfig.email.name}
         label={formConfig.email.label}
         type="email"
         labelColor={"white"}
         placeholderColor={"whiteAlpha.500"}
         placeholder="Ingrese su correo electrónico"
+        required
+      />
+      <InputField
+        name={formConfig.phone.name}
+        label={formConfig.phone.label}
+        placeholder="Ingrese su nombre de usuario"
+        labelColor={"white"}
+        placeholderColor={"whiteAlpha.500"}
         required
       />
       <InputField

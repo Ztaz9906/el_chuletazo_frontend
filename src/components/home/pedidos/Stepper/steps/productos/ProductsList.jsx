@@ -5,7 +5,7 @@ import { useFormikContext } from "formik";
 import { useEffect } from "react";
 
 export default function ProductsList() {
-  const { setFieldValue } = useFormikContext();
+  const { setFieldValue, errors, validateField, values } = useFormikContext();
   const productos = useSelector((state) => state.cart.products);
   const total = productos.reduce((sum, product) => {
     return sum + (product.default_price.unit_amount / 100) * product.quantity;
@@ -20,7 +20,8 @@ export default function ProductsList() {
   useEffect(() => {
     setFieldValue("total", total);
     setFieldValue("productos", products);
-  }, []);
+    validateField("productos");
+  }, [errors]);
   return (
     <Flex direction="column" h="100%" overflow="hidden">
       <Box
@@ -38,9 +39,8 @@ export default function ProductsList() {
           {total.toFixed(2)} US$
         </Text>
       </Box>
-      <Box
+      <Flex
         overflowY="auto"
-        flex={1}
         css={{
           "&::-webkit-scrollbar": {
             width: "0px",
@@ -53,15 +53,34 @@ export default function ProductsList() {
             background: "none",
           },
         }}
+        alignItems={"center"}
+        h={"100%"}
       >
-        <VStack spacing={4} align="stretch" w="full" mx="auto" p={4}>
-          <SimpleGrid columns={3} spacing={4}>
-            {productos.map((product) => (
-              <Product key={product.id} product={product} />
-            ))}
-          </SimpleGrid>
-        </VStack>
-      </Box>
+        {errors.productos ? (
+          <Box
+            border
+            borderWidth={"1px"}
+            bg={"red.100"}
+            borderColor={"red.400"}
+            borderRadius={"5px"}
+            display={"flex"}
+            justifyContent={"center"}
+            textAlign={"center"}
+            textColor={"red.600"}
+            w={"100%"}
+          >
+            {errors.productos}
+          </Box>
+        ) : (
+          <VStack spacing={4} align="stretch" w="full" mx="auto" p={4}>
+            <SimpleGrid columns={3} spacing={4}>
+              {productos.map((product) => (
+                <Product key={product.id} product={product} />
+              ))}
+            </SimpleGrid>
+          </VStack>
+        )}
+      </Flex>
     </Flex>
   );
 }

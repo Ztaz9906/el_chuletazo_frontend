@@ -66,11 +66,10 @@ const Header = () => {
       icon: <LogOutIcon />,
     },
   ];
-
   return (
     <Box bg="blackAlpha.300" p={2} height="56px">
       <Flex justify="space-between" align="center" height="100%">
-        <Box m={2}>
+        <Box m={2} onClick={() => navigate("/")}>
           <Image
             src={logo}
             alt="Logo del negocio"

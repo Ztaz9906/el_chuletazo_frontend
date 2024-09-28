@@ -1,6 +1,5 @@
 import {
   Box,
-  Divider,
   Flex,
   Step,
   StepIcon,
@@ -71,6 +70,8 @@ function MultiStepperForm({
         orientation={isMobile ? "vertical" : "horizontal"}
         height={isMobile ? "auto" : "100px"}
         gap="0"
+        px={2}
+        bg={"white"}
       >
         {steps.map((step, index) => (
           <Step key={index} flexShrink={0}>
@@ -92,7 +93,7 @@ function MultiStepperForm({
           </Step>
         ))}
       </Stepper>
-      <Divider />
+      {/*<Divider />*/}
       <Formik
         initialValues={initialValues}
         validationSchema={validations[stepper.activeStep]}

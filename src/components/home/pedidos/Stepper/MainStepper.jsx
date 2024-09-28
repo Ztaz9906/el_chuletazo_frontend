@@ -7,8 +7,9 @@ import RemitenteInputs from "@/components/home/pedidos/Stepper/steps/remitente/R
 import ConfirmationStep from "@/components/home/pedidos/Stepper/steps/confirmacion/ConfirmationStep.jsx";
 import { initialValues } from "@/components/home/pedidos/Stepper/schema/initialValues.js";
 import { validationSchema } from "@/components/home/pedidos/Stepper/schema/validations.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { usePostPedidoMutation } from "@/servicios/redux/api/Pedidos/index.js";
+import { clearCart } from "@/servicios/redux/slices/productSliece.js";
 
 const getActiveStep = (activeStep) => {
   switch (activeStep) {
@@ -52,12 +53,13 @@ const getActiveStep = (activeStep) => {
 export default function MainStepper() {
   const user = useSelector((state) => state.user);
   const [postPedido] = usePostPedidoMutation();
+  const dispatch = useDispatch();
   const steps = [
     {
       title: "Productos",
       description: "Productos seleccionados para la compra",
     },
-    { title: "Destinatario", description: "Seleccione un destinatario"},
+    { title: "Destinatario", description: "Seleccione un destinatario" },
     { title: "Remitente", description: "Datos del remitente" },
     { title: "Confirmacion", description: "Verifique todos los datos" },
   ];
@@ -78,6 +80,7 @@ export default function MainStepper() {
         const res = await postPedido(pedido).unwrap();
         if (res && res.checkout_url) {
           // Redirige a la URL de Stripe
+          dispatch(clearCart());
           localStorage.removeItem("cart");
           window.location.href = res.checkout_url;
         }
@@ -105,10 +108,6 @@ export default function MainStepper() {
           p={4}
           bg="rgba(255, 255, 255, 0.6)"
           boxShadow="lg"
-          mt={0}
-          mr={4} 
-          mb={4} 
-          ml={4} 
         >
           <Box flex="1" overflow="hidden">
             <Box

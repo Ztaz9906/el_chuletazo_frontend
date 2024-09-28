@@ -31,7 +31,10 @@ const loginEndpoint = loginApi.injectEndpoints({
       query: (googleToken) => ({
         url: "google-login/",
         method: "POST",
-        body: { id_token: googleToken },
+        body:
+          typeof googleToken === "string"
+            ? { id_token: googleToken }
+            : { access_token: googleToken.access_token },
       }),
       onQueryStarted: (arg, { dispatch, queryFulfilled }) => {
         queryFulfilled

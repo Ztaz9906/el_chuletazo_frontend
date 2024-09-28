@@ -1,8 +1,8 @@
 export const formConfig = {
-  username: {
-    name: "username",
-    label: "Nombre de usuario",
-    errorMsg: "Debe contener solo letras y números",
+  phone: {
+    name: "phone",
+    label: "Numero de telefono",
+    errorMsg: "Debe contener números",
   },
   email: {
     name: "email",

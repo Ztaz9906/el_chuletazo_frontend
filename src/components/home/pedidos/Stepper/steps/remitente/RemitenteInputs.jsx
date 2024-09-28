@@ -33,7 +33,7 @@ const RemitenteInputs = () => {
   const [editing, setEditing] = useState(false);
   const [patchUser] = usePatchUserMutation();
   const dispatch = useDispatch();
-  const { setFieldValue: MainSetFieldValue } = useFormikContext();
+  const { setFieldValue: MainSetFieldValue, errors } = useFormikContext();
 
   async function handleSubmit(values, setFieldError) {
     try {
@@ -173,6 +173,23 @@ const RemitenteInputs = () => {
                   </>
                 )}
               </Grid>
+
+              {errors.remitenteValidado && (
+                <Box
+                  border
+                  borderWidth={"1px"}
+                  bg={"red.100"}
+                  borderColor={"red.400"}
+                  borderRadius={"5px"}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  textAlign={"center"}
+                  textColor={"red.600"}
+                  w={"100%"}
+                >
+                  {errors.remitenteValidado}
+                </Box>
+              )}
             </>
           );
         }}

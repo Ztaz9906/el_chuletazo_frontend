@@ -40,7 +40,7 @@ export default function Login() {
     } catch (error) {
       toast({
         title: "Error de inicio de sesión",
-        description: error.message,
+        description: error.data,
         status: "error",
         duration: 3000,
         isClosable: true,

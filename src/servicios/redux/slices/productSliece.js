@@ -10,7 +10,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      console.log("Adding product:", action.payload);
       const existingProduct = state.products.find(
         (product) => product.id === action.payload.id,
       );
@@ -18,12 +17,10 @@ const cartSlice = createSlice({
       if (existingProduct) {
         existingProduct.quantity += action.payload.quantity;
       } else {
-        console.log("Adding new product to cart:", action.payload);
         state.products.push(action.payload);
       }
     },
     deleteProduct: (state, action) => {
-      console.log("Deleting product:", action.payload);
       state.products = state.products.filter(
         (product) => product.id !== action.payload,
       );
@@ -39,10 +36,14 @@ const cartSlice = createSlice({
         product.quantity = action.payload.quantity;
       }
     },
+    clearCart: (state) => {
+      return [];
+    },
   },
 });
 
 // Exportar las acciones para usarlas en los componentes
-export const { addProduct, deleteProduct, editQuantity } = cartSlice.actions;
+export const { clearCart, addProduct, deleteProduct, editQuantity } =
+  cartSlice.actions;
 // Exportar el reducer para integrarlo en el store
 export default cartSlice.reducer;
