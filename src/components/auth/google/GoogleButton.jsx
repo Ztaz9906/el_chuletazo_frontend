@@ -50,9 +50,9 @@ export default function GoogleButton() {
     <Button
       onClick={() => login()}
       isLoading={isLoading}
-      loadingText="Iniciando sesión"
+      loadingText="Iniciando sesión con google"
       spinner={<Spinner />}
-      leftIcon={<FcGoogle />}
+      leftIcon={<FcGoogle size={"24px"} />}
       width="100%"
       bg="white"
       color="gray.900"
