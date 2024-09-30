@@ -98,6 +98,10 @@ const SelectField = ({
         value={value}
         closeMenuOnSelect={!isMulti}
         chakraStyles={{
+          control: (provided) => ({
+            ...provided,
+            backgroundColor: "white",
+          }),
           placeholder: (provided) => ({
             ...provided,
             color: "#646A7A",
