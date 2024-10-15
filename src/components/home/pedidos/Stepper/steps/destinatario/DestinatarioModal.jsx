@@ -47,7 +47,7 @@ export default function DestinatarioModal() {
   return (
     <>
       <Button
-        colorScheme={"green"}
+        colorScheme={"wine"}
         px={4}
         py={2}
         leftIcon={<UserPlus size={20} color="white" />}
