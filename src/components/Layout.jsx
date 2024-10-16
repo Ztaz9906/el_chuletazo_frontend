@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import CustomGoogleLogin from "../components/auth/google/GoogleLogin.jsx";
 import BackPrincipal from "../components/header/BackPrincipal.jsx";
 import NavBar from "../components/nav_bar/NavBar.jsx";
-import Footer from "./footer/Footer.jsx";
+import Footer from "./Footer.jsx";
 
 const Layout = () => {
   const user = useSelector((state) => state.user);
