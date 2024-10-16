@@ -1,4 +1,4 @@
-import { Box } from "..chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import CustomGoogleLogin from "../components/auth/google/GoogleLogin.jsx";
