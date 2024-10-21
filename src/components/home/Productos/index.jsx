@@ -2,6 +2,7 @@ import ProductCard from "@/components/home/Productos/ProductCard.jsx";
 import { useGetProductoQuery } from "@/servicios/redux/api/productos/get/get.js";
 import {
   Box,
+  Button,
   Checkbox,
   Flex,
   HStack,
@@ -12,7 +13,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { SearchIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const sidebarOptions = [
@@ -24,11 +25,14 @@ const sidebarOptions = [
   "Los más vendidos",
 ];
 
+const ITEMS_PER_PAGE = 6;
+
 export default function Index() {
   const { isLoading, data, error } = useGetProductoQuery();
   const [showAnimation, setShowAnimation] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedOption, setSelectedOption] = useState("Todos los productos");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -54,6 +58,44 @@ export default function Index() {
         return nameMatch || descriptionMatch;
       })
     : [];
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pageNumbers = [];
+    const maxVisiblePages = 4;
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= maxVisiblePages; i++) {
+          pageNumbers.push(i);
+        }
+      } else if (currentPage >= totalPages - 2) {
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pageNumbers.push(i);
+        }
+      } else {
+        for (let i = currentPage - 1; i <= currentPage + 2; i++) {
+          pageNumbers.push(i);
+        }
+      }
+    }
+    return pageNumbers;
+  };
 
   if (isLoading) {
     return (
@@ -137,28 +179,72 @@ export default function Index() {
           </VStack>
         </Box>
         <Box flex={1} overflowY="auto">
-          <Flex flexWrap="wrap" justifyContent="center" gap={6}>
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((producto) => (
-                <Box
-                  key={producto.id}
-                  flexBasis={{
-                    base: "100%",
-                    sm: "calc(50% - 1rem)",
-                    md: "calc(33.333% - 1rem)",
-                    lg: "calc(25% - 1rem)",
-                  }}
+          <Flex flexDirection="column" gap={6}>
+            <Flex flexWrap="wrap" justifyContent="center" gap={6}>
+              {currentProducts.length > 0 ? (
+                currentProducts.map((producto) => (
+                  <Box
+                    key={producto.id}
+                    flexBasis={{
+                      base: "100%",
+                      sm: "calc(50% - 1rem)",
+                      md: "calc(33.333% - 1rem)",
+                      lg: "calc(25% - 1rem)",
+                    }}
+                  >
+                    <ProductCard
+                      producto={producto}
+                      showAnimation={showAnimation}
+                    />
+                  </Box>
+                ))
+              ) : (
+                <Text fontSize="xl" color="gray.500">
+                  No se encontraron productos.
+                </Text>
+              )}
+            </Flex>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <Flex justifyContent="center" mt={6} mb={4}>
+                <Button
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  isDisabled={currentPage === 1}
+                  variant="ghost"
+                  mx={1}
                 >
-                  <ProductCard
-                    producto={producto}
-                    showAnimation={showAnimation}
-                  />
-                </Box>
-              ))
-            ) : (
-              <Text fontSize="xl" color="gray.500">
-                No se encontraron productos.
-              </Text>
+                  <ChevronLeft size={20} />
+                </Button>
+
+                {getPageNumbers().map((pageNumber) => (
+                  <Button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    variant={currentPage === pageNumber ? "solid" : "ghost"}
+                    bg={
+                      currentPage === pageNumber ? "green.500" : "transparent"
+                    }
+                    color={currentPage === pageNumber ? "white" : "black"}
+                    _hover={{
+                      bg: currentPage === pageNumber ? "green.600" : "green.50",
+                    }}
+                    mx={1}
+                    borderRadius={"full"}
+                  >
+                    {pageNumber}
+                  </Button>
+                ))}
+
+                <Button
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  isDisabled={currentPage === totalPages}
+                  variant="ghost"
+                  mx={1}
+                >
+                  <ChevronRight size={20} />
+                </Button>
+              </Flex>
             )}
           </Flex>
         </Box>

@@ -109,7 +109,6 @@ const ProductCard = ({ producto }) => {
             </Text>
             <Tooltip label="Agregar al carrito" hasArrow>
               <Button
-                bg="white"
                 colorScheme="main"
                 px={1}
                 py={2}
