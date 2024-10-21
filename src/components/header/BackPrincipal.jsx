@@ -1,32 +1,44 @@
-import Header from "@/components/header/Header.jsx";
 import fondo from "@/assets/fondo_1.png";
-import { Box } from "@chakra-ui/react";
+import Header from "@/components/header/Header.jsx";
+import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import NavBar from "../nav_bar/NavBar";
 
-const BackPrincipal = ({ children }) => {
+const BackPrincipal = () => {
   return (
     <Box
       backgroundImage={`url(${fondo})`}
       backgroundSize="cover"
       backgroundPosition="center"
-      minHeight="50vh"
+      height="50vh"
+      minHeight="300px"
       display="flex"
-      flexDirection={"column"}
-      color={"white"}
+      flexDirection="column"
+      color="white"
     >
       <Header />
-      <div className="flex-grow flex flex-col justify-center p-4 md:p-8 relative z-10">
-        <h1 className="text-white text-xl sm:text-2xl md:text-4xl md:leading-[50px] leading-[50px] mb-4">
+      <VStack
+        flex={1}
+        justifyContent="center"
+        alignItems="flex-start"
+        p={{ base: 4, md: 8 }}
+        spacing={4}
+      >
+        <Heading
+          as="h1"
+          color="white"
+          fontSize={{ base: "xl", sm: "2xl", md: "4xl" }}
+          lineHeight="1.2"
+        >
           Adquiere de forma rápida y sencilla
           <br />
           los productos que necesita
-          <br />
-        </h1>
-        <h1 className="text-gray-300 text-[14px]">
+        </Heading>
+        <Text color="gray.300" fontSize="14px">
           En nuestra tienda online usted podrá comprar y enviar productos a sus
           familiares y amigos en Cuba
-        </h1>
-      </div>
-      {children}
+        </Text>
+      </VStack>
+      <NavBar />
     </Box>
   );
 };

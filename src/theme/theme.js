@@ -2,18 +2,16 @@ import { extendTheme } from "@chakra-ui/react";
 
 const colors = {
   main: {
-    5: "#bce6d7",
-    10: "#28b463",
     50: "#e6fae4",
     100: "#c2f2be",
     200: "#9dea97",
     300: "#77e26f",
     400: "#51da47",
-    500: "#25D606",
-    600: "#25D606",
-    700: "#168204",
-    800: "#0f5803",
-    900: "#072e01",
+    500: "#28b463",
+    600: "#1f8a4d", // Base color
+    700: "#1f8a4d",
+    800: "#166137",
+    900: "#0d3921",
   },
   wine: {
     50: "#f3e6e6",
@@ -21,11 +19,23 @@ const colors = {
     200: "#cf9292",
     300: "#bc6969",
     400: "#aa3f3f",
-    500: "#980515", // Se basará en un tono más claro cercano a bg
-    600: "#4A0E0E", // Color base (bg)
-    700: "#3D0C0C", // Color hover
+    500: "#4A0E0E", // Adjusted to be closer to base color
+    600: "#3D0C0C", // Base color
+    700: "#3D0C0C",
     800: "#2f0a0a",
     900: "#200606",
+  },
+  cart: {
+    50: "#f9e0d1",
+    100: "#f3c1a3",
+    200: "#ec9f74",
+    300: "#e57d45",
+    400: "#df5b16",
+    500: "#E35305", // Adjusted to be closer to base color
+    600: "#b44204", // Base color
+    700: "#b44204",
+    800: "#853203",
+    900: "#562102",
   },
 };
 

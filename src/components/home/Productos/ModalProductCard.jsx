@@ -1,3 +1,8 @@
+import { CustomNumberInput } from "@/components/home/Productos/ProductCard.jsx";
+import {
+  deleteProduct,
+  editQuantity,
+} from "@/servicios/redux/slices/productSliece.js";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -7,6 +12,7 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
+  Divider,
   HStack,
   Image,
   Spacer,
@@ -15,14 +21,9 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { CustomNumberInput } from "@/components/home/Productos/ProductCard.jsx";
-import {
-  deleteProduct,
-  editQuantity,
-} from "@/servicios/redux/slices/productSliece.js";
-import { useDispatch } from "react-redux";
 import { Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function ModalProductCard({ product }) {
   const dispatch = useDispatch();
@@ -76,7 +77,7 @@ export default function ModalProductCard({ product }) {
           <Image
             src={product.image}
             alt={product.name}
-            boxSize="100px"
+            boxSize="full"
             objectFit="cover"
           />
           <Text fontSize="md" fontWeight="bold" textColor={"green"}>
@@ -86,8 +87,25 @@ export default function ModalProductCard({ product }) {
         </VStack>
 
         <VStack align="start" spacing={4} flex={2}>
-          <Text fontWeight="bold">{product.name}</Text>
-          <Text fontSize="sm">{product.description}</Text>
+          <Text
+            fontSize="16px"
+            color="#5D5D5D"
+            fontWeight="medium"
+            isTruncated
+            maxW="60%"
+          >
+            {product.name}
+          </Text>
+          <Divider color={"#7A7A7A"} borderWidth={"1px"} />
+          <Text
+            fontSize="14px"
+            noOfLines={2}
+            fontWeight={"normal"}
+            textAlign="center"
+            color={"#6E6E6E"}
+          >
+            {product.description}
+          </Text>
           <Spacer />
           <HStack spacing={2} alignSelf="flex-end">
             <CustomNumberInput
@@ -98,7 +116,7 @@ export default function ModalProductCard({ product }) {
               <Trash2
                 onClick={handleDeleteClick}
                 cursor={"pointer"}
-                color="red"
+                color="#E35305"
               />
             </Tooltip>
           </HStack>
