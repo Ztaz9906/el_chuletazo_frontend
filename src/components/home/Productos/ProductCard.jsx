@@ -110,11 +110,10 @@ const ProductCard = ({ producto }) => {
             <Tooltip label="Agregar al carrito" hasArrow>
               <Button
                 bg="white"
-                color="main.10"
+                colorScheme="main"
                 px={1}
                 py={2}
                 rounded="md"
-                _hover={{ bg: "main.10", color: "white" }}
                 leftIcon={<ShoppingCart size={18} />}
                 iconSpacing={0.5}
                 onClick={handleAddToCart}
