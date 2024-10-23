@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Center, Grid, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Grid, HStack, Text, VStack, Flex, Divider } from "@chakra-ui/react";
 import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios/index.js";
 import SelectField from "@/ChakaraUI/FormField/SelectField/SelectField.jsx";
 import { formConfig } from "@/components/home/pedidos/Stepper/schema/formConfig.js";
@@ -27,7 +27,12 @@ const SelectDestinatario = () => {
   }, [values.destinatario_id, data]);
 
   return (
-    <Box width="100%" mt={8} >
+    <Box width="100%" mt={2} > 
+      <Text
+        fontSize={"2xl"}
+        textColor={"main.600"}
+      >Destinatarios</Text>
+      <Divider mb={4} borderColor="gray.300" />
       {data && data.length === 0 ? (
         <Center> 
           <DestinatarioModal />
@@ -36,7 +41,7 @@ const SelectDestinatario = () => {
           )}
         </Center>
       ) : (
-        <VStack spacing={6} align="stretch">
+        <VStack spacing={6} align="stretch" mt={6}>
           <HStack spacing={6} align="stretch">
             <SelectField
               options={
@@ -48,7 +53,6 @@ const SelectDestinatario = () => {
                   : []
               }
               name={formConfig.destinatario_id.name}
-              label={formConfig.destinatario_id.label}
               placeholder="Seleccione un destinatario"
             />
             <Center alignItems={"flex-end"}>
@@ -57,11 +61,14 @@ const SelectDestinatario = () => {
           </HStack>
 
           {selectedDestinatario && (
-            <Box borderWidth={1} borderRadius="md" p={4} mt={4} bg="gray.50">
-              <Text fontSize="xl" fontWeight="bold" mb={4}>
-                Detalles del Destinatario
-              </Text>
-              <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+            <Box borderWidth={1} borderRadius="lg" p={6} mt={6} bg="white" shadow="sm">
+              <Flex justify="space-between" align="center" mb={4}>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Detalles del Destinatario
+                </Text>
+              </Flex>
+              <Divider mb={4} borderColor="gray.300" />
+              <Grid templateColumns="repeat(3, 1fr)" gap={5}>
                 <DetailsItem
                   label="Nombre"
                   value={`${selectedDestinatario.nombre} ${selectedDestinatario.apellidos}`}

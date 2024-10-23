@@ -46,14 +46,14 @@ export default function DestinatarioModal() {
 
   return (
     <>
-      <Button
-        colorScheme={"wine"}
+      <Button  //Boton de Agregar Destinatarios 
+        colorScheme={"main"}
         px={4}
         py={2}
         leftIcon={<UserPlus size={20} color="white" />}
         onClick={onOpen}
       >
-        Registrar Destinatario
+        Agregar Destinatario
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered size="lg">
         <ModalOverlay />
@@ -92,7 +92,7 @@ export default function DestinatarioModal() {
                       colorScheme={"main"}
                       isLoading={isSubmitting}
                     >
-                      Agregar Destinatario
+                      Agregar
                     </Button>
                   </HStack>
                 </ModalFooter>

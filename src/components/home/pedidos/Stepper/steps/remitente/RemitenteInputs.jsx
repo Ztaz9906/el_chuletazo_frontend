@@ -6,6 +6,7 @@ import {
   Text,
   Tooltip,
   VStack,
+  Divider,
 } from "@chakra-ui/react";
 import { Edit, Save } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,7 +70,7 @@ const RemitenteInputs = () => {
     [user],
   );
   return (
-    <VStack spacing={4}>
+    <VStack>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setFieldError }) =>
@@ -95,9 +96,9 @@ const RemitenteInputs = () => {
           }, [user, setFieldValue, editing]);
           return (
             <>
-              <HStack justify="space-between" w="full">
-                <Text fontSize="xl" fontWeight="medium" color="#646A7A">
-                  Datos Personales del Remitente
+              <HStack justify="space-between" w="full" mt={2}>
+                <Text fontSize="2xl" fontWeight="medium" color="main.600">
+                  Remitente
                 </Text>
                 <Tooltip
                   label={
@@ -110,7 +111,7 @@ const RemitenteInputs = () => {
                     <HStack>
                       <Button
                         size="sm"
-                        colorScheme="red"
+                        colorScheme="cart"
                         onClick={() => setEditing(false)}
                       >
                         Cancelar
@@ -119,7 +120,7 @@ const RemitenteInputs = () => {
                         leftIcon={<Save size={20} />}
                         isDisabled={isSubmitting}
                         size="sm"
-                        colorScheme="blue"
+                        colorScheme="main"
                         onClick={() => {
                           submitForm().catch((error) => {
                             console.error("Form submission error:", error);
@@ -139,8 +140,9 @@ const RemitenteInputs = () => {
                   )}
                 </Tooltip>
               </HStack>
-
-              <Grid templateColumns="repeat(2, 1fr)" gap={4} w="full">
+              <Divider mb={4} borderColor="gray.300" />
+              <Box borderWidth={1} borderRadius="lg" w="full" p={4} bg="white" shadow="sm">
+              <Grid templateColumns="repeat(3, 1fr)" gap={2} w="full"margin={2}>
                 {editing ? (
                   <>
                     <InputField
@@ -173,7 +175,11 @@ const RemitenteInputs = () => {
                   </>
                 )}
               </Grid>
-
+              <CheckboxField
+                name={mainFormConfig.direccionFacturacionIgual.name}
+                label={mainFormConfig.direccionFacturacionIgual.label}
+              />
+              </Box>
               {errors.remitenteValidado && (
                 <Box
                   border
@@ -194,10 +200,7 @@ const RemitenteInputs = () => {
           );
         }}
       </Formik>
-      <CheckboxField
-        name={mainFormConfig.direccionFacturacionIgual.name}
-        label={mainFormConfig.direccionFacturacionIgual.label}
-      />
+      
     </VStack>
   );
 };

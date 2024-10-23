@@ -45,8 +45,8 @@ const ProductCard = ({ producto }) => {
       transition={{ duration: 0.5 }}
     >
       <Box
-        w="250px"
-        h="350px"
+        w="200px"
+        h="300px"
         bg="white"
         shadow="md"
         overflow="hidden"
@@ -54,7 +54,7 @@ const ProductCard = ({ producto }) => {
         display="flex"
         flexDirection="column"
       >
-        <Box p={3} h="200px">
+        <Box p={2} h="200px">
           <Image
             objectFit="contain"
             w="100%"
@@ -64,7 +64,7 @@ const ProductCard = ({ producto }) => {
           />
         </Box>
 
-        <VStack spacing={2} flex={1} justifyContent="space-between">
+        <VStack spacing={1} flex={1} justifyContent="space-between">
           <Flex
             alignItems="center"
             p={2}
@@ -73,7 +73,7 @@ const ProductCard = ({ producto }) => {
             justifyContent="space-between"
           >
             <Text
-              fontSize="16px"
+              fontSize="14px"
               color="#5D5D5D"
               fontWeight="medium"
               isTruncated
@@ -89,7 +89,7 @@ const ProductCard = ({ producto }) => {
             />
           </Flex>
           <Text
-            fontSize="14px"
+            fontSize="12px"
             noOfLines={2}
             fontWeight={"normal"}
             textAlign="center"
@@ -103,17 +103,18 @@ const ProductCard = ({ producto }) => {
             w="full"
             p={2}
           >
-            <Text fontSize="md" fontWeight="bold" textColor={"green"}>
+            <Text fontSize="sm" fontWeight="bold" textColor={"green"}>
               $ {(producto.default_price.unit_amount / 100).toFixed(2)}{" "}
               {producto.default_price.currency.toUpperCase()}/lb
             </Text>
             <Tooltip label="Agregar al carrito" hasArrow>
               <Button
                 colorScheme="main"
+                fontSize="xs"
                 px={1}
-                py={2}
+                py={1}
                 rounded="md"
-                leftIcon={<ShoppingCart size={18} />}
+                leftIcon={<ShoppingCart size={16} />}
                 iconSpacing={0.5}
                 onClick={handleAddToCart}
                 isDisabled={quantity === 0}
@@ -135,7 +136,7 @@ export const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
     <NumberInput
       bg={"white"}
       size="sm"
-      maxW="80px"
+      maxW="60px"
       value={value}
       borderRadius={"full"}
       onChange={(valueString) => {
@@ -145,7 +146,7 @@ export const CustomNumberInput = ({ value, onChange, min = 0, max = 99 }) => {
       min={min}
       max={max}
     >
-      <NumberInputField textAlign="center" fontSize="sm" />
+      <NumberInputField textAlign="center" fontSize="xs" />
       <NumberInputStepper>
         <NumberIncrementStepper bg={"white"} _active={{ bg: "gray.300" }} />
         <NumberDecrementStepper bg={"white"} _active={{ bg: "gray.300" }} />

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Box, Flex, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, SimpleGrid, Text, VStack, Divider } from "@chakra-ui/react";
 import Product from "@/components/home/pedidos/Stepper/steps/productos/Product.jsx";
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
@@ -24,21 +24,16 @@ export default function ProductsList() {
   }, [errors]);
   return (
     <Flex direction="column" h="100%" overflow="hidden">
-      <Box
-        p={1}
-        position="sticky"
-        top={0}
-        zIndex={1}
-        borderBottom="1px solid"
-        borderColor="gray.200"
-      >
-        <Text fontSize="20px" fontWeight="semiboldbold" mb={1}>
-          Pagar a El Chuletazo
+      <HStack justify="space-between" w="full" mt={2}>
+        <Text fontSize="2xl" fontWeight="medium" color="main.600">
+          Productos
         </Text>
-        <Text fontSize="24px" fontWeight="bold" color="green.500">
-          {total.toFixed(2)} US$
+        <Text fontSize="xl" fontWeight="bold" color="black">
+          Total a Pagar: {total.toFixed(2)} US$
         </Text>
-      </Box>
+      </HStack>
+      <Divider mb={4} borderColor="gray.300" />
+      <Box borderWidth={1} borderRadius="lg" p={6} mt={6} bg="white" shadow="sm">
       <Flex
         overflowY="auto"
         css={{
@@ -81,6 +76,7 @@ export default function ProductsList() {
           </VStack>
         )}
       </Flex>
+      </Box>
     </Flex>
   );
 }

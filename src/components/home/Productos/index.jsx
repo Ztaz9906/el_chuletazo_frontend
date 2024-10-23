@@ -12,6 +12,7 @@ import {
   Spinner,
   Text,
   VStack,
+  Divider,
 } from "@chakra-ui/react";
 import { ChevronLeft, ChevronRight, SearchIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -25,7 +26,7 @@ const sidebarOptions = [
   "Los más vendidos",
 ];
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 10;
 
 export default function Index() {
   const { isLoading, data, error } = useGetProductoQuery();
@@ -127,12 +128,14 @@ export default function Index() {
       flexDirection="column"
       bg="white"
       shadow="md"
-      p={2}
+      p={4}
+      mr={8}
+      ml={8}
     >
       <VStack spacing={4} align="stretch" mb={4}>
         <HStack w="full" justify="space-between">
           <Text
-            fontSize="48px"
+            fontSize="4xl"
             fontWeight="bold"
             color="green.500"
             textAlign="center"
@@ -150,10 +153,8 @@ export default function Index() {
             />
           </InputGroup>
         </HStack>
-        <Text fontSize="24px" textAlign="left" color="#5D5D5D">
-          En nuestra tienda online usted podrá comprar y enviar productos a sus
-          familiares y amigos en Cuba
-        </Text>
+        
+        <Divider mb={4} borderColor="gray.300" />
       </VStack>
       <Flex flex={1} overflow="hidden">
         <Box
@@ -179,17 +180,17 @@ export default function Index() {
           </VStack>
         </Box>
         <Box flex={1} overflowY="auto">
-          <Flex flexDirection="column" gap={6}>
-            <Flex flexWrap="wrap" justifyContent="center" gap={6}>
+          <Flex flexDirection="column">
+            <Flex flexWrap="wrap" justifyContent="center" gap={4}>
               {currentProducts.length > 0 ? (
                 currentProducts.map((producto) => (
                   <Box
                     key={producto.id}
                     flexBasis={{
                       base: "100%",
-                      sm: "calc(50% - 1rem)",
-                      md: "calc(33.333% - 1rem)",
-                      lg: "calc(25% - 1rem)",
+                      sm: "calc(50% - 2rem)",
+                      md: "calc(33.333% - 2rem)",
+                      lg: "calc(25% - 5rem)",
                     }}
                   >
                     <ProductCard
