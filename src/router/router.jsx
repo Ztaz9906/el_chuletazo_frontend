@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         path: "productos",
         element: <Index />,
       },
+      {
+        path: "info_pagos",
+        element: <InfoPagos />,
+      },
     ],
   },
   {
@@ -52,10 +56,6 @@ const router = createBrowserRouter([
   {
     path: "sign-up",
     element: <SingUp />,
-  },
-  {
-    path: "info_pagos",
-    element: <InfoPagos />,
   },
 ]);
 

@@ -6,7 +6,7 @@ function NavBar() {
   const location = useLocation();
   const links = [
     { label: "Productos", path: "/productos" },
-    { label: "Pagos", path: "/pagos" },
+    { label: "Pagos", path: "/info_pagos" },
     { label: "Envios", path: "/envios" },
     { label: "Preguntas Frecuentes", path: "/preguntas-frecuentes" },
   ];

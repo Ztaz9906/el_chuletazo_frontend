@@ -1,14 +1,16 @@
-import CustomGoogleLogin from "@/components/auth/google/GoogleLogin.jsx";
-import BackPrincipal from "@/components/header/BackPrincipal.jsx";
-import { Box, Flex } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import React from 'react';
+import { Box, Flex } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import CustomGoogleLogin from '@/components/auth/google/GoogleLogin.jsx';
+import BackPrincipal from '@/components/header/BackPrincipal.jsx';
+import Footer from '@/components/Footer/Footer.jsx';
 
 const Layout = () => {
   const user = useSelector((state) => state.user);
 
   return (
-    <Flex flexDirection="column" height="100vh" overflow="hidden">
+    <Flex flexDirection="column" minHeight="100vh">
       {!user && <CustomGoogleLogin useOneTap={true} />}
       <Box flexShrink={0}>
         <BackPrincipal />
@@ -24,8 +26,12 @@ const Layout = () => {
       >
         <Outlet />
       </Box>
+      <Box flexShrink={0}>
+        <Footer />
+      </Box>
     </Flex>
   );
 };
 
 export default Layout;
+

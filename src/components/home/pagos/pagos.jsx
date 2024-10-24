@@ -1,31 +1,48 @@
 // src/components/InfoPagos.jsx
 import React from 'react';
-import { Box, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Divider, Text } from '@chakra-ui/react';
+
 
 const InfoPagos = () => {
   return (
-    <Box p={5}>
-      <Heading as="h1" size="xl" mb={5}>Pagos</Heading>
+    <Box
+        height="100%"
+        display="flex"
+        flexDirection="column"
+        bg="white"
+        shadow="md"
+        p={4}
+        mr={2}
+        ml={2}>  
+        <Text
+            fontSize="4xl"
+            fontWeight="bold"
+            color="green.500"
+            mb={4}
+        >Pagos</Text>
+        
       <Accordion allowToggle>
-        <AccordionItem>
+      <AccordionItem>
           <h2>
             <AccordionButton _expanded={{ bg: 'main.500', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
-                Métodos de Pago
+                Método de Pago
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Text>
-              Aceptamos pagos a través de <strong>Stripe</strong>, una plataforma segura y confiable que permite el uso de las siguientes tarjetas de crédito y débito:
-              <ul>
-                <li>Visa</li>
-                <li>MasterCard</li>
-                <li>American Express</li>
-                <li>Discover</li>
-              </ul>
-            </Text>
+            <Flex justify="space-between" align="center">
+                <Text mr={20}>
+                En nuestro sitio web "El Chuletazo", usted podrá realizar el pago de diversas formas seguras y confiables, a través de la plataforma Stripe. Los métodos de pagos que se ofrecen son los siguientes:<br/>
+                1. Visa <br/>
+                2. MasterCard <br/>
+                3. American Express <br/>
+                </Text>
+                <Box>
+                    <img src="src/assets/gif/metod_pay.gif" alt="Método de Pago" width={200} />
+                </Box>
+            </Flex>
           </AccordionPanel>
         </AccordionItem>
 
@@ -33,19 +50,27 @@ const InfoPagos = () => {
           <h2>
             <AccordionButton _expanded={{ bg: 'main.500', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
-                Proceso de Pago
+                Pasos a Seguir
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Text>
-              1. <strong>Selecciona tus productos</strong>: Navega por nuestra tienda y añade los productos que deseas comprar a tu carrito.<br />
-              2. <strong>Revisa tu carrito</strong>: Una vez que hayas seleccionado todos los productos, dirígete a tu carrito para revisar tu pedido.<br />
-              3. <strong>Inicia el proceso de pago</strong>: Haz clic en el botón de "Pagar" para comenzar el proceso de pago.<br />
-              4. <strong>Introduce tus datos</strong>: Completa la información requerida, incluyendo tu dirección de envío y los detalles de tu tarjeta de crédito o débito.<br />
-              5. <strong>Confirma tu pedido</strong>: Revisa todos los detalles de tu pedido y confirma la compra. Recibirás un correo electrónico de confirmación con los detalles de tu pedido.
-            </Text>
+            <Flex justify="space-between" align="center">
+                <Text mr={20}>
+                1. <strong>Seleccione sus productos: </strong><br/>
+                 Navegue por nuestra tienda y agregue al carrito los productos que desee comprar.<br />
+                2. <strong>Revise su carrito</strong>: <br/>
+                Una vez que haya seleccionado todos los productos, diríjase a su carrito para revisar el pedido. Haga clic en el botón de "Comprar" para comenzar el proceso de pago.<br />
+                3. <strong>Inicia el proceso de pago</strong>: <br/> 
+                Complete la información requerida en cada uno de los pasos, lo que incluye registrar y seleccionar a su Destinatario (persona a la que se le enviarán los productos), introducir los datos del Remitente (persona que está haciendo el pedido) y si todo está correcto, presione en el botón "Confirmar Pedido" para dirigirse a la pasarela de pagos Stripe.<br />
+                4. <strong>Pagar</strong>: <br/>
+                Seleccione su método de pago y complete los campos referentes a sus tarjetas personales.
+                </Text>
+                <Box>
+                    <img src="src/assets/gif/step_pay.gif" alt="Método de Pago" width={300} />
+                </Box>
+            </Flex>
           </AccordionPanel>
         </AccordionItem>
 
@@ -53,18 +78,20 @@ const InfoPagos = () => {
           <h2>
             <AccordionButton _expanded={{ bg: 'main.500', color: 'white' }}>
               <Box as="span" flex="1" textAlign="left">
-                Seguridad en los Pagos
+                Seguridad en el Pago
               </Box>
               <AccordionIcon />
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Text>
-              En <strong>El Chuletazo</strong>, la seguridad de tus datos es nuestra prioridad. Stripe utiliza tecnología de encriptación avanzada para proteger tu información financiera. Además, cumplimos con los estándares de seguridad PCI-DSS para garantizar que tus datos estén siempre seguros.
-            </Text>
-            <Text>
-              En conformidad con nuestro compromiso respecto a la seguridad de los pagos, informamos a nuestros clientes que las pasarelas de pago que utilizamos en <strong>El Chuletazo</strong> cuentan con la verificación de las entidades financieras asociadas y verifican la fiabilidad de los datos facilitados durante la realización de un pedido. Este proceso forma parte de nuestra lucha contra el fraude en los modos de pago por Internet y para proteger al conjunto de los consumidores.
-            </Text>
+            <Flex justify="space-between" align="center">
+                <Text mr={20}>
+                En <strong>El Chuletazo</strong>, la seguridad de los datos de cada uno de nuestros clientes es nuestra prioridad. La pasarela de pagos Stripe utiliza tecnología de encriptación avanzada para proteger su información financiera. En caso de que presente alguna dificultad a la hora de realizar su pago, por favor comuníquese con nosotros de inmediato.
+                </Text>
+                <Box>
+                    <img src="src/assets/gif/security_pay.gif" alt="Método de Pago" width={300} />
+                </Box>
+            </Flex>
           </AccordionPanel>
         </AccordionItem>
 
@@ -78,9 +105,14 @@ const InfoPagos = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Text>
-              El cliente recibirá una confirmación de su pago mediante un mensaje a la dirección de correo electrónico proporcionada a nuestro sitio. Este correo incluirá todos los detalles de la transacción y el recibo de compra.
+          <Flex justify="space-between" align="center">
+            <Text mr={20}>
+              Una vez que se haya realizado el pago, el cliente recibirá un mensaje de confirmación a la dirección de correo electrónico proporcionada a nuestro sitio. Este correo incluirá todos los detalles de la transacción y el recibo de la compra que acaba de realizar.
             </Text>
+            <Box>
+                <img src="src/assets/gif/confirm_pay.gif" alt="Método de Pago" width={250}/>
+            </Box>
+            </Flex>
           </AccordionPanel>
         </AccordionItem>
 
@@ -94,9 +126,14 @@ const InfoPagos = () => {
             </AccordionButton>
           </h2>
           <AccordionPanel pb={4}>
-            <Text>
+          <Flex justify="space-between" align="center">
+            <Text mr={20}>
               En caso de que se detecte un pago sospechoso que no pueda ser aclarado entre la entidad bancaria, la financiera y <strong>El Chuletazo</strong>, y la orden correspondiente haya sido entregada sin que <strong>El Chuletazo</strong> haya logrado cobrar el pago, se tomarán medidas estrictas. Tanto el cliente involucrado, como la tarjeta utilizada en la transacción y sus destinatarios, serán vetados y no podrán realizar compras futuras en nuestra tienda.
             </Text>
+            <Box>
+                <img src="src/assets/gif/fraude_pay.gif" alt="Método de Pago" width={500}/>
+            </Box>
+            </Flex>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>

@@ -129,8 +129,8 @@ export default function Index() {
       bg="white"
       shadow="md"
       p={4}
-      mr={8}
-      ml={8}
+      mr={2}
+      ml={2}
     >
       <VStack spacing={4} align="stretch" mb={4}>
         <HStack w="full" justify="space-between">
