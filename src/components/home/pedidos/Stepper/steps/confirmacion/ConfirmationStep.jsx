@@ -43,7 +43,11 @@ export default function ConfirmationStep() {
   }
 
   return (
-    <Flex flexDirection={"column"} w={"100%"} gap={4}>
+    <Flex flexDirection={"column"} w={"100%"} gap={4} mt={2}>
+      <Text fontSize="2xl" mb={4} color={"main.600"}>
+        Confirmar Datos
+      </Text>
+      <Box borderWidth={1} borderRadius="lg" w="full" p={4} bg="white" shadow="sm">
       <Text fontSize="xl" mb={4}>
         Destinatario
       </Text>
@@ -73,6 +77,8 @@ export default function ConfirmationStep() {
       ) : (
         <Text>No se encontraron datos del destinatario</Text>
       )}
+      </Box>
+      <Box borderWidth={1} borderRadius="lg" w="full" p={4} bg="white" shadow="sm">
       <Text fontSize="xl" mb={4}>
         Remitente
       </Text>
@@ -81,10 +87,13 @@ export default function ConfirmationStep() {
         <LabelValue label={"Apellidos"} value={user.last_name} />
         <LabelValue label={"Teléfono"} value={user.phone} />
       </Grid>
+      </Box>
+      <Box borderWidth={1} borderRadius="lg" w="full" p={4} bg="white" shadow="sm">
       <Text fontSize="xl" mb={4}>
         Productos
       </Text>
       <ProductsList />
+      </Box>
     </Flex>
   );
 }

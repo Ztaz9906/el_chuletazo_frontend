@@ -14,6 +14,7 @@ const CheckboxField = ({ name, label }) => (
           isChecked={field.value}
           fontSize={"14px"}
           fontWeight="normal"
+          colorScheme={"green"}
           color={"#646A7A"}
           css={{
             "& .chakra-checkbox__control": {

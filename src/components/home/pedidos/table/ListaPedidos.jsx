@@ -5,10 +5,6 @@ import { Box, Heading } from "@chakra-ui/react";
 export default function ListaPedidos() {
   const { data, isLoading, isError, error } = useGetPedidosQuery();
 
-  if (isLoading) {
-    return <p>Cargando...</p>;
-  }
-
   if (isError) {
     return <p>Error: {error.message}</p>;
   }
@@ -26,7 +22,7 @@ export default function ListaPedidos() {
       </Heading>
       {data && (
         <Box bg={"white"}>
-          <PedidosTable pedidos={data} />
+          <PedidosTable pedidos={data || []} isLoading={isLoading} />
         </Box>
       )}
     </Box>

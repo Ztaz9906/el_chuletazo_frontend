@@ -1,3 +1,5 @@
+import fondo from "@/assets/fondo_2.png";
+import ModalProductCard from "@/components/home/Productos/ModalProductCard.jsx";
 import {
   Badge,
   Button,
@@ -16,10 +18,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { ShoppingCart } from "lucide-react";
-import ModalProductCard from "@/components/home/Productos/ModalProductCard.jsx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import fondo from "@/assets/fondo_2.png";
 
 export default function ModalCart({ textColor = "white" }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -78,7 +78,24 @@ export default function ModalCart({ textColor = "white" }) {
           maxH="80vh"
           maxW="600px"
         >
-          <ModalHeader>Mi Carrito</ModalHeader>
+          <ModalHeader>
+            <HStack w="full" justify={"space-between"}>
+              <Text
+                fontWeight="bold"
+                color={"#494949"}
+              >{`Mi Carrito > Productos`}</Text>
+              <Button
+                textColor={"white"}
+                colorScheme="cart"
+                onClick={onClose}
+                mr={3}
+                w={"120px"}
+                h={"35px"}
+              >
+                Vaciar Carriro
+              </Button>
+            </HStack>
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody p={2} overflowY="auto">
             <VStack spacing={2}>
@@ -93,14 +110,23 @@ export default function ModalCart({ textColor = "white" }) {
           </ModalBody>
           <ModalFooter>
             <HStack w="full">
-              <Text fontWeight="bold">Total:</Text>
-              <Text>${total.toFixed(2)}</Text>
+              <Text fontWeight="bold" color={"#494949"}>
+                Total:
+              </Text>
+              <Text fontWeight="bold" color={"#494949"}>
+                ${total.toFixed(2)}
+              </Text>
               <Spacer />
-              <Button textColor={"white"} bg="main.10" mr={3} onClick={onClose}>
+              <Button
+                textColor={"white"}
+                colorScheme="cart"
+                mr={3}
+                onClick={onClose}
+              >
                 Cerrar
               </Button>
               <Button
-                bg="main.10"
+                colorScheme="main"
                 textColor={"white"}
                 onClick={handleComprarClick}
               >

@@ -57,11 +57,11 @@ export default function MainStepper() {
   const steps = [
     {
       title: "Productos",
-      description: "Productos seleccionados para la compra",
+      description: "Verifique los productos",
     },
-    { title: "Destinatario", description: "Seleccione un destinatario" },
+    { title: "Destinatario", description: "Seleccione el destinatario" },
     { title: "Remitente", description: "Datos del remitente" },
-    { title: "Confirmacion", description: "Verifique todos los datos" },
+    { title: "Confirmación", description: "Verifique todos los datos" },
   ];
 
   const handleSubmit = async (values, actions, stepper) => {
@@ -138,7 +138,7 @@ export default function MainStepper() {
                   stepper.goToPrevious();
                 }
               }}
-              colorScheme="red"
+              colorScheme="cart"
               textTransform="uppercase"
               fontSize="sm"
               fontWeight="base"
@@ -148,7 +148,7 @@ export default function MainStepper() {
             <Button
               isDisabled={!formikProps.isValid}
               fontWeight="base"
-              colorScheme="green"
+              colorScheme="main"
               type="submit"
               borderRadius="5px"
               textTransform="uppercase"

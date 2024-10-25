@@ -1,6 +1,6 @@
 import { pedidosApi } from "@/servicios/redux/api/Pedidos/api.js";
 
-const productoGetEndpoint = pedidosApi.injectEndpoints({
+const pedidoGetEndpoint = pedidosApi.injectEndpoints({
   endpoints: (builder) => ({
     getPedidoById: builder.query({
       query: (id, filters) => {
@@ -17,19 +17,11 @@ const productoGetEndpoint = pedidosApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({
-                type: "Pedido",
-                id,
-              })),
-              { type: "Pedido", id: "LIST" },
-            ]
-          : [{ type: "Pedido", id: "LIST" }],
+      providesTags: (id) => [{ type: "Pedido", id }],
     }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetPedidoByIdQuery } = productoGetEndpoint;
+export const { useGetPedidoByIdQuery, useLazyGetPedidoByIdQuery } =
+  pedidoGetEndpoint;
