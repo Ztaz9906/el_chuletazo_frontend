@@ -1,10 +1,9 @@
-import React from 'react';
-import { Box, Flex } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
-import CustomGoogleLogin from '@/components/auth/google/GoogleLogin.jsx';
-import BackPrincipal from '@/components/header/BackPrincipal.jsx';
-import Footer from '@/components/Footer/Footer.jsx';
+import CustomGoogleLogin from "@/components/auth/google/GoogleLogin.jsx";
+import Footer from "@/components/Footer/Footer.jsx";
+import BackPrincipal from "@/components/header/BackPrincipal.jsx";
+import { Box, Flex } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   const user = useSelector((state) => state.user);
@@ -34,4 +33,3 @@ const Layout = () => {
 };
 
 export default Layout;
-

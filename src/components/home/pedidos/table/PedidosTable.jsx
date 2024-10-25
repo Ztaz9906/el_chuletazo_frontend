@@ -1,12 +1,13 @@
 import CTable from "@/ChakaraUI/Table/CTable.jsx";
 import DynamicFilter from "@/components/home/pedidos/table/DynamicFilter.jsx";
 import {
+  useCancelPedidoMutation,
   useGetCheckOutQuery,
-  usePatchPedidoMutation,
 } from "@/servicios/redux/api/Pedidos/index.js";
 import { Badge, IconButton, Stack, Tooltip, useToast } from "@chakra-ui/react";
-import { CircleDollarSign, CircleX, FilePenLine, Info } from "lucide-react";
+import { CircleDollarSign, CircleX, Info } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Función para obtener el badge del estado
 const getStatusBadge = (status) => {
@@ -29,12 +30,12 @@ const getStatusBadge = (status) => {
 const TableActions = ({ row }) => {
   const toast = useToast();
   const [checkoutId, setCheckoutId] = useState(null);
-
+  const navigation = useNavigate();
   // Use the query hook with conditional fetching
   const { data, error, isFetching } = useGetCheckOutQuery(checkoutId, {
     skip: !checkoutId, // Only fetch when we have an ID
   });
-  const [canelar, { isLoading }] = usePatchPedidoMutation();
+  const [canelar, { isLoading }] = useCancelPedidoMutation();
   // Handle data and error effects
   useEffect(() => {
     if (data?.checkout_url) {
@@ -59,10 +60,11 @@ const TableActions = ({ row }) => {
   const handleCancelled = async () => {
     console.log("Cancelando pedido", row.original.id);
     try {
-      await canelar(row.original.id, { estado: "cancelado" });
+      const res = await canelar(row.original.id);
+      console.log("Pedido cancelado:", res);
       toast({
         title: "Éxito",
-        description: "Pedido cancelado correctamente",
+        description: res.data.message,
         status: "success",
         duration: 3000,
         isClosable: true,
@@ -83,16 +85,18 @@ const TableActions = ({ row }) => {
     <Stack direction="row" spacing={2} align={"center"}>
       <Tooltip label="Ver detalles">
         <IconButton
-          onClick={() => console.log("Ver detalles", row.original)}
+          onClick={() => navigation(`/pedidos/detalles/${row.original.id}`)}
           icon={<Info />}
           size={"20px"}
-          color={"gray"}
-          variant={"none"}
+          colorScheme={"gray"}
+          _hover={{ color: "blue.500" }}
+          variant={"link"}
           aria-label={"Ver detalles"}
           cursor={"pointer"}
         />
       </Tooltip>
-      <Tooltip label="Editar pedido">
+      {/* TODO: Implementar edición de pedidos mas adelante */}
+      {/* <Tooltip label="Editar pedido">
         <IconButton
           onClick={() => console.log("Editar pedido", row.original)}
           icon={<FilePenLine />}
@@ -103,13 +107,14 @@ const TableActions = ({ row }) => {
           isDisabled={row.original.estado.toLowerCase() !== "pendiente"}
           cursor={"pointer"}
         />
-      </Tooltip>
+      </Tooltip> */}
       <Tooltip label={isLoading ? "Cancelando" : "Cancelar pedido"}>
         <IconButton
           onClick={handleCancelled}
           icon={<CircleX />}
           size={"20px"}
           color={"gray"}
+          _hover={{ color: "red.500" }}
           variant={"none"}
           aria-label={"Cancelar pedido"}
           isDisabled={
@@ -125,6 +130,7 @@ const TableActions = ({ row }) => {
           icon={<CircleDollarSign />}
           size={"20px"}
           color={"gray"}
+          _hover={{ color: "main.500" }}
           variant={"none"}
           aria-label={"Pagar pedido"}
           isDisabled={
@@ -141,7 +147,10 @@ const TableActions = ({ row }) => {
 const columns = [
   {
     header: "Fecha de Registro",
-    accessorKey: "created_at",
+    // Usamos un accessorKey único
+    accessorKey: "created_at_date",
+    // Pero seguimos accediendo al created_at original
+    accessorFn: (row) => row.created_at,
     cell: ({ getValue }) => {
       const date = new Date(getValue());
       return date.toLocaleDateString();
@@ -149,8 +158,10 @@ const columns = [
   },
   {
     header: "Hora de Registro",
-    id_column: "created_at_time",
-    accessorKey: "created_at",
+    // Usamos un accessorKey único
+    accessorKey: "created_at_time",
+    // Pero seguimos accediendo al created_at original
+    accessorFn: (row) => row.created_at,
     cell: ({ getValue }) => {
       const date = new Date(getValue());
       return date.toLocaleTimeString();
@@ -181,15 +192,17 @@ const columns = [
   },
 ];
 
-export default function PedidosTable({ pedidos }) {
-  if (!pedidos || pedidos.length === 0) {
-    return <p>No hay pedidos para mostrar.</p>;
-  }
-
+export default function PedidosTable({ pedidos, isLoading }) {
   const dataTable = {
     columns,
     rows: pedidos,
   };
 
-  return <CTable data={dataTable} DynamicFilters={DynamicFilter} />;
+  return (
+    <CTable
+      data={dataTable}
+      DynamicFilters={DynamicFilter}
+      isLoading={isLoading}
+    />
+  );
 }

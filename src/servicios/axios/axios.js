@@ -1,11 +1,8 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // Importar jwt_decode como valor por defecto
 
-//const baseUrl = process.env.REACT_APP_BACKEND_URL;
-export const baseUrl = "https://autentication-system.vercel.app/api/";
-//const localUrl = "http://127.0.0.1:8000/api/";
 const client = axios.create({
-  baseURL: baseUrl,
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -61,7 +58,7 @@ client.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 client.interceptors.response.use(
@@ -70,6 +67,7 @@ client.interceptors.response.use(
     let message = "Ocurrió un error inesperado";
 
     if (error.response) {
+      console.log(error.response);
       const { data, status } = error.response;
 
       if (typeof data === "string") {
@@ -81,10 +79,13 @@ client.interceptors.response.use(
           message = data.non_field_errors[0];
         } else if (data.message) {
           message = data.message;
+        } else if (data.error) {
+          message = data.error;
         } else {
           message = Object.entries(data)
             .map(([key, value]) => `${key}: ${value}`)
             .join(". ");
+          console.log(message);
         }
       }
 
@@ -97,7 +98,7 @@ client.interceptors.response.use(
 
     error.message = message;
     return Promise.reject(error);
-  },
+  }
 );
 
 // Función para verificar si el token necesita ser refrescado

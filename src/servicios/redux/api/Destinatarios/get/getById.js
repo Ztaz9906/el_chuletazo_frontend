@@ -29,4 +29,5 @@ const productoGetEndpoint = destinatarioApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useLazyGetDestinatarioByIdQuery } = productoGetEndpoint;
+export const { useLazyGetDestinatarioByIdQuery, useGetDestinatarioByIdQuery } =
+  productoGetEndpoint;

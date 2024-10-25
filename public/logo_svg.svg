@@ -1,0 +1,73 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cuerpo principal con forma más suave -->
+  <path 
+    d="M170 100 
+       C170 150 130 190 80 190
+       C30 190 10 150 10 100
+       C10 50 30 10 80 10
+       C130 10 170 50 170 100"
+    fill="white"
+    stroke="#333"
+    stroke-width="4"
+  />
+  
+  <!-- Orejas más estilizadas -->
+  <path 
+    d="M35 55 
+       C20 30 35 15 50 30
+       C65 45 50 60 35 55"
+    fill="white"
+    stroke="#333"
+    stroke-width="3.5"
+  />
+  
+  <path 
+    d="M125 55
+       C140 30 125 15 110 30
+       C95 45 110 60 125 55"
+    fill="white"
+    stroke="#333"
+    stroke-width="3.5"
+  />
+  
+  <!-- Ojos más expresivos -->
+  <circle cx="55" cy="85" r="6" fill="#333"/>
+  <circle cx="105" cy="85" r="6" fill="#333"/>
+  <circle cx="52" cy="82" r="2" fill="white"/>
+  <circle cx="102" cy="82" r="2" fill="white"/>
+  
+  <!-- Nariz más definida -->
+  <path 
+    d="M70 105
+       C70 95 90 95 90 105
+       C90 115 70 115 70 105"
+    fill="#333"
+  />
+  
+  <!-- Hocico más estilizado -->
+  <path 
+    d="M60 100
+       C60 85 100 85 100 100
+       C100 125 60 125 60 100"
+    fill="none"
+    stroke="#333"
+    stroke-width="3.5"
+  />
+  
+  <!-- Mejillas sutiles -->
+  <path
+    d="M40 95 Q 50 105 40 115"
+    fill="none"
+    stroke="#333"
+    stroke-width="2"
+    opacity="0.5"
+  />
+  
+  <path
+    d="M120 95 Q 110 105 120 115"
+    fill="none"
+    stroke="#333"
+    stroke-width="2"
+    opacity="0.5"
+  />
+</svg>

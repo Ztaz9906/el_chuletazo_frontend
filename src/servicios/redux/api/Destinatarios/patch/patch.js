@@ -3,12 +3,12 @@ import { destinatarioApi } from "@/servicios/redux/api/Destinatarios/api.js";
 const patchDestinatarioEndpoint = destinatarioApi.injectEndpoints({
   endpoints: (builder) => ({
     patchDestinatario: builder.mutation({
-      query: (id, data) => ({
-        url: `destinatario/${id}/`,
+      query: ({ id, ...data }) => ({
+        url: `destinatarios/${id}/`,
         method: "PATCH",
         body: data,
       }),
-      providesTags: (result, error, id) => [{ type: "Destinatario", id }],
+      invalidatesTags: [{ type: "Destinatario", id: "LIST" }],
     }),
   }),
   overrideExisting: false,
