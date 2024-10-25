@@ -7,8 +7,8 @@ function NavBar() {
   const links = [
     { label: "Productos", path: "/productos" },
     { label: "Pagos", path: "/info_pagos" },
-    { label: "Envios", path: "/envios" },
-    { label: "Preguntas Frecuentes", path: "/preguntas-frecuentes" },
+    { label: "Envíos", path: "/info_envios" },
+    { label: "Preguntas Frecuentes", path: "/info_preguntas-frecuentes" },
   ];
 
   return (

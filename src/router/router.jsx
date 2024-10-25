@@ -9,6 +9,8 @@ import ListaPedidos from "@/components/home/pedidos/table/ListaPedidos.jsx";
 import LayOutConfiguracion from "@/components/home/configuration/Layout/LayOutConfiguracion";
 import ListaDestinatarios from "@/components/home/configuration/destinatarios/Table/ListaDestinatarios";
 import InfoPagos from "@/components/home/pagos/pagos.jsx";
+import InfoEnvios from "@/components/home/envíos/envios";
+import InfoPreguntasFrecuentes from "@/components/home/preguntas_frecuentes/preguntas_frecuentes";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
       {
         path: "info_pagos",
         element: <InfoPagos />,
+      },
+      {
+        path: "info_envios",
+        element: <InfoEnvios />,
+      },
+      {
+        path: "info_preguntas-frecuentes",
+        element: <InfoPreguntasFrecuentes />,
       },
     ],
   },
