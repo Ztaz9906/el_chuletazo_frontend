@@ -1,11 +1,8 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // Importar jwt_decode como valor por defecto
 
-//const baseUrl = process.env.REACT_APP_BACKEND_URL;
-//export const baseUrl = "https://autentication-system.vercel.app/api/";
-const baseUrl = "http://127.0.0.1:8000/api/";
 const client = axios.create({
-  baseURL: baseUrl,
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

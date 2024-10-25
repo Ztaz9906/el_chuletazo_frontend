@@ -5,12 +5,15 @@ import Index from "@/components/home/Productos/index.jsx";
 import LayOutConfiguracion from "@/components/home/configuration/Layout/LayOutConfiguracion";
 import ListaDestinatarios from "@/components/home/configuration/destinatarios/Table/ListaDestinatarios";
 import InfoPagos from "@/components/home/pagos/pagos.jsx";
+import InfoEnvios from "@/components/home/envíos/envios";
+import InfoPreguntasFrecuentes from "@/components/home/preguntas_frecuentes/preguntas_frecuentes";
 import MainStepper from "@/components/home/pedidos/Stepper/MainStepper.jsx";
 import LayoutPedidos from "@/components/home/pedidos/layout/layoutPedidos.jsx";
 import ListaPedidos from "@/components/home/pedidos/table/ListaPedidos.jsx";
 import { createBrowserRouter } from "react-router-dom";
 import Activate from "../components/auth/activate/Activate";
 import Details from "../components/home/pedidos/details/Details";
+
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "info_pagos",
         element: <InfoPagos />,
+      },
+      {
+        path: "info_envios",
+        element: <InfoEnvios />,
+      },
+      {
+        path: "info_preguntas-frecuentes",
+        element: <InfoPreguntasFrecuentes />,
       },
     ],
   },
