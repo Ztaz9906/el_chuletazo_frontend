@@ -23,4 +23,5 @@ const pedidoGetEndpoint = pedidosApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetPedidoByIdQuery } = pedidoGetEndpoint;
+export const { useGetPedidoByIdQuery, useLazyGetPedidoByIdQuery } =
+  pedidoGetEndpoint;

@@ -1,16 +1,20 @@
-import { api } from "@/servicios/redux/api/productos/api.js";
+import { destinatarioApi } from "@/servicios/redux/api/Destinatarios/api.js";
 
-const deleteDestinatarioEndpoint = api.injectEndpoints({
+const destinatarioEndpoints = destinatarioApi.injectEndpoints({
   endpoints: (builder) => ({
     deleteDestinatario: builder.mutation({
       query: (id) => ({
-        url: `destinatario/${id}/`,
+        url: `destinatarios/${id}/`,
         method: "DELETE",
       }),
-      providesTags: (result, error, id) => [{ type: "Destinatario", id }],
+      // Transformar la respuesta vacía en un objeto con mensaje
+
+      invalidatesTags: (result, error, id) => [
+        { type: "Destinatario", id: "LIST" },
+        { type: "Destinatario", id },
+      ],
     }),
   }),
-  overrideExisting: false,
 });
 
-export const { useDeleteDestinatarioMutation } = deleteDestinatarioEndpoint;
+export const { useDeleteDestinatarioMutation } = destinatarioEndpoints;

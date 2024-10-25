@@ -1,3 +1,7 @@
+import DestinatarioInputs from "@/components/home/pedidos/Stepper/steps/destinatario/DestinatarioInputs.jsx";
+import { initialValues } from "@/components/home/pedidos/Stepper/steps/destinatario/schema/initialValues.js";
+import { validationSchema } from "@/components/home/pedidos/Stepper/steps/destinatario/schema/validations.js";
+import { usePostDestinatarioMutation } from "@/servicios/redux/api/Destinatarios/index.js";
 import {
   Box,
   Button,
@@ -12,12 +16,8 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { UserPlus } from "lucide-react";
-import { initialValues } from "@/components/home/pedidos/Stepper/steps/destinatario/schema/initialValues.js";
-import { validationSchema } from "@/components/home/pedidos/Stepper/steps/destinatario/schema/validations.js";
 import { Form, Formik } from "formik";
-import DestinatarioInputs from "@/components/home/pedidos/Stepper/steps/destinatario/DestinatarioInputs.jsx";
-import { usePostDestinatarioMutation } from "@/servicios/redux/api/Destinatarios/index.js";
+import { UserPlus } from "lucide-react";
 
 export default function DestinatarioModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,7 +46,7 @@ export default function DestinatarioModal() {
 
   return (
     <>
-      <Button  //Boton de Agregar Destinatarios 
+      <Button //Boton de Agregar Destinatarios
         colorScheme={"main"}
         px={4}
         py={2}

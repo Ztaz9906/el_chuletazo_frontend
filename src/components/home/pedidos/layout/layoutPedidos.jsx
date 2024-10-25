@@ -1,6 +1,6 @@
-import { Box } from "@chakra-ui/react";
-import Header from "@/components/header/Header.jsx";
 import fondo from "@/assets/fondo_1.png";
+import Header from "@/components/header/Header.jsx";
+import { Box } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 
 const LayoutPedidos = () => {

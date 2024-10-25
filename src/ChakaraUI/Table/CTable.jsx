@@ -1,17 +1,10 @@
-import React, { useMemo, useState } from "react";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import {
   Box,
   Button,
   Flex,
   IconButton,
   Select,
+  Spinner,
   Table,
   Tbody,
   Td,
@@ -21,13 +14,21 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
+import { useMemo, useState } from "react";
 
-export default function CTable({ data, DynamicFilters }) {
+export default function CTable({ data, DynamicFilters, isLoading }) {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -86,7 +87,7 @@ export default function CTable({ data, DynamicFilters }) {
           },
         }}
       >
-        <Table size="sm" tableLayout="fixed" width="full">
+        <Table size="sm" layout="fixed" width="full">
           <Thead
             position="sticky"
             top={0}
@@ -110,7 +111,7 @@ export default function CTable({ data, DynamicFilters }) {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                   </Th>
                 ))}
@@ -120,6 +121,18 @@ export default function CTable({ data, DynamicFilters }) {
 
           <Tbody>
             {totalRowsCount === 0 && <Tr>No hay resultados</Tr>}
+            {isLoading && (
+              <Tr>
+                <Spinner boxSize={"16px"} />
+                <Text
+                  color={"gray.300"}
+                  fontWeight={"medium"}
+                  fontSize={"14px"}
+                >
+                  Cargando Pedidos
+                </Text>
+              </Tr>
+            )}
             {rowModel.rows.map((row) => (
               <Tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
@@ -178,7 +191,8 @@ export default function CTable({ data, DynamicFilters }) {
         <Flex gap={2} alignItems="center">
           <IconButton
             aria-label="Primera página"
-            colorScheme={"wine"}
+            colorScheme={"cart"}
+            variant={"link"}
             size="sm"
             icon={<ChevronsLeft />}
             onClick={() => table.setPageIndex(0)}
@@ -186,7 +200,8 @@ export default function CTable({ data, DynamicFilters }) {
           />
           <IconButton
             aria-label="Página anterior"
-            colorScheme={"wine"}
+            colorScheme={"cart"}
+            variant={"link"}
             size="sm"
             icon={<ChevronLeft />}
             onClick={() => table.previousPage()}
@@ -196,12 +211,13 @@ export default function CTable({ data, DynamicFilters }) {
             {Array.from(
               { length: Math.min(5, table.getPageCount()) },
               (_, i) =>
-                i + Math.max(0, table.getState().pagination.pageIndex - 2),
+                i + Math.max(0, table.getState().pagination.pageIndex - 2)
             ).map((pageIndex) => (
               <Button
                 key={pageIndex}
                 size="sm"
-                colorScheme={"wine"}
+                colorScheme={"cart"}
+                borderRadius={"full"}
                 variant={
                   pageIndex === table.getState().pagination.pageIndex
                     ? "solid"
@@ -215,7 +231,8 @@ export default function CTable({ data, DynamicFilters }) {
           </Flex>
           <IconButton
             aria-label="Siguiente página"
-            colorScheme={"wine"}
+            colorScheme={"cart"}
+            variant={"link"}
             size="sm"
             icon={<ChevronRight />}
             onClick={() => table.nextPage()}
@@ -223,7 +240,8 @@ export default function CTable({ data, DynamicFilters }) {
           />
           <IconButton
             aria-label="Última página"
-            colorScheme={"wine"}
+            colorScheme={"cart"}
+            variant={"link"}
             size="sm"
             icon={<ChevronsRight />}
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}

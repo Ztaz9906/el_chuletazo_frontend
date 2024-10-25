@@ -8,7 +8,7 @@ const patchPedidoEndpoint = pedidosApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      providesTags: (result, error, id) => [{ type: "Pedido", id }],
+      invalidatesTags: [{ type: "Pedidos", id: "LIST" }],
     }),
   }),
   overrideExisting: false,
