@@ -45,7 +45,7 @@ const ProductCard = ({ producto }) => {
       transition={{ duration: 0.5 }}
     >
       <Box
-        w="200px"
+        w="250px"
         h="300px"
         bg="white"
         shadow="md"
@@ -54,7 +54,7 @@ const ProductCard = ({ producto }) => {
         display="flex"
         flexDirection="column"
       >
-        <Box p={2} h="200px">
+        <Box p={2} h="150px" w="full">
           <Image
             objectFit="contain"
             w="100%"
@@ -78,6 +78,8 @@ const ProductCard = ({ producto }) => {
               fontWeight="medium"
               isTruncated
               maxW="60%"
+              mr={1}
+              ml={1}
             >
               {producto.name}
             </Text>
@@ -88,12 +90,14 @@ const ProductCard = ({ producto }) => {
               }}
             />
           </Flex>
-          <Text
+          <Text 
             fontSize="12px"
             noOfLines={2}
             fontWeight={"normal"}
             textAlign="center"
             color={"#6E6E6E"}
+            mr={2}
+            ml={2}
           >
             {producto.description}
           </Text>
@@ -111,8 +115,7 @@ const ProductCard = ({ producto }) => {
               <Button
                 colorScheme="main"
                 fontSize="xs"
-                px={1}
-                py={1}
+                px={2}
                 rounded="md"
                 leftIcon={<ShoppingCart size={16} />}
                 iconSpacing={0.5}

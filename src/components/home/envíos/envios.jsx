@@ -7,13 +7,13 @@ const InfoEnvios = () => {
 
       <Text fontSize="4xl" fontWeight="bold" color="green.500" mb={4}>Envíos</Text>
       
-      <Accordion defaultIndex={[0]} allowMultiple>
+      <Accordion allowToggle>
         
         <AccordionItem>
           <h2>
             <AccordionButton>
               <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
-                Provincias a las que se llegan los envíos
+                Provincias a las que se hacen llegar los envíos
               </Box>
               <AccordionIcon />
             </AccordionButton>
@@ -28,7 +28,7 @@ const InfoEnvios = () => {
                   <Text fontSize="md" color="gray.700">• Mayabeque</Text>
                   <Text fontSize="md" color="gray.700">• Matanzas</Text>
               </Box>
-              <Image src="src/assets/gif/mapa_cuba.gif" alt="Mapa de Cuba" width={200} flex="1" />
+              <Image src="/gif/mapa_cuba.gif" alt="Mapa de Cuba" width={200} flex="1" />
             </Flex>
           </AccordionPanel>
         </AccordionItem>

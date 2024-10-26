@@ -84,11 +84,11 @@ const SelectDestinatario = () => {
                 />
                 <DetailsItem
                   label="Provincia"
-                  value={selectedDestinatario.provincia}
+                  value={selectedDestinatario.provincia.name}
                 />
                 <DetailsItem
                   label="Municipio"
-                  value={selectedDestinatario.municipio}
+                  value={selectedDestinatario.municipio.name}
                 />
                 <DetailsItem
                   label="Teléfono Celular"

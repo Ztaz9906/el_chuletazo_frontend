@@ -4,7 +4,7 @@ import Product from "@/components/home/pedidos/Stepper/steps/productos/Product.j
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
 
-export default function ProductsList() {
+export default function ProductsList({}) {
   const { setFieldValue, errors, validateField, values } = useFormikContext();
   const productos = useSelector((state) => state.cart.products);
   const total = productos.reduce((sum, product) => {
