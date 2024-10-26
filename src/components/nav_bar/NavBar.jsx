@@ -20,16 +20,40 @@ function NavBar() {
               as={Link}
               to={path}
               key={index}
-              bg="transparent"
-              color={location.pathname === path ? "green.500" : "white"}
-              borderBottom="2px solid transparent"
-              borderRadius="0"
+              bg={location.pathname === path ? "rgba(255, 255, 255, 0.15)" : "transparent"}
+              color={location.pathname === path ? "green.400" : "white"}
+              fontWeight={location.pathname === path ? "bold" : "normal"}
+              px={4}
+              py={2}
               display="flex"
               alignItems="center"
+              transition="all 0.2s ease-in-out"
+              position="relative"
+              _before={{
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                borderRadius: "xl",
+                bg: "rgba(255, 255, 255, 0.1)",
+                transform: "scale(0.95)",
+                opacity: 0,
+                transition: "all 0.2s ease-in-out",
+              }}
               _hover={{
-                borderBottom: "2px solid",
-                borderColor: "green.500",
-                color: "green.500",
+                bg: "rgba(255, 255, 255, 0.2)",
+                color: "green.300",
+                transform: "translateY(-1px)",
+                _before: {
+                  transform: "scale(1)",
+                  opacity: 1,
+                },
+              }}
+              _active={{
+                transform: "scale(0.98)",
+                bg: "rgba(255, 255, 255, 0.25)",
               }}
               h="10"
             >

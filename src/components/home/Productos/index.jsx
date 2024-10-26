@@ -14,17 +14,32 @@ import {
   VStack,
   Divider,
 } from "@chakra-ui/react";
-import { ChevronLeft, ChevronRight, SearchIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const sidebarOptions = [
-  "Todos los productos",
-  "Carne de Cerdo",
-  "Cerdo Ahumado",
-  "Embutidos",
-  "Bebidas",
-  "Los más vendidos",
-];
+const sidebarOptions = {
+  categories: {
+    title: "Categorías",
+    options: [
+      "Todos los productos",
+      "Carne de Cerdo",
+      "Cerdo Ahumado",
+      "Embutidos",
+      "Bebidas",
+      "Los más vendidos",
+    ],
+  },
+  prices: {
+    title: "Precios",
+    options: [
+      "Menos de $10",
+      "$10 - $30",
+      "$30 - $50",
+      "$50 - $100",
+      "Más de $100",
+    ],
+  },
+};
 
 const ITEMS_PER_PAGE = 10;
 
@@ -143,13 +158,28 @@ export default function Index() {
             Productos
           </Text>
           <InputGroup maxW="400px">
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon color="gray" size="18px" />
-            </InputLeftElement>
+            <InputLeftElement
+              pointerEvents="none"
+              children={<Search size={18} color="#666666" />} 
+            />
             <Input
               placeholder="Buscar"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              bg="#EEFFE8"
+              borderColor="gray.200"
+              _hover={{
+                borderColor: "green.300",
+                bg: "#E4FFD9"
+              }}
+              _focus={{
+                borderColor: "green.400",
+                boxShadow: "0 0 0 1px #48BB78",
+                bg: "#EEFFE8"
+              }}
+              _placeholder={{
+                color: "gray.500"
+              }}
             />
           </InputGroup>
         </HStack>
@@ -165,18 +195,56 @@ export default function Index() {
           p={4}
           overflowY="auto"
         >
-          <VStack align="start" spacing={2}>
-            {sidebarOptions.map((option) => (
-              <Checkbox
-                key={option}
-                isChecked={selectedOption === option}
-                onChange={() => setSelectedOption(option)}
-                colorScheme="green"
-                color="#5D5D5D"
+          <VStack align="start" spacing={6}>
+            <Box width="100%">
+              <Text
+                fontSize="lg"
+                fontWeight="bold"
+                color="green.600"
+                mb={3}
               >
-                {option}
-              </Checkbox>
-            ))}
+                {sidebarOptions.categories.title}
+              </Text>
+              <VStack align="start" spacing={2}>
+                {sidebarOptions.categories.options.map((option) => (
+                  <Checkbox
+                    key={option}
+                    isChecked={selectedOption === option}
+                    onChange={() => setSelectedOption(option)}
+                    colorScheme="green"
+                    color="#5D5D5D"
+                  >
+                    {option}
+                  </Checkbox>
+                ))}
+              </VStack>
+            </Box>
+
+            <Divider borderColor="gray.300" />
+
+            <Box width="100%">
+              <Text
+                fontSize="lg"
+                fontWeight="bold"
+                color="green.600"
+                mb={3}
+              >
+                {sidebarOptions.prices.title}
+              </Text>
+              <VStack align="start" spacing={2}>
+                {sidebarOptions.prices.options.map((option) => (
+                  <Checkbox
+                    key={option}
+                    isChecked={selectedOption === option}
+                    onChange={() => setSelectedOption(option)}
+                    colorScheme="green"
+                    color="#5D5D5D"
+                  >
+                    {option}
+                  </Checkbox>
+                ))}
+              </VStack>
+            </Box>
           </VStack>
         </Box>
         <Box flex={1} overflowY="auto">
@@ -206,7 +274,6 @@ export default function Index() {
               )}
             </Flex>
 
-            {/* Pagination Controls */}
             {totalPages > 1 && (
               <Flex justifyContent="center" mt={6} mb={4}>
                 <Button

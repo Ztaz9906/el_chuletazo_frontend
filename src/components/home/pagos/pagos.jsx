@@ -7,7 +7,7 @@ const InfoPagos = () => {
       
       <Text fontSize="4xl" fontWeight="bold" color="green.500" mb={4}>Pagos</Text>
       
-      <Accordion defaultIndex={[0]} allowMultiple>
+      <Accordion allowToggle>
         
         <AccordionItem>
           <h2>
@@ -27,7 +27,7 @@ const InfoPagos = () => {
                 <br />3. American Express
               </Text>
               <Box>
-                <Image src="src/assets/gif/metod_pay.gif" alt="Método de Pago" width={200} />
+                <Image src="/gif/metod_pay.gif" alt="Método de Pago" width={200} />
               </Box>
             </Flex>
           </AccordionPanel>
@@ -55,7 +55,7 @@ const InfoPagos = () => {
                 Seleccione su método de pago y complete los campos referentes a sus tarjetas personales.
               </Text>
               <Box>
-                <Image src="src/assets/gif/step_pay.gif" alt="Método de Pago" width={300} />
+                <Image src="/gif/step_pay.gif" alt="Método de Pago" width={300} />
               </Box>
             </Flex>
           </AccordionPanel>
@@ -76,7 +76,7 @@ const InfoPagos = () => {
                 En <strong>El Chuletazo</strong>, la seguridad de los datos de cada uno de nuestros clientes es nuestra prioridad. La pasarela de pagos Stripe utiliza tecnología de encriptación avanzada para proteger su información financiera. En caso de que presente alguna dificultad a la hora de realizar su pago, por favor comuníquese con nosotros de inmediato.
               </Text>
               <Box>
-                <Image src="src/assets/gif/security_pay.gif" alt="Seguridad en el Pago" width={300} />
+                <Image src="/gif/security_pay.gif" alt="Seguridad en el Pago" width={300} />
               </Box>
             </Flex>
           </AccordionPanel>
@@ -97,7 +97,7 @@ const InfoPagos = () => {
                 Una vez que se haya realizado el pago, el cliente recibirá un mensaje de confirmación a la dirección de correo electrónico proporcionada a nuestro sitio. Este correo incluirá todos los detalles de la transacción y el recibo de la compra que acaba de realizar.
               </Text>
               <Box>
-                <Image src="src/assets/gif/confirm_pay.gif" alt="Confirmación de Pago" width={250}/>
+                <Image src="/gif/confirm_pay.gif" alt="Confirmación de Pago" width={250}/>
               </Box>
             </Flex>
           </AccordionPanel>
@@ -118,7 +118,7 @@ const InfoPagos = () => {
                 En caso de que se detecte un pago sospechoso que no pueda ser aclarado entre la entidad bancaria, la financiera y <strong>El Chuletazo</strong>, y la orden correspondiente haya sido entregada sin que <strong>El Chuletazo</strong> haya logrado cobrar el pago, se tomarán medidas estrictas. Tanto el cliente involucrado, como la tarjeta utilizada en la transacción y sus destinatarios, serán vetados y no podrán realizar compras futuras en nuestra tienda.
               </Text>
               <Box>
-                <Image src="src/assets/gif/fraude_pay.gif" alt="Medidas Contra Pago Fraudulento" width={500}/>
+                <Image src="/gif/fraude_pay.gif" alt="Medidas Contra Pago Fraudulento" width={500}/>
               </Box>
             </Flex>
           </AccordionPanel>

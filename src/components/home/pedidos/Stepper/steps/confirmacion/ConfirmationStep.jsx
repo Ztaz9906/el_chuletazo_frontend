@@ -70,8 +70,8 @@ export default function ConfirmationStep() {
               value={destinatario.telefono_fijo}
             />
             <LabelValue label={"CI"} value={destinatario.ci} />
-            <LabelValue label={"Provincia"} value={destinatario.provincia} />
-            <LabelValue label={"Municipio"} value={destinatario.municipio} />
+            <LabelValue label={"Provincia"} value={destinatario.provincia.name} />
+            <LabelValue label={"Municipio"} value={destinatario.municipio.name} />
           </Grid>
         </Stack>
       ) : (
