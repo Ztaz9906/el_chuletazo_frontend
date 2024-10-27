@@ -80,7 +80,7 @@ export default function DestinatarioModal() {
                 </ModalBody>
                 <ModalFooter>
                   <HStack w="full" justify={"space-between"}>
-                    <Button colorScheme="red" mr={3} onClick={onClose}>
+                    <Button colorScheme="cart" mr={3} onClick={onClose}>
                       Cerrar
                     </Button>
                     <Button

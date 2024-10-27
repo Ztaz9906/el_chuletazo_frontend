@@ -58,7 +58,7 @@ const columns = [
   },
 ];
 
-export default function DestinatariosTable({ destinatarios }) {
+export default function DestinatariosTable({ destinatarios, isLoading }) {
   if (!destinatarios || destinatarios.length === 0) {
     return <p>No hay destinatarios para mostrar.</p>;
   }
@@ -68,5 +68,11 @@ export default function DestinatariosTable({ destinatarios }) {
     rows: destinatarios,
   };
 
-  return <CTable data={dataTable} DynamicFilters={DynamicFilter} />;
+  return (
+    <CTable
+      data={dataTable}
+      DynamicFilters={DynamicFilter}
+      isLoading={isLoading}
+    />
+  );
 }
