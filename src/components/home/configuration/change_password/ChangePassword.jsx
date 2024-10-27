@@ -50,7 +50,7 @@ const ChangePassword = () => {
   return (
     <VStack
       align="stretch"
-      spacing={0}
+      spacing={1}
       bg="rgba(255, 255, 255, 0.6)"
       p={4}
       boxShadow="lg"
@@ -73,7 +73,7 @@ const ChangePassword = () => {
                 </Text>
               </HStack>
               <Divider mb={6} borderColor="gray.300" />
-              <Box w="full" p={4}>
+              <Box w="full" p={4} borderWidth={1} borderRadius="lg">
                 <Form>
                   <Grid
                     templateColumns="repeat(1, 1fr)"

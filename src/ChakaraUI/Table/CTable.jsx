@@ -56,7 +56,13 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
   const filteredRowsCount = table.getFilteredRowModel().rows.length;
   const totalRowsCount = data.rows.length;
   return (
-    <Flex direction="column" h="100vh" position="relative">
+    <Flex
+      direction="column"
+      maxH="calc(100vh - 130px)"
+      bg={"white"}
+      shadow={"lg"}
+      borderRadius={"lg"}
+    >
       {DynamicFilters && (
         <Box position="sticky" top={0} zIndex={2} p={4}>
           <DynamicFilters
@@ -72,7 +78,6 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
         flex="1"
         overflowY="auto"
         position="relative"
-        maxH="calc(100vh - 300px)"
         css={{
           "&::-webkit-scrollbar": {
             width: "8px",
@@ -118,7 +123,7 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
             ))}
           </Thead>
 
-          <Tbody>
+          <Tbody bg={"white"}>
             {isLoading && (
               <Tr>
                 <Td colSpan={columns.length} textAlign="center" py={8}>
@@ -181,7 +186,9 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
         bottom={0}
         zIndex={1}
         borderTop="1px solid"
+        borderBottom="1px solid"
         borderColor="gray.200"
+        bg={"white"}
       >
         <Flex alignItems="center" gap={6}>
           <Text fontSize="14px" fontWeight="normal" color="#51616D">

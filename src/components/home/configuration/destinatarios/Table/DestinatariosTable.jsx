@@ -6,10 +6,6 @@ import DestinatarioEditModal from "../edit/DestinatarioEditModal";
 
 const columns = [
   {
-    header: "ID",
-    accessorKey: "id",
-  },
-  {
     header: "Nombre",
     accessorKey: "nombre",
   },

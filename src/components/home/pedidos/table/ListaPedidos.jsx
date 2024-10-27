@@ -21,7 +21,7 @@ export default function ListaPedidos() {
         Lista de Pedidos
       </Heading>
 
-      <Box bg={"white"}>
+      <Box>
         <PedidosTable pedidos={data || []} isLoading={isLoading} />
       </Box>
     </Box>
