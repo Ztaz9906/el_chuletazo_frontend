@@ -1,4 +1,4 @@
-import fondo from "@/assets/fondo_2.png";
+import fondo from "/fondo_2.png";
 import ModalProductCard from "@/components/home/Productos/ModalProductCard.jsx";
 import {
   Badge,
