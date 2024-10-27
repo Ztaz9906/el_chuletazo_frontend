@@ -1,15 +1,21 @@
 import ModalCart from "@/components/home/Productos/ModalCart.jsx";
-import { Box, Link as ChakraLink, HStack } from "@chakra-ui/react";
-import { Link, useLocation } from "react-router-dom";
+import { Box, Link as ChakraLink, HStack, Button, Icon } from "@chakra-ui/react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ListTodo } from 'lucide-react';
 
 function NavBar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const links = [
     { label: "Productos", path: "/productos" },
     { label: "Pagos", path: "/info_pagos" },
     { label: "Envíos", path: "/info_envios" },
     { label: "Preguntas Frecuentes", path: "/info_preguntas-frecuentes" },
   ];
+
+  const handleOrdersClick = () => {
+    navigate('/pedidos'); 
+  };
 
   return (
     <Box bg="rgba(0, 0, 0, 0.2)" w="full">
@@ -61,9 +67,25 @@ function NavBar() {
             </ChakraLink>
           ))}
         </HStack>
-        <Box ml="auto">
+        <HStack spacing={2} ml="auto">
+          <Button
+            bg="transparent"
+            onClick={handleOrdersClick}
+            color="white"
+            borderBottom="2px solid transparent"
+            borderRadius="0"
+            _hover={{
+              borderBottom: "2px solid",
+              borderColor: "main.10",
+              color: "white",
+            }}
+            h="10"
+            leftIcon={<Icon as={ListTodo} />}
+          >
+            Mis Pedidos
+          </Button>
           <ModalCart />
-        </Box>
+        </HStack>
       </HStack>
     </Box>
   );

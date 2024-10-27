@@ -17,7 +17,7 @@ const LayoutPedidos = () => {
       <div className="flex-grow">
         <Box
           w="full"
-          backgroundImage="url('/src/assets/fondo_2.png')"
+          backgroundImage="url('/fondo_2.png')"
           backgroundSize="cover"
           backgroundPosition="center"
         >
