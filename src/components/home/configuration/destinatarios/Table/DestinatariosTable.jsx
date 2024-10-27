@@ -59,10 +59,6 @@ const columns = [
 ];
 
 export default function DestinatariosTable({ destinatarios, isLoading }) {
-  if (!destinatarios || destinatarios.length === 0) {
-    return <p>No hay destinatarios para mostrar.</p>;
-  }
-
   const dataTable = {
     columns,
     rows: destinatarios,

@@ -1,14 +1,21 @@
 import DestinatariosTable from "@/components/home/configuration/destinatarios/Table/DestinatariosTable";
 import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios";
-import { Box, Divider, HStack, Text } from "@chakra-ui/react";
+import { Box, Divider, HStack, Text, VStack } from "@chakra-ui/react";
 import DestinatarioModal from "../../../pedidos/Stepper/steps/destinatario/DestinatarioModal";
 
 export default function ListaDestinatarios() {
-  const { data, isLoading, isError, error } = useGetDestinatarioQuery();
+  const { data, isLoading } = useGetDestinatarioQuery();
 
   return (
-    <Box height="100vh">
-      <HStack w="full" justify="space-between" p={2}>
+    <VStack
+      height="100vh"
+      bg="rgba(255, 255, 255, 0.6)"
+      p={4}
+      boxShadow="lg"
+      mt={4}
+      borderRadius={"5px"}
+    >
+      <HStack w="full" justify="space-between" mt={2}>
         <Text fontSize="2xl" fontWeight="medium" color="main.600">
           Mis Destinatarios
         </Text>
@@ -18,6 +25,6 @@ export default function ListaDestinatarios() {
       <Box bg={"white"}>
         <DestinatariosTable destinatarios={data || []} isLoading={isLoading} />
       </Box>
-    </Box>
+    </VStack>
   );
 }
