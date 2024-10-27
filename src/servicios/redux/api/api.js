@@ -8,7 +8,7 @@ import { provinciaApi } from "@/servicios/redux/api/nomencladores/Provincias/api
 import { pedidosApi } from "@/servicios/redux/api/Pedidos/api.js";
 import { api } from "@/servicios/redux/api/productos/api.js";
 import { userApi } from "@/servicios/redux/api/user/api.js";
-import { activateApi } from "./auth/activate/api";
+import { authApi } from "./auth/api";
 
 export const apiSlices = [
   loginApi,
@@ -18,7 +18,7 @@ export const apiSlices = [
   destinatarioApi,
   provinciaApi,
   pedidosApi,
-  activateApi,
+  authApi,
 ];
 
 // You want to create a helper for easier store setup

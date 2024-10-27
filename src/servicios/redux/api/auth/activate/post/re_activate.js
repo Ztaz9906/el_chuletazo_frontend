@@ -1,6 +1,6 @@
-import { activateApi } from "../api";
+import { authApi } from "../../api";
 
-const reactivatePostEndpoint = activateApi.injectEndpoints({
+const reactivatePostEndpoint = authApi.injectEndpoints({
   endpoints: (builder) => ({
     reactivar: builder.mutation({
       query: (data) => ({
