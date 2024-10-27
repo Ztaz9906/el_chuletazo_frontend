@@ -13,7 +13,7 @@ client.interceptors.request.use(
   async (config) => {
     const re_login = "/login/";
     const re_refresh = "/refresh/";
-    let token = sessionStorage.getItem("token");
+    let token = localStorage.getItem("token");
 
     // Solo añadimos el token en rutas que lo requieran
     if (
@@ -26,22 +26,22 @@ client.interceptors.request.use(
         // Si el token necesita ser refrescado, hacer la petición de refresh
         if (token && shouldRefresh.needRefresh) {
           if (!shouldRefresh.valid) {
-            const refreshToken = sessionStorage.getItem("refresh");
+            const refreshToken = localStorage.getItem("refresh");
             const response = await client.post("/token/refresh/", {
               refresh: refreshToken,
             });
 
-            // Guardar los nuevos tokens en sessionStorage
+            // Guardar los nuevos tokens en localStorage
             token = response.data.access;
-            sessionStorage.setItem("token", response.data.access);
-            sessionStorage.setItem("refresh", response.data.refresh);
+            localStorage.setItem("token", response.data.access);
+            localStorage.setItem("refresh", response.data.refresh);
           }
         }
       } catch (e) {
         // Si el refresh falla, eliminar tokens y redirigir a la página de login
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("refresh");
-        sessionStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("user");
 
         window.location
           .replace(`${window.location.origin}/login`)
