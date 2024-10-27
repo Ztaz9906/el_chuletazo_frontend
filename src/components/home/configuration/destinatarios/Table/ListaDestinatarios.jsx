@@ -8,7 +8,7 @@ export default function ListaDestinatarios() {
 
   return (
     <VStack
-      height="auto"
+      h="calc(100vh - 100px)"
       bg="rgba(255, 255, 255, 0.6)"
       p={4}
       boxShadow="lg"
