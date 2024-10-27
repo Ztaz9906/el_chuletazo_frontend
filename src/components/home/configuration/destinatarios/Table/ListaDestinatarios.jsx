@@ -1,6 +1,6 @@
 import DestinatariosTable from "@/components/home/configuration/destinatarios/Table/DestinatariosTable";
 import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios";
-import { Box, Heading, HStack } from "@chakra-ui/react";
+import { Box, VStack, HStack, Text, Divider } from "@chakra-ui/react";
 import DestinatarioModal from "../../../pedidos/Stepper/steps/destinatario/DestinatarioModal";
 
 export default function ListaDestinatarios() {
@@ -15,24 +15,26 @@ export default function ListaDestinatarios() {
   }
 
   return (
-    <Box height="100vh" p={4}>
-      <HStack w={"full"} justify={"space-between"}>
-        <Heading
-          as="h1"
-          mb={4}
-          fontSize="32px"
-          fontWeight={"medium"}
-          color="#51616D"
-        >
-          Lista de Destinatarios
-        </Heading>
+    <VStack 
+      align="stretch" 
+      bg="rgba(255, 255, 255, 0.6)" 
+      p={4} 
+      boxShadow="lg" 
+      mt={4} 
+      h="calc(100vh - 100px)"
+    >      
+      <HStack w="full" justify="space-between">
+        <Text fontSize="2xl" fontWeight="medium" color="main.600">
+            Mis Destinatarios
+        </Text>
         <DestinatarioModal />
       </HStack>
+      <Divider mb={4} borderColor="gray.300" />      
       {data && (
-        <Box bg={"white"}>
+        <Box w="full" overflow="auto" flex="1">
           <DestinatariosTable destinatarios={data} />
         </Box>
       )}
-    </Box>
+    </VStack>
   );
 }
