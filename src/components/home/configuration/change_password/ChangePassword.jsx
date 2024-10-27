@@ -73,7 +73,7 @@ const ChangePassword = () => {
                 </Text>
               </HStack>
               <Divider mb={6} borderColor="gray.300" />
-              <Box w="full" p={4} bg="white">
+              <Box w="full" p={4}>
                 <Form>
                   <Grid
                     templateColumns="repeat(1, 1fr)"
