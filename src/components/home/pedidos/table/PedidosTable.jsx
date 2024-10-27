@@ -96,18 +96,6 @@ const TableActions = ({ row }) => {
         />
       </Tooltip>
       {/* TODO: Implementar edición de pedidos mas adelante */}
-      {/* <Tooltip label="Editar pedido">
-        <IconButton
-          onClick={() => console.log("Editar pedido", row.original)}
-          icon={<FilePenLine />}
-          size={"20px"}
-          color={"gray"}
-          variant={"none"}
-          aria-label={"Editar pedido"}
-          isDisabled={row.original.estado.toLowerCase() !== "pendiente"}
-          cursor={"pointer"}
-        />
-      </Tooltip> */}
       <Tooltip label={isLoading ? "Cancelando" : "Cancelar pedido"}>
         <IconButton
           onClick={handleCancelled}
@@ -172,7 +160,7 @@ const columns = [
     accessorKey: "destinatario",
     cell: ({ getValue }) => {
       const dest = getValue();
-      return `${dest.nombre} ${dest.apellidos}`;
+      return `${dest.nombre_completo}`;
     },
   },
   {

@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useGetPedidoByIdQuery } from "../../../../servicios/redux/api/Pedidos";
 import PedidoDetails from "./PedidoDetail";
@@ -6,14 +6,6 @@ import PedidoDetails from "./PedidoDetail";
 export default function Details() {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetPedidoByIdQuery(id);
-
-  if (isLoading) {
-    return (
-      <Box p={4}>
-        <Text>Cargando detalles del pedido...</Text>
-      </Box>
-    );
-  }
 
   if (isError) {
     return (
@@ -23,5 +15,5 @@ export default function Details() {
     );
   }
 
-  return <PedidoDetails data={data} />;
+  return <PedidoDetails data={data || []} isLoading={isLoading} />;
 }
