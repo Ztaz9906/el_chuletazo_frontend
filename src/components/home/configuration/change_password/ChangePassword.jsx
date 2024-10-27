@@ -48,7 +48,7 @@ const ChangePassword = () => {
   }
 
   return (
-    <VStack>
+    <VStack align="stretch" spacing={0} bg="rgba(255, 255, 255, 0.6)" p={4} boxShadow="lg" mt={4} h="calc(100vh - 100px)">
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setFieldError }) =>
@@ -64,7 +64,7 @@ const ChangePassword = () => {
                   Cambiar Contraseña
                 </Text>
               </HStack>
-              <Divider mb={4} borderColor="gray.300" />
+              <Divider mb={6} borderColor="gray.300" />
               <Box
                 borderWidth={1}
                 borderRadius="lg"
