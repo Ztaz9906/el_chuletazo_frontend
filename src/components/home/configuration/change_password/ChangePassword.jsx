@@ -48,7 +48,16 @@ const ChangePassword = () => {
   }
 
   return (
-    <VStack align="stretch" spacing={0} bg="rgba(255, 255, 255, 0.6)" p={4} boxShadow="lg" mt={4} h="calc(100vh - 100px)">
+    <VStack
+      align="stretch"
+      spacing={1}
+      bg="rgba(255, 255, 255, 0.6)"
+      p={4}
+      boxShadow="lg"
+      mt={4}
+      h="calc(100vh - 100px)"
+      justify={"space-between"}
+    >
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setFieldError }) =>
@@ -56,123 +65,124 @@ const ChangePassword = () => {
         }
         validationSchema={validationSchema}
       >
-        {({ values, isSubmitting, isValid }) => {
+        {({ values, isSubmitting, isValid, submitForm }) => {
           return (
             <>
-              <HStack justify="space-between" w="full" mt={2}>
-                <Text fontSize="2xl" fontWeight="medium" color="main.600">
-                  Cambiar Contraseña
-                </Text>
-              </HStack>
-              <Divider mb={6} borderColor="gray.300" />
-              <Box
-                borderWidth={1}
-                borderRadius="lg"
-                w="full"
-                p={4}
-                bg="white"
-                shadow="sm"
-              >
-                <Form>
-                  <Grid
-                    templateColumns="repeat(1, 1fr)"
-                    gap={2}
-                    w="full"
-                    margin={2}
-                  >
-                    <InputField
-                      name={formConfig.old_password.name}
-                      label={formConfig.old_password.label}
-                      type={showPassword ? "text" : "password"}
-                      placeholderColor={"gray.500"}
-                      placeholder="Ingrese su contraseña vieja"
-                      required
-                      rightIcon={
-                        showPassword ? (
-                          <EyeOffIcon
-                            color={"#646A7A"}
-                            onClick={() => setShowPassword(!showPassword)}
-                            cursor="pointer"
-                          />
-                        ) : (
-                          <EyeIcon
-                            color={"#646A7A"}
-                            onClick={() => setShowPassword(!showPassword)}
-                            cursor="pointer"
-                          />
-                        )
-                      }
-                    />
-                    <InputField
-                      name={formConfig.new_password1.name}
-                      label={formConfig.new_password1.label}
-                      type={showConfirmPassword1 ? "text" : "password"}
-                      placeholderColor={"gray.500"}
-                      placeholder="Ingrese su contraseña nueva"
-                      required
-                      rightIcon={
-                        showConfirmPassword1 ? (
-                          <EyeOffIcon
-                            color={"#646A7A"}
-                            onClick={() =>
-                              setShowConfirmPassword1(!showConfirmPassword1)
-                            }
-                            cursor="pointer"
-                          />
-                        ) : (
-                          <EyeIcon
-                            color={"#646A7A"}
-                            onClick={() =>
-                              setShowConfirmPassword1(!showConfirmPassword1)
-                            }
-                            cursor="pointer"
-                          />
-                        )
-                      }
-                    />
-                    <InputField
-                      name={formConfig.new_password2.name}
-                      label={formConfig.new_password2.label}
-                      type={showConfirmPassword2 ? "text" : "password"}
-                      placeholderColor={"gray.500"}
-                      placeholder="Confirme su contraseña nueva"
-                      required
-                      rightIcon={
-                        showConfirmPassword2 ? (
-                          <EyeOffIcon
-                            color={"#646A7A"}
-                            onClick={() =>
-                              setShowConfirmPasswor2(!showConfirmPassword2)
-                            }
-                            cursor="pointer"
-                          />
-                        ) : (
-                          <EyeIcon
-                            color={"#646A7A"}
-                            onClick={() =>
-                              setShowConfirmPasswor2(!showConfirmPassword2)
-                            }
-                            cursor="pointer"
-                          />
-                        )
-                      }
-                    />
+              <Box>
+                <HStack justify="space-between" w="full" mt={2}>
+                  <Text fontSize="2xl" fontWeight="medium" color="main.600">
+                    Cambiar Contraseña
+                  </Text>
+                </HStack>
+                <Divider mb={6} borderColor="gray.300" />
+                <Box w="full" p={4} borderWidth={1} borderRadius="lg">
+                  <Form>
+                    <Grid
+                      templateColumns="repeat(1, 1fr)"
+                      gap={2}
+                      w="full"
+                      margin={2}
+                    >
+                      <InputField
+                        name={formConfig.old_password.name}
+                        label={formConfig.old_password.label}
+                        type={showPassword ? "text" : "password"}
+                        placeholderColor={"gray.500"}
+                        placeholder="Ingrese su contraseña vieja"
+                        required
+                        rightIcon={
+                          showPassword ? (
+                            <EyeOffIcon
+                              color={"#646A7A"}
+                              onClick={() => setShowPassword(!showPassword)}
+                              cursor="pointer"
+                            />
+                          ) : (
+                            <EyeIcon
+                              color={"#646A7A"}
+                              onClick={() => setShowPassword(!showPassword)}
+                              cursor="pointer"
+                            />
+                          )
+                        }
+                      />
+                      <InputField
+                        name={formConfig.new_password1.name}
+                        label={formConfig.new_password1.label}
+                        type={showConfirmPassword1 ? "text" : "password"}
+                        placeholderColor={"gray.500"}
+                        placeholder="Ingrese su contraseña nueva"
+                        required
+                        rightIcon={
+                          showConfirmPassword1 ? (
+                            <EyeOffIcon
+                              color={"#646A7A"}
+                              onClick={() =>
+                                setShowConfirmPassword1(!showConfirmPassword1)
+                              }
+                              cursor="pointer"
+                            />
+                          ) : (
+                            <EyeIcon
+                              color={"#646A7A"}
+                              onClick={() =>
+                                setShowConfirmPassword1(!showConfirmPassword1)
+                              }
+                              cursor="pointer"
+                            />
+                          )
+                        }
+                      />
+                      <InputField
+                        name={formConfig.new_password2.name}
+                        label={formConfig.new_password2.label}
+                        type={showConfirmPassword2 ? "text" : "password"}
+                        placeholderColor={"gray.500"}
+                        placeholder="Confirme su contraseña nueva"
+                        required
+                        rightIcon={
+                          showConfirmPassword2 ? (
+                            <EyeOffIcon
+                              color={"#646A7A"}
+                              onClick={() =>
+                                setShowConfirmPasswor2(!showConfirmPassword2)
+                              }
+                              cursor="pointer"
+                            />
+                          ) : (
+                            <EyeIcon
+                              color={"#646A7A"}
+                              onClick={() =>
+                                setShowConfirmPasswor2(!showConfirmPassword2)
+                              }
+                              cursor="pointer"
+                            />
+                          )
+                        }
+                      />
 
-                    <PasswordStrengthChecker password={values.new_password1} />
-
-                    <HStack justify="flex-end" w="full">
-                      <Button
-                        colorScheme="main"
-                        isDisabled={isSubmitting || isLoading || !isValid}
-                        isLoading={isSubmitting || isLoading}
-                        type="submit"
-                      >
-                        Guardar
-                      </Button>
-                    </HStack>
-                  </Grid>
-                </Form>
+                      <PasswordStrengthChecker
+                        password={values.new_password1}
+                      />
+                    </Grid>
+                  </Form>
+                </Box>
               </Box>
+
+              <HStack justify="flex-end" w="full">
+                <Button
+                  colorScheme="main"
+                  isDisabled={isSubmitting || isLoading || !isValid}
+                  isLoading={isSubmitting || isLoading}
+                  onClick={() => {
+                    submitForm().catch((error) => {
+                      console.error("Form submission error:", error);
+                    });
+                  }}
+                >
+                  Guardar
+                </Button>
+              </HStack>
             </>
           );
         }}
