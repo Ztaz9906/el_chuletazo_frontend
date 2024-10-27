@@ -82,10 +82,7 @@ client.interceptors.response.use(
         } else if (data.error) {
           message = data.error;
         } else {
-          message = Object.entries(data)
-            .map(([key, value]) => `${key}: ${value}`)
-            .join(". ");
-          console.log(message);
+          message = data;
         }
       }
 

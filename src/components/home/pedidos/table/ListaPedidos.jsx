@@ -20,11 +20,10 @@ export default function ListaPedidos() {
       >
         Lista de Pedidos
       </Heading>
-      {data && (
-        <Box bg={"white"}>
-          <PedidosTable pedidos={data || []} isLoading={isLoading} />
-        </Box>
-      )}
+
+      <Box bg={"white"}>
+        <PedidosTable pedidos={data || []} isLoading={isLoading} />
+      </Box>
     </Box>
   );
 }

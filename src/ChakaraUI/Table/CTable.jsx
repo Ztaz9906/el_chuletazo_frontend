@@ -55,7 +55,6 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
   const rowModel = table.getRowModel();
   const filteredRowsCount = table.getFilteredRowModel().rows.length;
   const totalRowsCount = data.rows.length;
-
   return (
     <Flex direction="column" h="100vh" position="relative">
       {DynamicFilters && (
@@ -120,34 +119,55 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
           </Thead>
 
           <Tbody>
-            {totalRowsCount === 0 && <Tr>No hay resultados</Tr>}
             {isLoading && (
               <Tr>
-                <Spinner boxSize={"16px"} />
-                <Text
-                  color={"gray.300"}
-                  fontWeight={"medium"}
-                  fontSize={"14px"}
-                >
-                  Cargando Pedidos
-                </Text>
+                <Td colSpan={columns.length} textAlign="center" py={8}>
+                  <Flex justifyContent="center" alignItems="center" gap={2}>
+                    <Spinner boxSize={"32px"} />
+                    <Text
+                      color={"gray.500"}
+                      fontWeight={"medium"}
+                      fontSize={"20px"}
+                    >
+                      Cargando
+                    </Text>
+                  </Flex>
+                </Td>
               </Tr>
             )}
-            {rowModel.rows.map((row) => (
-              <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <Td
-                    key={cell.id}
-                    fontSize="14px"
-                    fontWeight="normal"
-                    color="#51616D"
-                    textAlign="left"
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Td>
-                ))}
+            {!isLoading && filteredRowsCount === 0 ? (
+              <Tr>
+                <Td
+                  colSpan={columns.length}
+                  textAlign="center"
+                  fontSize="20px"
+                  fontWeight={"medium"}
+                  color="#51616D"
+                  py={8}
+                >
+                  No hay resultados
+                </Td>
               </Tr>
-            ))}
+            ) : (
+              rowModel.rows.map((row) => (
+                <Tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <Td
+                      key={cell.id}
+                      fontSize="14px"
+                      fontWeight="normal"
+                      color="#51616D"
+                      textAlign="left"
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </Td>
+                  ))}
+                </Tr>
+              ))
+            )}
           </Tbody>
         </Table>
       </Box>

@@ -1,5 +1,6 @@
-import fondo from "@/assets/fondo_2.png";
+import fondo from "/fondo_2.png";
 import ModalProductCard from "@/components/home/Productos/ModalProductCard.jsx";
+import { clearCart } from "@/servicios/redux/slices/productSliece.js";
 import {
   Badge,
   Button,
@@ -18,13 +19,14 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { ShoppingCart } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function ModalCart({ textColor = "white" }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cart = useSelector((state) => state.cart.products);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const total = cart.reduce((sum, product) => {
     return sum + (product.default_price.unit_amount / 100) * product.quantity;
@@ -36,7 +38,10 @@ export default function ModalCart({ textColor = "white" }) {
       onClose();
     }
   };
-
+  const handleClearCart = () => {
+    dispatch(clearCart());
+    localStorage.removeItem("cart");
+  };
   return (
     <>
       <Button
@@ -84,16 +89,18 @@ export default function ModalCart({ textColor = "white" }) {
                 fontWeight="bold"
                 color={"#494949"}
               >{`Mi Carrito > Productos`}</Text>
-              <Button
-                textColor={"white"}
-                colorScheme="cart"
-                onClick={onClose}
-                mr={3}
-                w={"120px"}
-                h={"35px"}
-              >
-                Vaciar Carriro
-              </Button>
+              {cart.length > 0 && (
+                <Button
+                  textColor={"white"}
+                  colorScheme="cart"
+                  onClick={handleClearCart}
+                  mr={3}
+                  w={"120px"}
+                  h={"35px"}
+                >
+                  Vaciar Carriro
+                </Button>
+              )}
             </HStack>
           </ModalHeader>
           <ModalCloseButton />

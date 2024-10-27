@@ -17,7 +17,7 @@ const Layout = () => {
       <Box
         flex={1}
         overflowY="auto"
-        backgroundImage="url('/src/assets/fondo_2.png')"
+        backgroundImage="url('/fondo_2.png')"
         backgroundSize="cover"
         backgroundPosition="center"
         py={8}

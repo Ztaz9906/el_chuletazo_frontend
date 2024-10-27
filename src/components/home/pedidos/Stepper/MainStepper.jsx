@@ -1,15 +1,15 @@
 import MultiStepperForm from "@/ChakaraUI/Stepper/Stepper.jsx";
-import { Box, Button, Center, Flex, Heading, Stack } from "@chakra-ui/react";
-import { Check } from "lucide-react";
-import ProductsList from "@/components/home/pedidos/Stepper/steps/productos/ProductsList.jsx";
-import SelectDestinatario from "@/components/home/pedidos/Stepper/steps/destinatario/SelectDestinatario.jsx";
-import RemitenteInputs from "@/components/home/pedidos/Stepper/steps/remitente/RemitenteInputs.jsx";
-import ConfirmationStep from "@/components/home/pedidos/Stepper/steps/confirmacion/ConfirmationStep.jsx";
 import { initialValues } from "@/components/home/pedidos/Stepper/schema/initialValues.js";
 import { validationSchema } from "@/components/home/pedidos/Stepper/schema/validations.js";
-import { useDispatch, useSelector } from "react-redux";
+import ConfirmationStep from "@/components/home/pedidos/Stepper/steps/confirmacion/ConfirmationStep.jsx";
+import SelectDestinatario from "@/components/home/pedidos/Stepper/steps/destinatario/SelectDestinatario.jsx";
+import ProductsList from "@/components/home/pedidos/Stepper/steps/productos/ProductsList.jsx";
+import RemitenteInputs from "@/components/home/pedidos/Stepper/steps/remitente/RemitenteInputs.jsx";
 import { usePostPedidoMutation } from "@/servicios/redux/api/Pedidos/index.js";
 import { clearCart } from "@/servicios/redux/slices/productSliece.js";
+import { Box, Button, Center, Flex, Heading, Stack } from "@chakra-ui/react";
+import { Check } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 
 const getActiveStep = (activeStep) => {
   switch (activeStep) {
@@ -74,8 +74,8 @@ export default function MainStepper() {
           customer_id: user.customer_id,
           total: values.total,
           productos: values.productos,
-          success_url: "http://localhost:3000/pedidos",
-          cancel_url: "http://localhost:3000/",
+          success_url: `${window.location.origin}/pedidos`,
+          cancel_url: `${window.location.origin}/pedidos`,
         };
         const res = await postPedido(pedido).unwrap();
         if (res && res.checkout_url) {

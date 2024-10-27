@@ -11,7 +11,7 @@ const cartSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       const existingProduct = state.products.find(
-        (product) => product.id === action.payload.id,
+        (product) => product.id === action.payload.id
       );
 
       if (existingProduct) {
@@ -22,14 +22,14 @@ const cartSlice = createSlice({
     },
     deleteProduct: (state, action) => {
       state.products = state.products.filter(
-        (product) => product.id !== action.payload,
+        (product) => product.id !== action.payload
       );
       console.log(state.products);
     },
     editQuantity: (state, action) => {
       console.log(state, action.payload);
       const product = state.products.find(
-        (product) => product.id === action.payload.id,
+        (product) => product.id === action.payload.id
       );
 
       if (product) {
@@ -37,7 +37,8 @@ const cartSlice = createSlice({
       }
     },
     clearCart: (state) => {
-      return [];
+      // Corregido: Mantener la estructura del estado
+      state.products = [];
     },
   },
 });

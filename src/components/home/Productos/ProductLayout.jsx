@@ -18,7 +18,7 @@ const ProductLayout = () => {
       <Box
         flex={1}
         overflowY="auto"
-        backgroundImage="url('/src/assets/fondo_2.png')"
+        backgroundImage="url('/fondo_2.png')"
         backgroundSize="cover"
         backgroundPosition="center"
         p={4}

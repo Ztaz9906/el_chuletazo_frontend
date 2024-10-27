@@ -1,4 +1,3 @@
-import { ErrorMessage, Field } from "formik";
 import {
   Flex,
   FormControl,
@@ -10,6 +9,7 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
+import { ErrorMessage, Field } from "formik";
 
 /**
  * @param {Object} props
@@ -24,11 +24,13 @@ import {
  * @param {string} [props.labelColor="#646A7A"] - Color for the label text
  * @param {string} [props.placeholderColor="#646A7A"] - Color for the placeholder text
  */
+
 const InputField = ({
   name,
   label,
   type = "text",
   isNumber = false,
+  isString = false,
   placeholder,
   leftIcon,
   rightIcon,
@@ -74,7 +76,14 @@ const InputField = ({
                   ? (e) => {
                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
                     }
-                  : undefined
+                  : isString
+                    ? (e) => {
+                        e.target.value = e.target.value.replace(
+                          /[^A-Za-z\s]/g,
+                          ""
+                        );
+                      }
+                    : undefined
               }
               {...props}
               _placeholder={{

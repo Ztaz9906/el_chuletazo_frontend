@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from "react";
 import {
   Flex,
   Input,
@@ -7,7 +6,9 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
+
 import { SearchIcon } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 const DynamicFilter = ({
   setGlobalFilterFunction,
@@ -34,7 +35,7 @@ const DynamicFilter = ({
 
       return searchMatch && dateMatch && estadoMatch;
     },
-    [searchTerm, date, estado],
+    [searchTerm, date, estado]
   );
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const DynamicFilter = ({
         searchTerm,
         date,
         estado,
-      }),
+      })
     );
   }, [
     globalFilterFn,
@@ -54,7 +55,13 @@ const DynamicFilter = ({
     setGlobalFilterFunction,
     setGlobalFilterValue,
   ]);
-
+  const options = [
+    { value: "pendiente", label: "Pendiente" },
+    { value: "pagado", label: "Pagado" },
+    { value: "enviado", label: "Enviado" },
+    { value: "completado", label: "Completado" },
+    { value: "cancelado", label: "Cancelado" },
+  ];
   return (
     <>
       <Flex direction={{ base: "column", md: "row" }} gap={4} mb={4}>
@@ -88,19 +95,20 @@ const DynamicFilter = ({
           fontWeight="normal"
           _placeholder={{ color: "#51616D", fontWeight: "normal" }}
         />
+
         <Select
-          placeholder="Seleccionar estado"
+          placeholder="Todos"
           value={estado}
           onChange={(e) => setEstado(e.target.value)}
           fontSize="14px"
           fontWeight="normal"
           color="#51616D"
         >
-          <option value="pendiente">Pendiente</option>
-          <option value="pagado">Pagado</option>
-          <option value="enviado">Enviado</option>
-          <option value="completado">Completado</option>
-          <option value="cancelado">Cancelado</option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </Select>
       </Flex>
       <Flex

@@ -19,7 +19,7 @@ const LayOutConfiguracion = () => {
       <div className="flex-grow">
         <Flex
           w="full"
-          backgroundImage="url('/src/assets/fondo_2.png')"
+          backgroundImage="url('/fondo_2.png')"
           backgroundSize="cover"
           backgroundPosition="center"
         >
