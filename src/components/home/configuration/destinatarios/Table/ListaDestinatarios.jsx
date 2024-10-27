@@ -1,38 +1,23 @@
 import DestinatariosTable from "@/components/home/configuration/destinatarios/Table/DestinatariosTable";
 import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios";
-import { Box, Heading, HStack } from "@chakra-ui/react";
+import { Box, Divider, HStack, Text } from "@chakra-ui/react";
 import DestinatarioModal from "../../../pedidos/Stepper/steps/destinatario/DestinatarioModal";
 
 export default function ListaDestinatarios() {
   const { data, isLoading, isError, error } = useGetDestinatarioQuery();
 
-  if (isLoading) {
-    return <p>Cargando...</p>;
-  }
-
-  if (isError) {
-    return <p>Error: {error.message}</p>;
-  }
-
   return (
-    <Box height="100vh" p={4}>
-      <HStack w={"full"} justify={"space-between"}>
-        <Heading
-          as="h1"
-          mb={4}
-          fontSize="32px"
-          fontWeight={"medium"}
-          color="#51616D"
-        >
-          Lista de Destinatarios
-        </Heading>
+    <Box height="100vh">
+      <HStack w="full" justify="space-between" p={2}>
+        <Text fontSize="2xl" fontWeight="medium" color="main.600">
+          Mis Destinatarios
+        </Text>
         <DestinatarioModal />
       </HStack>
-      {data && (
-        <Box bg={"white"}>
-          <DestinatariosTable destinatarios={data} />
-        </Box>
-      )}
+      <Divider mb={4} borderColor="gray.300" />
+      <Box bg={"white"}>
+        <DestinatariosTable destinatarios={data || []} isLoading={isLoading} />
+      </Box>
     </Box>
   );
 }

@@ -1,30 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
 import { loginApi } from "@/servicios/redux/api/auth/login/login.js";
 import { logoutApi } from "@/servicios/redux/api/auth/logout/logout.js";
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = JSON.parse(sessionStorage.getItem("user")) || null;
+const initialState = JSON.parse(localStorage.getItem("user")) || null;
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     setUser: (state, action) => {
-      sessionStorage.setItem("user", JSON.stringify(action.payload));
+      localStorage.setItem("user", JSON.stringify(action.payload));
       return action.payload;
     },
     removeUser: (state) => {
-      sessionStorage.removeItem("user");
+      localStorage.removeItem("user");
       return null;
     },
   },
   extraReducers: (builder) => {
     builder
       .addMatcher(loginApi.endpoints.Login.matchFulfilled, (state, action) => {
-        sessionStorage.setItem("user", JSON.stringify(action.payload.user));
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
         return action.payload.user;
       })
       .addMatcher(logoutApi.endpoints.Logout.matchFulfilled, (state) => {
-        sessionStorage.removeItem("user");
+        localStorage.removeItem("user");
         return null;
       });
   },

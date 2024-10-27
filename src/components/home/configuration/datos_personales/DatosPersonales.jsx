@@ -18,8 +18,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formConfig } from "./schema/formConfig";
 
-const LabelValue = ({ label, value }) => (
-  <Box>
+const LabelValue = ({ label, value }) => ( //campos de los datos personales ()
+  <Box> 
     <Text fontSize="sm" fontWeight="bold" color="gray.600">
       {label}
     </Text>
@@ -67,7 +67,7 @@ const DatosPersonales = () => {
     [user]
   );
   return (
-    <VStack>
+    <VStack align="stretch" spacing={0} bg="rgba(255, 255, 255, 0.6)" p={4} boxShadow="lg" mt={4} h="calc(100vh - 100px)">     
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setFieldError }) =>
@@ -129,7 +129,7 @@ const DatosPersonales = () => {
                   )}
                 </Tooltip>
               </HStack>
-              <Divider mb={4} borderColor="gray.300" />
+              <Divider mb={6} borderColor="gray.300" />
               <Box
                 borderWidth={1}
                 borderRadius="lg"

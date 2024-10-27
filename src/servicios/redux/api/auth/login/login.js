@@ -17,8 +17,8 @@ const loginEndpoint = loginApi.injectEndpoints({
       onQueryStarted: (arg, { dispatch, queryFulfilled }) => {
         queryFulfilled
           .then((response) => {
-            sessionStorage.setItem("token", response.data.access);
-            sessionStorage.setItem("refresh", response.data.refresh);
+            localStorage.setItem("token", response.data.access);
+            localStorage.setItem("refresh", response.data.refresh);
             dispatch(setUser(response.data.user));
           })
           .catch((error) => {
@@ -40,13 +40,13 @@ const loginEndpoint = loginApi.injectEndpoints({
         queryFulfilled
           .then((response) => {
             if (response.data.access && response.data.refresh) {
-              sessionStorage.setItem("token", response.data.access);
-              sessionStorage.setItem("refresh", response.data.refresh);
+              localStorage.setItem("token", response.data.access);
+              localStorage.setItem("refresh", response.data.refresh);
               dispatch(setUser(response.data.user));
             } else {
               console.error(
                 "Invalid response from google login:",
-                response.data,
+                response.data
               );
             }
           })
