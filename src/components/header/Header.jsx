@@ -57,7 +57,7 @@ const Header = () => {
   const menu = [
     {
       label: "Configuración",
-      onClick: () => {},
+      onClick: () => navigate('/configuracion'),
       icon: <Settings />,
     },
     {
