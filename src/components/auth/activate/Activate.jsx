@@ -19,7 +19,7 @@ import { useParams } from "react-router-dom";
 import {
   useActivarMutation,
   useReactivarMutation,
-} from "../../../servicios/redux/api/auth/activate";
+} from "../../../servicios/redux/api/auth";
 
 const Activate = () => {
   const [activar, { isLoading: isActivating }] = useActivarMutation();

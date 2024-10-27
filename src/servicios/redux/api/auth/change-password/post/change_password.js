@@ -1,10 +1,10 @@
 import { authApi } from "../../api";
 
-const activatePostEndpoint = authApi.injectEndpoints({
+const changePostEndpoint = authApi.injectEndpoints({
   endpoints: (builder) => ({
-    activar: builder.mutation({
+    changePassword: builder.mutation({
       query: (data) => ({
-        url: "usuarios/activar/",
+        url: "change_password",
         method: "POST",
         body: data,
       }),
@@ -13,4 +13,4 @@ const activatePostEndpoint = authApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useActivarMutation } = activatePostEndpoint;
+export const { useChangePasswordMutation } = changePostEndpoint;
