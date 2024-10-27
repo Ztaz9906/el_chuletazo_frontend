@@ -7,7 +7,14 @@ export default function ListaDestinatarios() {
   const { data, isLoading } = useGetDestinatarioQuery();
 
   return (
-    <VStack height="auto" p={4} borderRadius={"5px"}>
+    <VStack
+      height="auto"
+      bg="rgba(255, 255, 255, 0.6)"
+      p={4}
+      boxShadow="lg"
+      mt={4}
+      borderRadius={"5px"}
+    >
       <HStack w="full" justify="space-between" mt={2}>
         <Text fontSize="2xl" fontWeight="medium" color="main.600">
           Mis Destinatarios
@@ -15,7 +22,7 @@ export default function ListaDestinatarios() {
         <DestinatarioModal />
       </HStack>
       <Divider mb={4} borderColor="gray.300" />
-      <Box>
+      <Box borderWidth={1} borderRadius={"5px"} borderColor={"gray.300"}>
         <DestinatariosTable destinatarios={data || []} isLoading={isLoading} />
       </Box>
     </VStack>

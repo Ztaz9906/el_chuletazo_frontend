@@ -58,10 +58,10 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
   return (
     <Flex
       direction="column"
+      minH="calc(100vh - 400px)"
       maxH="calc(100vh - 130px)"
       bg={"white"}
-      shadow={"lg"}
-      borderRadius={"lg"}
+      borderRadius={"5px"}
     >
       {DynamicFilters && (
         <Box position="sticky" top={0} zIndex={2} p={4}>
@@ -186,9 +186,9 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
         bottom={0}
         zIndex={1}
         borderTop="1px solid"
-        borderBottom="1px solid"
-        borderColor="gray.200"
         bg={"white"}
+        borderColor={"gray.300"}
+        borderBottomRadius={"5px"}
       >
         <Flex alignItems="center" gap={6}>
           <Text fontSize="14px" fontWeight="normal" color="#51616D">
