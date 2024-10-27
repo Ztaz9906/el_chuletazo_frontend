@@ -48,7 +48,15 @@ const ChangePassword = () => {
   }
 
   return (
-    <VStack align="stretch" spacing={0} bg="rgba(255, 255, 255, 0.6)" p={4} boxShadow="lg" mt={4} h="calc(100vh - 100px)">
+    <VStack
+      align="stretch"
+      spacing={0}
+      bg="rgba(255, 255, 255, 0.6)"
+      p={4}
+      boxShadow="lg"
+      mt={4}
+      h="auto"
+    >
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setFieldError }) =>
@@ -56,7 +64,7 @@ const ChangePassword = () => {
         }
         validationSchema={validationSchema}
       >
-        {({ values, isSubmitting, isValid }) => {
+        {({ values, isSubmitting, isValid, submitForm }) => {
           return (
             <>
               <HStack justify="space-between" w="full" mt={2}>
@@ -65,14 +73,7 @@ const ChangePassword = () => {
                 </Text>
               </HStack>
               <Divider mb={6} borderColor="gray.300" />
-              <Box
-                borderWidth={1}
-                borderRadius="lg"
-                w="full"
-                p={4}
-                bg="white"
-                shadow="sm"
-              >
+              <Box w="full" p={4} bg="white">
                 <Form>
                   <Grid
                     templateColumns="repeat(1, 1fr)"
@@ -159,20 +160,23 @@ const ChangePassword = () => {
                     />
 
                     <PasswordStrengthChecker password={values.new_password1} />
-
-                    <HStack justify="flex-end" w="full">
-                      <Button
-                        colorScheme="main"
-                        isDisabled={isSubmitting || isLoading || !isValid}
-                        isLoading={isSubmitting || isLoading}
-                        type="submit"
-                      >
-                        Guardar
-                      </Button>
-                    </HStack>
                   </Grid>
                 </Form>
               </Box>
+              <HStack justify="flex-end" w="full">
+                <Button
+                  colorScheme="main"
+                  isDisabled={isSubmitting || isLoading || !isValid}
+                  isLoading={isSubmitting || isLoading}
+                  onClick={() => {
+                    submitForm().catch((error) => {
+                      console.error("Form submission error:", error);
+                    });
+                  }}
+                >
+                  Guardar
+                </Button>
+              </HStack>
             </>
           );
         }}
