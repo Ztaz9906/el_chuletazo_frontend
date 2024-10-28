@@ -17,6 +17,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { LogOutIcon, Settings } from "lucide-react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
@@ -28,7 +29,7 @@ const Header = () => {
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const toast = useToast();
-  const { isOpen: isLogin, onToggle } = useDisclosure();
+  const [isLogin, setIsLogin] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLogout = async () => {
@@ -69,14 +70,13 @@ const Header = () => {
       icon: <LogOutIcon />,
     },
   ];
-  function handleModalOpen({ login }) {
-    if (login && isLogin) {
-      onOpen();
-    } else {
-      onToggle();
-      onOpen();
-    }
-  }
+  const handleModalOpen = (isLoginMode = true) => {
+    setIsLogin(isLoginMode);
+    onOpen();
+  };
+  const toggleAuthMode = () => {
+    setIsLogin((prev) => !prev);
+  };
   return (
     <>
       <Box bg="blackAlpha.300" p={2} height="56px">
@@ -155,7 +155,7 @@ const Header = () => {
                   size="sm"
                   color="white"
                   _hover={{ bg: "transparent", color: "green" }}
-                  onClick={() => handleModalOpen({ login: true })}
+                  onClick={() => handleModalOpen(true)}
                 >
                   Iniciar Sesión
                 </Button>
@@ -165,7 +165,7 @@ const Header = () => {
                   size="sm"
                   color="white"
                   _hover={{ bg: "transparent", color: "green" }}
-                  onClick={() => handleModalOpen({ login: false })}
+                  onClick={() => handleModalOpen(false)}
                 >
                   Registrarse
                 </Button>
@@ -176,9 +176,9 @@ const Header = () => {
       </Box>
       <CustomModal isOpen={isOpen} onClose={onClose}>
         {isLogin ? (
-          <Login onClose={onClose} onSignUpOpen={onToggle} />
+          <Login onClose={onClose} toggleAuthMode={toggleAuthMode} />
         ) : (
-          <SingUp onClose={onClose} onLoginOpen={onToggle} />
+          <SingUp onClose={onClose} toggleAuthMode={toggleAuthMode} />
         )}
       </CustomModal>
     </>

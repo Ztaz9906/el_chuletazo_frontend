@@ -20,7 +20,7 @@ import {
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = ({ onClose, onLoginOpen }) => {
+const SignUp = ({ onClose, toggleAuthMode }) => {
   const toast = useToast();
   const navigate = useNavigate();
   const [postUser] = usePostUserMutation();
@@ -114,9 +114,7 @@ const SignUp = ({ onClose, onLoginOpen }) => {
                     ¿Ya tienes cuenta?
                   </Text>
                   <Link
-                    onClick={() => {
-                      onLoginOpen();
-                    }}
+                    onClick={toggleAuthMode}
                     color="green.500"
                     fontWeight="semibold"
                     _hover={{
