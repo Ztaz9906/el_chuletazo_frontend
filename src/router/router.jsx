@@ -15,6 +15,7 @@ import Activate from "../components/auth/activate/Activate";
 import ChangePassword from "../components/home/configuration/change_password/ChangePassword";
 import DatosPersonales from "../components/home/configuration/datos_personales/DatosPersonales";
 import Details from "../components/home/pedidos/details/Details";
+import LandingPage from "@/components/home/landingPage/LandingPage";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
   {
     path: "sign-up",
     element: <SingUp />,
+  },
+  {
+    path: "landingpage",
+    element: <LandingPage />,
   },
 ]);
 
