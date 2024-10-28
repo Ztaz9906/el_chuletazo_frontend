@@ -15,7 +15,9 @@ const BackPrincipal = () => {
       flexDirection="column"
       color="white"
     >
-      <Header />
+      <Box position="fixed" w="100%">
+        <Header />
+      </Box>
       <VStack
         flex={1}
         justifyContent="center"

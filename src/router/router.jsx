@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout.jsx";
 import Login from "@/components/auth/login/Login.jsx";
-import SingUp from "@/components/auth/sing-up/SingUp.jsx";
+import SignUp from "@/components/auth/sing-up/SingUp.jsx";
 import Index from "@/components/home/Productos/index.jsx";
 import LayOutConfiguracion from "@/components/home/configuration/Layout/LayOutConfiguracion";
 import ListaDestinatarios from "@/components/home/configuration/destinatarios/Table/ListaDestinatarios";
@@ -15,8 +15,18 @@ import Activate from "../components/auth/activate/Activate";
 import ChangePassword from "../components/home/configuration/change_password/ChangePassword";
 import DatosPersonales from "../components/home/configuration/datos_personales/DatosPersonales";
 import Details from "../components/home/pedidos/details/Details";
+import LandingPage from "@/components/home/landingPage/LandingPage";
 
 const router = createBrowserRouter([
+  {
+    path: "",
+    children:[
+      {
+        path: "",
+        element: <LandingPage />,
+      }
+    ]
+  },
   {
     path: "/",
     element: <Layout />,
@@ -85,7 +95,7 @@ const router = createBrowserRouter([
   },
   {
     path: "sign-up",
-    element: <SingUp />,
+    element: <SignUp />,
   },
 ]);
 

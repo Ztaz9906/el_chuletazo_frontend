@@ -12,7 +12,7 @@ const InfoPreguntasFrecuentes = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 ¿Es posible pagar con tarjetas MLC?
               </Box>
               <AccordionIcon />
@@ -32,7 +32,7 @@ const InfoPreguntasFrecuentes = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 ¿Es posible realizar la compra desde cualquier país del mundo?
               </Box>
               <AccordionIcon />
@@ -48,7 +48,7 @@ const InfoPreguntasFrecuentes = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 ¿Es posible realizar el pago en efectivo en Cuba, una vez recibido el producto?
               </Box>
               <AccordionIcon />

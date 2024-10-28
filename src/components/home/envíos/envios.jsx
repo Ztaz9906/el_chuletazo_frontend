@@ -12,7 +12,7 @@ const InfoEnvios = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 Provincias a las que se hacen llegar los envíos
               </Box>
               <AccordionIcon />
@@ -36,7 +36,7 @@ const InfoEnvios = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 Tarifas y Duración del Envío
               </Box>
               <AccordionIcon />
@@ -51,7 +51,7 @@ const InfoEnvios = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 Proceso de Entrega y Recepción
               </Box>
               <AccordionIcon />

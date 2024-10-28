@@ -44,7 +44,7 @@ client.interceptors.request.use(
         localStorage.removeItem("user");
 
         window.location
-          .replace(`${window.location.origin}/login`)
+          .replace(`${window.location.origin}`)
           .then(() => window.location.reload());
       }
 

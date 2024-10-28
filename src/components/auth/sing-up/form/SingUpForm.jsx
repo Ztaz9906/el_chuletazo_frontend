@@ -15,7 +15,9 @@ const SingUpForm = () => {
         label={formConfig.email.label}
         type="email"
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        placeholderColor={"grey"}
+        color={"grey"}
+        backgroundColor={"white"}
         placeholder="Ingrese su correo electrónico"
         required
       />
@@ -24,7 +26,9 @@ const SingUpForm = () => {
         label={formConfig.phone.label}
         placeholder="Ingrese su nombre de usuario"
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        placeholderColor={"grey"}
+        color={"grey"}
+        backgroundColor={"white"}
         required
       />
       <InputField
@@ -32,7 +36,9 @@ const SingUpForm = () => {
         label={formConfig.password.label}
         type={showPassword ? "text" : "password"}
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        color={"grey"}
+        placeholderColor={"grey"}
+        backgroundColor={"white"}
         placeholder="Ingrese su contraseña"
         required
         rightIcon={
@@ -44,7 +50,7 @@ const SingUpForm = () => {
             />
           ) : (
             <EyeIcon
-              color={"#FFFFFF80"}
+              color={"grey"}
               onClick={() => setShowPassword(!showPassword)}
               cursor="pointer"
             />
@@ -56,7 +62,9 @@ const SingUpForm = () => {
         label={formConfig.confirm_password.label}
         type={showConfirmPassword ? "text" : "password"}
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        color={"grey"}
+        placeholderColor={"grey"}
+        backgroundColor={"white"}
         placeholder="Confirme su contraseña"
         required
         rightIcon={
@@ -68,7 +76,7 @@ const SingUpForm = () => {
             />
           ) : (
             <EyeIcon
-              color={"#FFFFFF80"}
+              color={"grey"}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               cursor="pointer"
             />
@@ -79,7 +87,9 @@ const SingUpForm = () => {
         name={formConfig.first_name.name}
         label={formConfig.first_name.label}
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        color={"grey"}
+        placeholderColor={"grey"}
+        backgroundColor={"white"}
         placeholder="Ingrese su nombre"
         required
       />
@@ -87,7 +97,9 @@ const SingUpForm = () => {
         name={formConfig.last_name.name}
         label={formConfig.last_name.label}
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        color={"grey"}
+        placeholderColor={"grey"}
+        backgroundColor={"white"}
         placeholder="Ingrese su apellido"
         required
       />
