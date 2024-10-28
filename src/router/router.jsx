@@ -19,6 +19,15 @@ import LandingPage from "@/components/home/landingPage/LandingPage";
 
 const router = createBrowserRouter([
   {
+    path: "",
+    children:[
+      {
+        path: "",
+        element: <LandingPage />,
+      }
+    ]
+  },
+  {
     path: "/",
     element: <Layout />,
     children: [
@@ -87,10 +96,6 @@ const router = createBrowserRouter([
   {
     path: "sign-up",
     element: <SingUp />,
-  },
-  {
-    path: "landingpage",
-    element: <LandingPage />,
   },
 ]);
 
