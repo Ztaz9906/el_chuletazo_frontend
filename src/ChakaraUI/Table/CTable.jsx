@@ -59,7 +59,7 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
     <Flex
       direction="column"
       minH="calc(100vh - 400px)"
-      maxH="calc(100vh - 130px)"
+      maxH="calc(100vh - 200px)"
       bg={"white"}
       borderRadius={"5px"}
     >
