@@ -50,7 +50,7 @@ const LandingPage = () => {
         left="0" 
         right="0" 
         zIndex="1000"
-        bgGradient="linear(to-r, green.50, green.100)"
+        bgGradient="linear(to-r, green.100, green.100)"
       >
         <Header/>
       </Box>
@@ -58,7 +58,7 @@ const LandingPage = () => {
         <Box
           position="relative"
           height={{ base: "90vh", md: "80vh" }}
-          bgGradient="linear(to-b, #fffaef, green.100)"
+          bgGradient="linear(to-b,  green.100, #fffaef)"
           overflow="hidden"
         >
         <Container maxW="container.xl" h="full" position="relative" zIndex="2">
@@ -94,6 +94,7 @@ const LandingPage = () => {
                 _hover={{
                   transform: "translateY(-2px)",
                   boxShadow: "lg",
+                  bg: "cart.300",
                 }}
               >
                 Ver Productos
@@ -107,7 +108,7 @@ const LandingPage = () => {
         </Container>
       </Box>
 
-      <Box py={20} bgGradient="linear(to-b, green.100, #fffaef)" position="relative">
+      <Box py={20} bgGradient="linear(to-b , #fffaef, white)" position="relative">
         <Box
           position="absolute"
           top="0"
@@ -125,7 +126,10 @@ const LandingPage = () => {
               fontSize="4xl"
               color="green.600"
             >
-              ¿Por qué elegir El Chuletazo?
+              ¿Por qué elegir {" "}
+                <Text as="span" color="cart.300">
+                  El Chuletazo?
+                </Text>
             </Heading>
           </motion.div>
 
@@ -164,10 +168,12 @@ const LandingPage = () => {
                   p={6}
                   height="100%"
                   borderRadius="lg"
-                  bg="white"
+                  bg="green.50"
+                  shadow= "xl"
                   _hover={{
                     transform: "translateY(-8px)",
                     shadow: "xl",
+                    bg: "#ffecc1"
                   }}
                   transition="all 0.3s"
                 >
@@ -175,12 +181,12 @@ const LandingPage = () => {
                     <Icon
                       as={feature.icon}
                       boxSize={12}
-                      color="green.500"
+                      color="cart.300"
                     />
-                    <Heading size="md" color="green.700">
+                    <Heading size="md" color="cart.300">
                       {feature.title}
                     </Heading>
-                    <Text color="gray.600" textAlign="center">
+                    <Text color="grey" textAlign="center">
                       {feature.description}
                     </Text>
                   </VStack>
@@ -198,7 +204,7 @@ const LandingPage = () => {
           left="0"
           right="0"
           bottom="0"
-          bg={"#fffaef"}
+          bgGradient="linear(to-b, white, #fffaef)" 
           backgroundPosition="center"
           zIndex="1"
         />
@@ -219,8 +225,8 @@ const LandingPage = () => {
                 color="gray"
                 maxW="3xl"
               >
-                Descubre nuestra selección de productos de alta calidad, 
-                cuidadosamente elegidos para satisfacer los gustos más exigentes.
+                Navega en nuestro sitio y descubre la selección de variados productos de alta calidad con la que contamos, 
+                elegidos cuidadosamente para satisfacer los gustos más exigentes de cada uno de nuestros clientes.
               </Text>
             </Stack>
           </motion.div>
@@ -256,7 +262,7 @@ const LandingPage = () => {
                   ¿Listo para hacer feliz a alguien?
                 </Heading>
                 <Text color="cart.300" fontSize="lg">
-                  Comienza a enviar productos de calidad a tus seres queridos hoy mismo.
+                 <strong> Comienza a enviar productos de calidad a tus seres queridos HOY mismo. </strong>
                 </Text>
               </VStack>
               <Button
