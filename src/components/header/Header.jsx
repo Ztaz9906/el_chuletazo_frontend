@@ -1,3 +1,5 @@
+import SingUp from "@/components/auth/sing-up/SingUp";
+import { useLogoutMutation } from "@/servicios/redux/api/auth/logout/logout.js";
 import {
   Avatar,
   Box,
@@ -10,33 +12,24 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useDisclosure,
   useToast,
   VStack,
-  useDisclosure,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import logo from "../../assets/logo.png";
 import { LogOutIcon, Settings } from "lucide-react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLogoutMutation } from "@/servicios/redux/api/auth/logout/logout.js";
-import Login from "@/components/auth/login/Login";
-import SingUp from "@/components/auth/sing-up/SingUp";
+import logo from "../../assets/logo.png";
+import CustomModal from "../../ChakaraUI/Modal/Modal";
+import Login from "../auth/login/Login";
 
 const Header = () => {
   const user = useSelector((state) => state.user);
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const toast = useToast();
-  const { 
-    isOpen: isLoginOpen, 
-    onOpen: onLoginOpen, 
-    onClose: onLoginClose 
-  } = useDisclosure();
-  const { 
-    isOpen: isSingUpOpen, 
-    onOpen: onSingUpOpen, 
-    onClose: onSingUpClose 
-  } = useDisclosure();
+  const { isOpen: isLogin, onToggle } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLogout = async () => {
     try {
@@ -67,7 +60,7 @@ const Header = () => {
   const menu = [
     {
       label: "Configuración",
-      onClick: () => navigate('/configuracion'),
+      onClick: () => navigate("/configuracion"),
       icon: <Settings />,
     },
     {
@@ -76,7 +69,14 @@ const Header = () => {
       icon: <LogOutIcon />,
     },
   ];
-
+  function handleModalOpen({ login }) {
+    if (login && isLogin) {
+      onOpen();
+    } else {
+      onToggle();
+      onOpen();
+    }
+  }
   return (
     <>
       <Box bg="blackAlpha.300" p={2} height="56px">
@@ -101,14 +101,29 @@ const Header = () => {
                         name={getInitials(user.first_name, user.last_name)}
                       />
                       <VStack align="start" spacing={0} justifyContent="center">
-                        <Text color="white" fontWeight="medium" lineHeight="16px" fontSize="14px">
+                        <Text
+                          color="white"
+                          fontWeight="medium"
+                          lineHeight="16px"
+                          fontSize="14px"
+                        >
                           {`${user.first_name} ${user.last_name}`}
                         </Text>
-                        <Text color="white" fontWeight="normal" lineHeight="12px" fontSize="10px">
+                        <Text
+                          color="white"
+                          fontWeight="normal"
+                          lineHeight="12px"
+                          fontSize="10px"
+                        >
                           {user.email}
                         </Text>
                       </VStack>
-                      <Icon viewBox="0 0 24 24" boxSize="20px" color="white" cursor="pointer">
+                      <Icon
+                        viewBox="0 0 24 24"
+                        boxSize="20px"
+                        color="white"
+                        cursor="pointer"
+                      >
                         <path fill="currentColor" d="M7 10l5 5 5-5z" />
                       </Icon>
                     </Flex>
@@ -140,7 +155,7 @@ const Header = () => {
                   size="sm"
                   color="white"
                   _hover={{ bg: "transparent", color: "green" }}
-                  onClick={onLoginOpen}
+                  onClick={() => handleModalOpen({ login: true })}
                 >
                   Iniciar Sesión
                 </Button>
@@ -150,7 +165,7 @@ const Header = () => {
                   size="sm"
                   color="white"
                   _hover={{ bg: "transparent", color: "green" }}
-                  onClick={onSingUpOpen}
+                  onClick={() => handleModalOpen({ login: false })}
                 >
                   Registrarse
                 </Button>
@@ -159,8 +174,13 @@ const Header = () => {
           </Box>
         </Flex>
       </Box>
-      <Login isOpen={isLoginOpen} onClose={onLoginClose} />
-      <SingUp isOpen={isSingUpOpen} onClose={onSingUpClose} />
+      <CustomModal isOpen={isOpen} onClose={onClose}>
+        {isLogin ? (
+          <Login onClose={onClose} onSignUpOpen={onToggle} />
+        ) : (
+          <SingUp onClose={onClose} onLoginOpen={onToggle} />
+        )}
+      </CustomModal>
     </>
   );
 };
