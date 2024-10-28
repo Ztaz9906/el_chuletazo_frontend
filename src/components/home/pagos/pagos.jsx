@@ -12,7 +12,13 @@ const InfoPagos = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box 
+              as='span' 
+              flex='1' 
+              textAlign='left' 
+              fontSize="xl" 
+              color="grey"
+              fontWeight="bold">
                 Método de Pago
               </Box>
               <AccordionIcon />
@@ -36,7 +42,7 @@ const InfoPagos = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 Pasos a Seguir
               </Box>
               <AccordionIcon />
@@ -64,7 +70,7 @@ const InfoPagos = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 Seguridad en el Pago
               </Box>
               <AccordionIcon />
@@ -85,7 +91,7 @@ const InfoPagos = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 Confirmación de Pago
               </Box>
               <AccordionIcon />
@@ -106,7 +112,7 @@ const InfoPagos = () => {
         <AccordionItem>
           <h2>
             <AccordionButton>
-              <Box as='span' flex='1' textAlign='left' fontSize="xl" fontWeight="bold">
+              <Box as='span' flex='1' textAlign='left' fontSize="xl" color="grey" fontWeight="bold">
                 Medidas Contra Pago Fraudulento
               </Box>
               <AccordionIcon />

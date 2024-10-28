@@ -13,18 +13,22 @@ const LoginForm = () => {
         label={formConfig.email.label}
         type="email"
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        placeholderColor={"grey"}
+        color={"grey"}
+        backgroundColor={"white"}
         placeholder="Ingrese su correo electrónico"
-        leftIcon={<User color={"#FFFFFF80"} />}
+        leftIcon={<User color={"green"} />}
       />
       <InputField
         name={formConfig.password.name}
         label={formConfig.password.label}
         type={showPassword ? "password" : "text"}
         labelColor={"white"}
-        placeholderColor={"whiteAlpha.500"}
+        placeholderColor={"grey"}
+        color={"grey"}
+        backgroundColor={"white"}
         placeholder="Ingrese su contraseña"
-        leftIcon={<LockIcon color={"#FFFFFF80"} />}
+        leftIcon={<LockIcon color={"green"} />}
         rightIcon={
           showPassword ? (
             <EyeIcon

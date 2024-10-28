@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout.jsx";
 import Login from "@/components/auth/login/Login.jsx";
-import SingUp from "@/components/auth/sing-up/SingUp.jsx";
+import SignUp from "@/components/auth/sing-up/SingUp.jsx";
 import Index from "@/components/home/Productos/index.jsx";
 import LayOutConfiguracion from "@/components/home/configuration/Layout/LayOutConfiguracion";
 import ListaDestinatarios from "@/components/home/configuration/destinatarios/Table/ListaDestinatarios";
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
   },
   {
     path: "sign-up",
-    element: <SingUp />,
+    element: <SignUp />,
   },
 ]);
 
