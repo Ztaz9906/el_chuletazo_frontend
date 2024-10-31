@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Checkbox,
+  Divider,
   Flex,
   HStack,
   Input,
@@ -12,7 +13,6 @@ import {
   Spinner,
   Text,
   VStack,
-  Divider,
 } from "@chakra-ui/react";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -63,9 +63,10 @@ export default function Index() {
 
   const filteredProducts = data
     ? data.filter((producto) => {
-        const nameMatch = producto.name
-          ? producto.name.toLowerCase().includes(searchTerm.toLowerCase())
-          : false;
+        const nameMatch =
+          !searchTerm | producto.name
+            ? producto.name.toLowerCase().includes(searchTerm.toLowerCase())
+            : false;
         const descriptionMatch = producto.description
           ? producto.description
               .toLowerCase()
@@ -160,7 +161,7 @@ export default function Index() {
           <InputGroup maxW="400px">
             <InputLeftElement
               pointerEvents="none"
-              children={<Search size={18} color="#666666" />} 
+              children={<Search size={18} color="#666666" />}
             />
             <Input
               placeholder="Buscar"
@@ -170,20 +171,20 @@ export default function Index() {
               borderColor="gray.200"
               _hover={{
                 borderColor: "green.300",
-                bg: "#E4FFD9"
+                bg: "#E4FFD9",
               }}
               _focus={{
                 borderColor: "green.400",
                 boxShadow: "0 0 0 1px #48BB78",
-                bg: "#EEFFE8"
+                bg: "#EEFFE8",
               }}
               _placeholder={{
-                color: "gray.500"
+                color: "gray.500",
               }}
             />
           </InputGroup>
         </HStack>
-        
+
         <Divider mb={4} borderColor="gray.300" />
       </VStack>
       <Flex flex={1} overflow="hidden">
@@ -197,12 +198,7 @@ export default function Index() {
         >
           <VStack align="start" spacing={6}>
             <Box width="100%">
-              <Text
-                fontSize="lg"
-                fontWeight="bold"
-                color="green.600"
-                mb={3}
-              >
+              <Text fontSize="lg" fontWeight="bold" color="green.600" mb={3}>
                 {sidebarOptions.categories.title}
               </Text>
               <VStack align="start" spacing={2}>
@@ -223,12 +219,7 @@ export default function Index() {
             <Divider borderColor="gray.300" />
 
             <Box width="100%">
-              <Text
-                fontSize="lg"
-                fontWeight="bold"
-                color="green.600"
-                mb={3}
-              >
+              <Text fontSize="lg" fontWeight="bold" color="green.600" mb={3}>
                 {sidebarOptions.prices.title}
               </Text>
               <VStack align="start" spacing={2}>
