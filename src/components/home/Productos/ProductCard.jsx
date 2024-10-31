@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const ProductCard = ({ producto }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [showAnimation, setShowAnimation] = useState(false);
   const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ const ProductCard = ({ producto }) => {
     console.log("Product added to cart:", productCard);
     if (quantity === 0) return;
     dispatch(addProduct(productCard));
-    setQuantity(0);
+    setQuantity(1);
   };
 
   return (
