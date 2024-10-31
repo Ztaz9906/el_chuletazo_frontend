@@ -3,6 +3,7 @@ import { useGetProductoQuery } from "@/servicios/redux/api/productos/get/get.js"
 import {
   Box,
   Button,
+  Divider,
   Flex,
   HStack,
   Input,
@@ -11,7 +12,6 @@ import {
   Spinner,
   Text,
   VStack,
-  Divider,
 } from "@chakra-ui/react";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -163,7 +163,7 @@ export default function Index() {
           <InputGroup maxW="400px">
             <InputLeftElement
               pointerEvents="none"
-              children={<Search size={18} color="#666666" />} 
+              children={<Search size={18} color="#666666" />}
             />
             <Input
               placeholder="Buscar"
@@ -173,20 +173,20 @@ export default function Index() {
               borderColor="gray.200"
               _hover={{
                 borderColor: "green.300",
-                bg: "#E4FFD9"
+                bg: "#E4FFD9",
               }}
               _focus={{
                 borderColor: "green.400",
                 boxShadow: "0 0 0 1px #48BB78",
-                bg: "#EEFFE8"
+                bg: "#EEFFE8",
               }}
               _placeholder={{
-                color: "gray.500"
+                color: "gray.500",
               }}
             />
           </InputGroup>
         </HStack>
-        
+
         <Divider mb={4} borderColor="gray.300" />
       </VStack>
       <Flex flex={1} overflow="hidden">
@@ -200,7 +200,7 @@ export default function Index() {
         >
 
         <SideBar setSearchTerm={setFilter}/>
-
+        
         </Box>
         <Box flex={1} overflowY="auto">
           <Flex flexDirection="column">
