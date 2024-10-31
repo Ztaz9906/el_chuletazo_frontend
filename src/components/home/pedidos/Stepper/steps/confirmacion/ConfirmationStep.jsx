@@ -92,7 +92,7 @@ export default function ConfirmationStep() {
       <Text fontSize="xl" mb={4}>
         Productos
       </Text>
-      <ProductsList />
+      <ProductsList hasTitle={false} />
       </Box>
     </Flex>
   );

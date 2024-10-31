@@ -11,23 +11,33 @@ import {
   NumberInputStepper,
   Text,
   Tooltip,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 const ProductCard = ({ producto }) => {
   const [quantity, setQuantity] = useState(1);
   const [showAnimation, setShowAnimation] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const toast = useToast();
 
   useEffect(() => {
     setShowAnimation(true);
   }, []);
 
   const handleAddToCart = async () => {
+    if(!user){
+      toast({
+        title: "Debe Iniciar Sesión para realizar la compra",
+        status: "error",
+      })
+    }
     const productCard = {
       ...producto,
       quantity: quantity,

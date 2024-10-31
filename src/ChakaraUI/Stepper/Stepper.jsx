@@ -66,6 +66,7 @@ function MultiStepperForm({
   return (
     <Flex direction={isMobile ? "row" : "column"} gap={6}>
       <Stepper
+        colorScheme="main"
         index={stepper.activeStep}
         orientation={isMobile ? "vertical" : "horizontal"}
         height={isMobile ? "auto" : "100px"}

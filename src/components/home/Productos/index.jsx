@@ -3,7 +3,6 @@ import { useGetProductoQuery } from "@/servicios/redux/api/productos/get/get.js"
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
   HStack,
   Input,
@@ -16,30 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
-
-const sidebarOptions = {
-  categories: {
-    title: "Categorías",
-    options: [
-      "Todos los productos",
-      "Carne de Cerdo",
-      "Cerdo Ahumado",
-      "Embutidos",
-      "Bebidas",
-      "Los más vendidos",
-    ],
-  },
-  prices: {
-    title: "Precios",
-    options: [
-      "Menos de $10",
-      "$10 - $30",
-      "$30 - $50",
-      "$50 - $100",
-      "Más de $100",
-    ],
-  },
-};
+import SideBar from "./sideBar";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -47,8 +23,42 @@ export default function Index() {
   const { isLoading, data, error } = useGetProductoQuery();
   const [showAnimation, setShowAnimation] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedOption, setSelectedOption] = useState("Todos los productos");
   const [currentPage, setCurrentPage] = useState(1);
+  const [filter, setFilter] = useState(null);
+
+  function CustomFilter(producto) {
+    // Si no hay filtro, devolver true
+    console.log(filter)
+
+    if (!filter) return true;
+    
+    // Búsqueda por término
+    const contentMatch = !searchTerm ? true : (() => {
+        // Limpia y divide los términos de búsqueda
+        const searchTerms = searchTerm.toLowerCase().trim().split(/\s+/);
+        
+        // Obtiene el contenido combinado para buscar
+        const productContent = [
+            producto.name || '',
+            producto.description || ''
+        ].join(' ').toLowerCase();
+        
+        // Verifica que todos los términos estén presentes
+        return searchTerms.every(term => productContent.includes(term));
+    })();
+    console.log(contentMatch)
+
+    // Filtrado por precio
+    const priceAmount = producto.default_price?.unit_amount || 0;
+    const priceMatch = !filter.prices ? true : (
+        priceAmount >= (filter.prices.min || 0) && 
+        (filter.prices.max === null || priceAmount <= filter.prices.max)
+    );
+    console.log(priceMatch, priceAmount)
+
+
+    return contentMatch && priceMatch;
+}
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -63,15 +73,8 @@ export default function Index() {
 
   const filteredProducts = data
     ? data.filter((producto) => {
-        const nameMatch = producto.name
-          ? producto.name.toLowerCase().includes(searchTerm.toLowerCase())
-          : false;
-        const descriptionMatch = producto.description
-          ? producto.description
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase())
-          : false;
-        return nameMatch || descriptionMatch;
+      
+        return CustomFilter(producto);
       })
     : [];
 
@@ -195,57 +198,9 @@ export default function Index() {
           p={4}
           overflowY="auto"
         >
-          <VStack align="start" spacing={6}>
-            <Box width="100%">
-              <Text
-                fontSize="lg"
-                fontWeight="bold"
-                color="green.600"
-                mb={3}
-              >
-                {sidebarOptions.categories.title}
-              </Text>
-              <VStack align="start" spacing={2}>
-                {sidebarOptions.categories.options.map((option) => (
-                  <Checkbox
-                    key={option}
-                    isChecked={selectedOption === option}
-                    onChange={() => setSelectedOption(option)}
-                    colorScheme="green"
-                    color="#5D5D5D"
-                  >
-                    {option}
-                  </Checkbox>
-                ))}
-              </VStack>
-            </Box>
 
-            <Divider borderColor="gray.300" />
+        <SideBar setSearchTerm={setFilter}/>
 
-            <Box width="100%">
-              <Text
-                fontSize="lg"
-                fontWeight="bold"
-                color="green.600"
-                mb={3}
-              >
-                {sidebarOptions.prices.title}
-              </Text>
-              <VStack align="start" spacing={2}>
-                {sidebarOptions.prices.options.map((option) => (
-                  <Checkbox
-                    key={option}
-                    isChecked={selectedOption === option}
-                    onChange={() => setSelectedOption(option)}
-                    colorScheme="green"
-                    color="#5D5D5D"
-                  >
-                    {option}
-                  </Checkbox>
-                ))}
-              </VStack>
-            </Box>
-          </VStack>
         </Box>
         <Box flex={1} overflowY="auto">
           <Flex flexDirection="column">
