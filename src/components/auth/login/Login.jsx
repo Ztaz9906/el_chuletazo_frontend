@@ -35,7 +35,7 @@ const Login = ({ onClose, toggleAuthMode }) => {
         isClosable: true,
       });
       onClose();
-      navigate("/productos");
+      navigate("/");
     } catch (error) {
       toast({
         title: "Error de inicio de sesión",

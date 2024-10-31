@@ -46,7 +46,7 @@ const SignUp = ({ onClose, toggleAuthMode }) => {
         isClosable: true,
       });
       onClose();
-      navigate("/productos");
+      navigate("/");
     } catch (error) {
       if (error.data) {
         // Handle specific field errors
