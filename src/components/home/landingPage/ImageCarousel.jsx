@@ -24,34 +24,32 @@ const ImageCarousel = () => {
 
   const slideVariants = {
     enter: (direction) => ({
-      scale: 0.7,
-      y: direction > 0 ? 100 : -100,
       opacity: 0,
-      rotateY: direction > 0 ? 45 : -45,
+      rotateY: direction > 0 ? 90 : -90,
+      scale: 0.8,
       transition: {
         duration: 0.8
       }
     }),
     center: {
       zIndex: 1,
-      scale: 1,
-      y: 0,
       opacity: 1,
       rotateY: 0,
+      scale: 1,
       transition: {
         duration: 0.8
       }
     },
     exit: (direction) => ({
-      scale: 0.7,
-      y: direction < 0 ? 100 : -100,
       opacity: 0,
-      rotateY: direction < 0 ? 45 : -45,
+      rotateY: direction < 0 ? 90 : -90,
+      scale: 0.8,
       transition: {
         duration: 0.8
       }
     })
   };
+  
 
   const swipeConfidenceThreshold = 10000;
   const swipePower = (offset, velocity) => {
@@ -77,33 +75,36 @@ const ImageCarousel = () => {
     >
       <AnimatePresence initial={false} custom={1}>
         <motion.img
-          key={currentIndex}
-          src={images[currentIndex]}
-          custom={1}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          style={{
+            key={currentIndex}
+            src={images[currentIndex]}
+            custom={1}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            style={{
             position: "absolute",
             width: "100%",
             height: "100%",
             objectFit: "contain",
             borderRadius: "15px",
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
+            perspective: "1000px"
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
             const swipe = swipePower(offset.x, velocity.x);
             if (swipe < -swipeConfidenceThreshold) {
-              paginate(1);
+                paginate(1);
             } else if (swipe > swipeConfidenceThreshold) {
-              paginate(-1);
+                paginate(-1);
             }
-          }}
+            }}
         />
-      </AnimatePresence>
+        </AnimatePresence>
+
+
     </Box>
   );
 };
