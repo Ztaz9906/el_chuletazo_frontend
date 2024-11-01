@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Box } from '@chakra-ui/react';
 
-const ImageCarousel = () => {
+const CubeCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const images = [
-    '/landingpage1.png',
-    '/landingpage2.png',
-    '/landingpage3.png',
-    '/landingpage4.png'
+    '/landingpage/landingpage1.png',
+    '/landingpage/landingpage2.png',
+    '/landingpage/landingpage3.png',
+    '/landingpage/landingpage4.png',
   ];
 
   useEffect(() => {
@@ -17,96 +15,71 @@ const ImageCarousel = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 2300);
-
+    }, 3000); 
     return () => clearInterval(timer);
   }, []);
 
-  const slideVariants = {
-    enter: (direction) => ({
-      opacity: 0,
-      rotateY: direction > 0 ? 90 : -90,
-      scale: 0.8,
-      transition: {
-        duration: 0.8
-      }
-    }),
-    center: {
-      zIndex: 1,
-      opacity: 1,
-      rotateY: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8
-      }
-    },
-    exit: (direction) => ({
-      opacity: 0,
-      rotateY: direction < 0 ? 90 : -90,
-      scale: 0.8,
-      transition: {
-        duration: 0.8
-      }
-    })
-  };
-  
-
-  const swipeConfidenceThreshold = 10000;
-  const swipePower = (offset, velocity) => {
-    return Math.abs(offset) * velocity;
-  };
-
-  const paginate = (newDirection) => {
-    setCurrentIndex((prevIndex) => {
-      const nextIndex = prevIndex + newDirection;
-      if (nextIndex < 0) return images.length - 1;
-      if (nextIndex >= images.length) return 0;
-      return nextIndex;
-    });
-  };
-
   return (
-    <Box 
-      position="relative" 
-      height="500px" 
-      width="400px" 
-      margin="0 auto"
-      perspective="1000px"
+    <Box
+      position="relative"
+      height="450px" 
+      width="360px"  
+      margin="3rem auto" 
+      sx={{
+        perspective: "1000px",
+        transformStyle: "preserve-3d"
+      }}
     >
-      <AnimatePresence initial={false} custom={1}>
-        <motion.img
-            key={currentIndex}
-            src={images[currentIndex]}
-            custom={1}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
+      <Box
+        position="relative"
+        width="100%"
+        height="100%"
+        sx={{
+          transformStyle: "preserve-3d",
+          transform: "translateZ(-225px)", 
+          transition: "transform 1.0s" 
+        }}
+        style={{
+          transform: `translateZ(-225px) rotateY(${currentIndex * -90}deg)`
+        }}
+      >
+        {images.map((img, index) => (
+          <Box
+            key={index}
+            mt="10%"
+            position="absolute"
+            width="360px" 
+            height="450px" 
+            sx={{
+              backfaceVisibility: "hidden",
+              transformStyle: "preserve-3d",
+              transition: "all 0.5s", 
+            }}
             style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            objectFit: "contain",
-            borderRadius: "15px",
-            perspective: "1000px"
+              transform: `rotateY(${index * 90}deg) translateZ(225px) scale(${
+                currentIndex === index ? 1.05 : 0.95
+              })`, 
+              opacity: currentIndex === index ? 1 : 0.8
             }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
-            if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-            } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-            }
-            }}
-        />
-        </AnimatePresence>
-
-
+          >
+            <Box
+              as="img"
+              src={img}
+              width="100%"
+              height="100%"
+              objectFit="cover"
+              borderRadius="15px"
+              sx={{
+                backfaceVisibility: "hidden",
+                boxShadow: "0 0 20px rgba(0,0,0,0.4)",
+                transition: "transform 0.5s", 
+              }}
+            />
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
 
-export default ImageCarousel;
+export default CubeCarousel;
