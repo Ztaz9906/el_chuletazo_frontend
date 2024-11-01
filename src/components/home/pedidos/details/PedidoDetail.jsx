@@ -9,9 +9,10 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { ArrowLeftFromLine } from "lucide-react";
+import { CircleChevronLeft } from "lucide-react";
 import { useSelector } from "react-redux";
 import PedidoProductList from "./PedidoProductList";
+import CanceledBanner from "./CanceledBanner";
 
 const LabelValue = ({ label, value }) => (
   <Box mb={2}>
@@ -29,71 +30,80 @@ export default function PedidoDetails({ data, isLoading }) {
   }
 
   return (
-    <Flex flexDirection="column" w="100%" gap={4} mt={2}>
-      <HStack spacing={4} justify={"space-between"}>
-        <Text fontSize="2xl" mb={4} color="main.600">
-          Detalles del Pedido
-        </Text>
-        <HStack
-          spacing={2}
-          justify={"space-between"}
-          as={Link}
-          href="/pedidos"
-          transition="transform 0.2s"
-          _hover={{
-            textDecoration: "none",
-            transform: "translateX(-5px)",
-            borderBottom: "1px solid #b44204",
-          }}
-        >
-          <Box as={ArrowLeftFromLine} size={16} color="#b44204" />
-          <Text color="cart.600" mr={"4px"}>
-            Atras
+    <Flex 
+      direction="column" 
+      p={4} 
+      bg="rgba(255, 255, 255, 0.6)" 
+      boxShadow="lg"
+    >
+      <Flex flexDirection="column" w="100%" mt={2}>
+        <HStack spacing={4} justify={"space-between"}>
+          <Text fontSize="2xl" mb={4} color="main.600">
+            <strong>Detalles del Pedido</strong>
           </Text>
-        </HStack>
-      </HStack>
-      <Box
-        display={"flex"}
-        flexDirection={"column"}
-        height={"calc(100vh - 150px)"}
-        overflowY={"auto"}
-        gap={4}
-        mt={2}
-        p={1}
-      >
-        {isLoading ? (
-          <Flex justifyContent="center" alignItems="center" gap={2}>
-            <Spinner boxSize={"32px"} />
-            <Text color={"gray.500"} fontWeight={"medium"} fontSize={"20px"}>
-              Cargando
+          <HStack
+            spacing={2}
+            justify={"space-between"}
+            as={Link}
+            href="/pedidos"
+            transition="transform 0.2s"
+            _hover={{
+              textDecoration: "none",
+              transform: "translateX(-5px)",
+              fontWeight: "bold",
+            }}
+          >
+            <Box as={CircleChevronLeft} size={20} color="main.600" />
+            <Text color="main.600" mr={"4px"}>
+              Atrás
             </Text>
-          </Flex>
-        ) : (
-          <>
-            {/* Estado del Pedido */}
-            <Box
-              borderWidth={1}
-              borderRadius="lg"
-              w="full"
-              p={4}
-              bg="white"
-              shadow="sm"
-            >
-              <Text fontSize="xl" mb={4}>
-                Estado del Pedido
+          </HStack>
+        </HStack>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          height={"calc(100vh - 180px)"} // Ajustado para compensar el nuevo espaciado
+          overflowY={"auto"}
+          gap={4}
+          mt={2}
+          p={1}
+        >
+          {isLoading ? (
+            <Flex justifyContent="center" alignItems="center" gap={2}>
+              <Spinner boxSize={"32px"} />
+              <Text color={"gray.500"} fontWeight={"medium"} fontSize={"20px"}>
+                Cargando
               </Text>
-              <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-                <LabelValue label="Estado" value={data.estado.toUpperCase()} />
-                <LabelValue
-                  label="Fecha de Creación"
-                  value={new Date(data.created_at).toLocaleDateString()}
-                />
-                <LabelValue
-                  label="Última Actualización"
-                  value={new Date(data.updated_at).toLocaleDateString()}
-                />
-              </Grid>
-            </Box>
+            </Flex>
+          ) : (
+            <>
+              {/* Estado del Pedido */}
+              <Box
+                borderWidth={1}
+                borderRadius="lg"
+                w="full"
+                p={4}
+                bg="white"
+                shadow="sm"
+                position="relative"
+              >
+                {data.estado.toUpperCase() === 'CANCELADO' && <CanceledBanner/>}
+              
+                <Text fontSize="xl" mb={4}>
+                  Estado del Pedido
+                </Text>
+                <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+                  <LabelValue label="Estado" value={data.estado.toUpperCase()} />
+                  <LabelValue
+                    label="Fecha de Creación"
+                    value={new Date(data.created_at).toLocaleDateString()}
+                  />
+                  <LabelValue
+                    label="Última Actualización"
+                    value={new Date(data.updated_at).toLocaleDateString()}
+                  />
+                </Grid>
+              </Box>
             {/* Remitente */}
             <Box
               borderWidth={1}
@@ -179,7 +189,7 @@ export default function PedidoDetails({ data, isLoading }) {
               borderRadius="lg"
               w="full"
               p={4}
-              bg="whiteAlpha.400"
+              bg="white"
               shadow="sm"
             >
               <PedidoProductList
@@ -190,6 +200,7 @@ export default function PedidoDetails({ data, isLoading }) {
           </>
         )}
       </Box>
+    </Flex>
     </Flex>
   );
 }
