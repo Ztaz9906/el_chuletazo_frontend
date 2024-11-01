@@ -90,10 +90,10 @@ const DatosPersonales = () => {
                 </Text>
                 <Tooltip
                   label={
-                    editing ? "Guardar cambios" : "Editar datos del remitente"
+                    editing ? "Guardar cambios" : "Editar datos personales"
                   }
                   hasArrow
-                  bg="gray.600"
+                  bg="cart.500"
                 >
                   {editing ? (
                     <HStack>
