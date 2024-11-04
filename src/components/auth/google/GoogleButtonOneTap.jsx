@@ -1,8 +1,8 @@
 import { GoogleLogin } from "@react-oauth/google";
 
-import { useNavigate } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
 import { useGoogleLoginMutation } from "@/servicios/redux/api/auth/login/login.js";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export default function GoogleButtonOneTap({ useOneTap }) {
   const [googleLoginMutation] = useGoogleLoginMutation();
@@ -19,7 +19,7 @@ export default function GoogleButtonOneTap({ useOneTap }) {
         duration: 3000,
         isClosable: true,
       });
-      navigate("/productos");
+      navigate("/");
     } catch (error) {
       console.error("Error during google login:", error);
       toast({

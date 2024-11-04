@@ -17,6 +17,7 @@ import { PasswordStrengthChecker } from "./PasswordStrengthCheker";
 import { formConfig } from "./schema/formConfig";
 import { initialValues } from "./schema/initialValues";
 import { validationSchema } from "./schema/validations";
+import Sidebar from "../SideBar/Sidebar";
 
 const LabelValue = ({ label, value }) => (
   <Box>
@@ -68,6 +69,7 @@ const ChangePassword = () => {
         {({ values, isSubmitting, isValid, submitForm }) => {
           return (
             <>
+              
               <Box>
                 <HStack justify="space-between" w="full" mt={2}>
                   <Text fontSize="2xl" fontWeight="medium" color="main.600">
@@ -75,7 +77,7 @@ const ChangePassword = () => {
                   </Text>
                 </HStack>
                 <Divider mb={6} borderColor="gray.300" />
-                <Box w="full" p={4} borderWidth={1} borderRadius="lg">
+                <Box w="full" p={4} borderWidth={1} borderRadius="lg" bg="white">
                   <Form>
                     <Grid
                       templateColumns="repeat(1, 1fr)"

@@ -4,7 +4,7 @@ import Product from "@/components/home/pedidos/Stepper/steps/productos/Product.j
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
 
-export default function ProductsList({}) {
+export default function ProductsList({hasTitle = true}) {
   const { setFieldValue, errors, validateField, values } = useFormikContext();
   const productos = useSelector((state) => state.cart.products);
   const total = productos.reduce((sum, product) => {
@@ -25,9 +25,11 @@ export default function ProductsList({}) {
   return (
     <Flex direction="column" h="100%" overflow="hidden">
       <HStack justify="space-between" w="full" mt={2}>
-        <Text fontSize="2xl" fontWeight="medium" color="main.600">
+        {hasTitle && 
+        (<Text fontSize="2xl" fontWeight="medium" color="main.600">
           Productos
-        </Text>
+        </Text>)}
+        
         <Text fontSize="xl" fontWeight="bold" color="black">
           Total a Pagar: {total.toFixed(2)} US$
         </Text>

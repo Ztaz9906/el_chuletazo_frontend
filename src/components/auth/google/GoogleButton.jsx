@@ -1,9 +1,8 @@
-import React from "react";
-import { useGoogleLogin } from "@react-oauth/google";
-import { useNavigate } from "react-router-dom";
-import { Button, Spinner, useToast } from "@chakra-ui/react";
 import { useGoogleLoginMutation } from "@/servicios/redux/api/auth/login/login.js";
+import { Button, Spinner, useToast } from "@chakra-ui/react";
+import { useGoogleLogin } from "@react-oauth/google";
 import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
 export default function GoogleButton() {
   const [googleLoginMutation, { isLoading }] = useGoogleLoginMutation();
@@ -21,7 +20,7 @@ export default function GoogleButton() {
           duration: 3000,
           isClosable: true,
         });
-        navigate("/productos");
+        navigate("/");
       } catch (error) {
         console.error("Error during Google login:", error);
         toast({

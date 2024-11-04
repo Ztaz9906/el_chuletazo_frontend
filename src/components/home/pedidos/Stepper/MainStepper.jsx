@@ -10,6 +10,7 @@ import { clearCart } from "@/servicios/redux/slices/productSliece.js";
 import { Box, Button, Center, Flex, Heading, Stack } from "@chakra-ui/react";
 import { Check } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const getActiveStep = (activeStep) => {
   switch (activeStep) {
@@ -52,7 +53,8 @@ const getActiveStep = (activeStep) => {
 
 export default function MainStepper() {
   const user = useSelector((state) => state.user);
-  const [postPedido] = usePostPedidoMutation();
+  const [postPedido, { isLoading }] = usePostPedidoMutation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const steps = [
     {
@@ -72,7 +74,7 @@ export default function MainStepper() {
         const pedido = {
           destinatario_id: values.destinatario_id,
           customer_id: user.customer_id,
-          total: values.total,
+          total: values.total.toFixed(2),
           productos: values.productos,
           success_url: `${window.location.origin}/pedidos`,
           cancel_url: `${window.location.origin}/pedidos`,
@@ -133,7 +135,7 @@ export default function MainStepper() {
             <Button
               onClick={() => {
                 if (stepper.activeStep === 0) {
-                  // Cancelar
+                  navigate("/productos");
                 } else {
                   stepper.goToPrevious();
                 }
@@ -153,6 +155,7 @@ export default function MainStepper() {
               borderRadius="5px"
               textTransform="uppercase"
               fontSize="sm"
+              isLoading={formikProps.isSubmitting || isLoading}
             >
               {steps.length !== stepper.activeStep
                 ? "siguiente"
