@@ -1,15 +1,17 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
   const user = useSelector((state) => state.user);
-  
+
   const menuItems = [
     { label: "Datos Personales", href: "/configuracion/datos-personales" },
-    { label: "Cambio de Contraseña", href: "/configuracion/cambiar-contraseña" },
+    {
+      label: "Cambio de Contraseña",
+      href: "/configuracion/cambiar-contrasenna",
+    },
     { label: "Mis Destinatarios", href: "/configuracion/destinatarios" },
   ];
 
@@ -19,40 +21,43 @@ const Sidebar = () => {
     <div className="w-[300px] bg-white rounded-xl shadow-lg p-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-green-100 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-green-100 rounded-full blur-3xl opacity-20 -ml-16 -mb-16"></div>
-      
+
       <div className="flex flex-col items-center relative z-10">
         <h2 className="text-2xl font-semibold mb-6 text-green-600">
           Configuración
         </h2>
-        
+
         <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-400 rounded-lg shadow-lg flex items-center justify-center mb-4 transform transition-transform hover:scale-105">
           <FaUser className="text-white text-2xl" />
         </div>
-        
+
         <h3 className="text-xl font-medium mb-8 text-gray-700 text-center px-2">
           {userName}
         </h3>
-        
+
         <div className="w-full space-y-3">
           {menuItems.map((item, index) => {
             const isActive = location.pathname === item.href;
-            
+            console.log(location.pathname, item.href, isActive);
             return (
               <Link
                 key={index}
                 to={item.href}
                 className={`
                   block relative group transition-all duration-300
-                  ${isActive ? 'text-white' : 'text-gray-600 hover:text-gray-800'}
+                  ${isActive ? "text-white" : "text-gray-600 hover:text-gray-800"}
                 `}
               >
-                <div className={`
+                <div
+                  className={`
                   relative w-full py-3 px-4 rounded-l-lg transition-all duration-100
-                  ${isActive 
-                    ? 'bg-green-500 shadow-lg' 
-                    : 'hover:bg-green-50 hover:shadow-md'
+                  ${
+                    isActive
+                      ? "bg-green-500 shadow-lg"
+                      : "hover:bg-green-50 hover:shadow-md"
                   }
-                `}>
+                `}
+                >
                   {isActive && (
                     <div className="absolute right-0 top-0 h-full w-4">
                       <div className="absolute right-0 top-0 h-full w-6 bg-green-500 transform translate-x-6">
@@ -60,15 +65,18 @@ const Sidebar = () => {
                       </div>
                     </div>
                   )}
-                  
+
                   <div className="flex items-center">
-                    <span className={`
+                    <span
+                      className={`
                       font-medium transition-all duration-100
-                      ${isActive 
-                        ? 'transform translate-x-6' 
-                        : 'group-hover:translate-x-4'
+                      ${
+                        isActive
+                          ? "transform translate-x-6"
+                          : "group-hover:translate-x-4"
                       }
-                    `}>
+                    `}
+                    >
                       {item.label}
                     </span>
                   </div>
