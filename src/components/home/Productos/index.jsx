@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import SideBar from "./sideBar";
+import SideBar from "./SideBar";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -28,37 +28,40 @@ export default function Index() {
 
   function CustomFilter(producto) {
     // Si no hay filtro, devolver true
-    console.log(filter)
+    console.log(filter);
 
     if (!filter) return true;
-    
+
     // Búsqueda por término
-    const contentMatch = !searchTerm ? true : (() => {
-        // Limpia y divide los términos de búsqueda
-        const searchTerms = searchTerm.toLowerCase().trim().split(/\s+/);
-        
-        // Obtiene el contenido combinado para buscar
-        const productContent = [
-            producto.name || '',
-            producto.description || ''
-        ].join(' ').toLowerCase();
-        
-        // Verifica que todos los términos estén presentes
-        return searchTerms.every(term => productContent.includes(term));
-    })();
-    console.log(contentMatch)
+    const contentMatch = !searchTerm
+      ? true
+      : (() => {
+          // Limpia y divide los términos de búsqueda
+          const searchTerms = searchTerm.toLowerCase().trim().split(/\s+/);
+
+          // Obtiene el contenido combinado para buscar
+          const productContent = [
+            producto.name || "",
+            producto.description || "",
+          ]
+            .join(" ")
+            .toLowerCase();
+
+          // Verifica que todos los términos estén presentes
+          return searchTerms.every((term) => productContent.includes(term));
+        })();
+    console.log(contentMatch);
 
     // Filtrado por precio
     const priceAmount = producto.default_price?.unit_amount || 0;
-    const priceMatch = !filter.prices ? true : (
-        priceAmount >= (filter.prices.min || 0) && 
-        (filter.prices.max === null || priceAmount <= filter.prices.max)
-    );
-    console.log(priceMatch, priceAmount)
+    const priceMatch = !filter.prices
+      ? true
+      : priceAmount >= (filter.prices.min || 0) &&
+        (filter.prices.max === null || priceAmount <= filter.prices.max);
+    console.log(priceMatch, priceAmount);
 
-
-    return contentMatch && priceMatch;
-}
+    return contentMatch && priceMatch;
+  }
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -73,7 +76,6 @@ export default function Index() {
 
   const filteredProducts = data
     ? data.filter((producto) => {
-      
         return CustomFilter(producto);
       })
     : [];
@@ -198,9 +200,7 @@ export default function Index() {
           p={4}
           overflowY="auto"
         >
-
-        <SideBar setSearchTerm={setFilter}/>
-        
+          <SideBar setSearchTerm={setFilter} />
         </Box>
         <Box flex={1} overflowY="auto">
           <Flex flexDirection="column">
