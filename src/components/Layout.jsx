@@ -20,8 +20,8 @@ const Layout = () => {
         backgroundImage="url('/fondo_2.png')"
         backgroundSize="cover"
         backgroundPosition="center"
-        py={8}
-        px={14}
+        py={{ base: 2, md: 8 }}
+        px={{ base: 1, md: 14 }}
       >
         <Outlet />
       </Box>

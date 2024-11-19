@@ -11,10 +11,12 @@ import {
   InputLeftElement,
   Spinner,
   Text,
+  useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
-import { ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Filter, Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import CustomDrawer from "../../../ChakaraUI/Drawer/CustomDrawer";
 import SideBar from "./SideBar";
 
 const ITEMS_PER_PAGE = 10;
@@ -25,7 +27,7 @@ export default function Index() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState(null);
-
+  const isMobile = useBreakpointValue({ base: true, md: false });
   function CustomFilter(producto) {
     // Si no hay filtro, devolver true
     console.log(filter);
@@ -95,7 +97,6 @@ export default function Index() {
   const getPageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 4;
-
     if (totalPages <= maxVisiblePages) {
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
@@ -153,55 +154,70 @@ export default function Index() {
       ml={2}
     >
       <VStack spacing={4} align="stretch" mb={4}>
-        <HStack w="full" justify="space-between">
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          w="full"
+          justify="space-between"
+        >
           <Text
             fontSize="4xl"
             fontWeight="bold"
             color="green.500"
-            textAlign="center"
+            textAlign="left"
           >
             Productos
           </Text>
-          <InputGroup maxW="400px">
-            <InputLeftElement
-              pointerEvents="none"
-              children={<Search size={18} color="#666666" />}
-            />
-            <Input
-              placeholder="Buscar"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              bg="#EEFFE8"
-              borderColor="gray.200"
-              _hover={{
-                borderColor: "green.300",
-                bg: "#E4FFD9",
-              }}
-              _focus={{
-                borderColor: "green.400",
-                boxShadow: "0 0 0 1px #48BB78",
-                bg: "#EEFFE8",
-              }}
-              _placeholder={{
-                color: "gray.500",
-              }}
-            />
-          </InputGroup>
-        </HStack>
+          <HStack w={"full"} justifyContent={"flex-end"}>
+            <InputGroup maxW={{ base: "auto", md: "400px" }}>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<Search size={18} color="#666666" />}
+              />
+              <Input
+                placeholder="Buscar"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                bg="#EEFFE8"
+                borderColor="gray.200"
+                _hover={{
+                  borderColor: "green.300",
+                  bg: "#E4FFD9",
+                }}
+                _focus={{
+                  borderColor: "green.400",
+                  boxShadow: "0 0 0 1px #48BB78",
+                  bg: "#EEFFE8",
+                }}
+                _placeholder={{
+                  color: "gray.500",
+                }}
+              />
+            </InputGroup>
+            {isMobile && (
+              <CustomDrawer
+                trigger={<Filter size={24} color="#666666" strokeWidth={1.5} />}
+                title={"Filtros"}
+                menu={<SideBar setSearchTerm={setFilter} />}
+              />
+            )}
+          </HStack>
+        </Flex>
 
         <Divider mb={4} borderColor="gray.300" />
       </VStack>
       <Flex flex={1} overflow="hidden">
-        <Box
-          width="200px"
-          mr={8}
-          bg="#EEFFE8"
-          boxShadow="#00000040"
-          p={4}
-          overflowY="auto"
-        >
-          <SideBar setSearchTerm={setFilter} />
-        </Box>
+        {!isMobile && (
+          <Box
+            width="200px"
+            mr={8}
+            bg="#EEFFE8"
+            boxShadow="#00000040"
+            p={4}
+            overflowY="auto"
+          >
+            <SideBar setSearchTerm={setFilter} />
+          </Box>
+        )}
         <Box flex={1} overflowY="auto">
           <Flex flexDirection="column">
             <Flex flexWrap="wrap" justifyContent="center" gap={4}>

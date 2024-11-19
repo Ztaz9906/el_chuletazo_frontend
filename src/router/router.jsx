@@ -5,6 +5,7 @@ import Index from "@/components/home/Productos/index.jsx";
 import LayOutConfiguracion from "@/components/home/configuration/Layout/LayOutConfiguracion";
 import ListaDestinatarios from "@/components/home/configuration/destinatarios/Table/ListaDestinatarios";
 import InfoEnvios from "@/components/home/envíos/envios";
+import LandingPage from "@/components/home/landingPage/LandingPage";
 import InfoPagos from "@/components/home/pagos/pagos.jsx";
 import MainStepper from "@/components/home/pedidos/Stepper/MainStepper.jsx";
 import LayoutPedidos from "@/components/home/pedidos/layout/layoutPedidos.jsx";
@@ -15,17 +16,16 @@ import Activate from "../components/auth/activate/Activate";
 import ChangePassword from "../components/home/configuration/change_password/ChangePassword";
 import DatosPersonales from "../components/home/configuration/datos_personales/DatosPersonales";
 import Details from "../components/home/pedidos/details/Details";
-import LandingPage from "@/components/home/landingPage/LandingPage";
 
 const router = createBrowserRouter([
   {
     path: "",
-    children:[
+    children: [
       {
         path: "",
         element: <LandingPage />,
-      }
-    ]
+      },
+    ],
   },
   {
     path: "/",
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
         element: <ListaDestinatarios />,
       },
       {
-        path: "cambiar-contraseña",
+        path: "cambiar-contrasenna",
         element: <ChangePassword />,
       },
       {

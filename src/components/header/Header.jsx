@@ -11,6 +11,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Portal,
   Text,
   useDisclosure,
   useToast,
@@ -81,7 +82,7 @@ const Header = () => {
     <>
       <Box bg="blackAlpha.300" p={2} height="56px">
         <Flex justify="space-between" align="center" height="100%">
-          <Box m={2} onClick={() => navigate("/")}>
+          <Box m={2} onClick={() => navigate("/")} cursor={"pointer"}>
             <Image
               src={logo}
               alt="Logo del negocio"
@@ -128,22 +129,30 @@ const Header = () => {
                       </Icon>
                     </Flex>
                   </MenuButton>
-                  <MenuList zIndex={50} bg="blackAlpha.300" border="none">
-                    {menu.map((item, index) => (
-                      <MenuItem
-                        key={index}
-                        onClick={item.onClick}
-                        size="sm"
-                        color="white"
-                        bg="transparent"
-                        _hover={{ color: "green" }}
-                        gap={2}
-                      >
-                        {item.icon}
-                        {item.label}
-                      </MenuItem>
-                    ))}
-                  </MenuList>
+                  <Portal>
+                    <MenuList
+                      zIndex={50}
+                      bg="transparent"
+                      bgGradient="linear(to-l, blackAlpha.300, blackAlpha.500)"
+                      border="none"
+                      backdropFilter="blur(10px)"
+                    >
+                      {menu.map((item, index) => (
+                        <MenuItem
+                          key={index}
+                          onClick={item.onClick}
+                          size="sm"
+                          color="white"
+                          bg="transparent"
+                          _hover={{ color: "main.600" }}
+                          gap={2}
+                        >
+                          {item.icon}
+                          {item.label}
+                        </MenuItem>
+                      ))}
+                    </MenuList>
+                  </Portal>
                 </Menu>
               </Flex>
             ) : (

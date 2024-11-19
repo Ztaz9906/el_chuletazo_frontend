@@ -1,4 +1,4 @@
-import { Box, Checkbox, Divider, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Divider, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const sidebarOptions = {
@@ -25,7 +25,7 @@ const sidebarOptions = {
   },
 };
 
-export default function SideBar({ setSearchTerm }) {
+export default function SideBar({ setSearchTerm, onClose }) {
   const [selectedOption, setSelectedOption] = useState("Todos los productos");
   const [selectedOptionPrice, setSelectedOptionPrice] = useState(null);
 
@@ -78,6 +78,9 @@ export default function SideBar({ setSearchTerm }) {
           ))}
         </VStack>
       </Box>
+      <Button colorScheme={"cart"} onClick={onClose} w="full">
+        Aplicar Filtros
+      </Button>
     </VStack>
   );
 }
