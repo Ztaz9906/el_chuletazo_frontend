@@ -135,7 +135,8 @@ const Header = () => {
                   <Portal>
                     <MenuList
                       zIndex={50}
-                      bg="blackAlpha.300"
+                      bg="transparent"
+                      bgGradient="linear(to-l, blackAlpha.300, blackAlpha.500)"
                       border="none"
                       backdropFilter="blur(10px)"
                     >
@@ -146,7 +147,7 @@ const Header = () => {
                           size="sm"
                           color="white"
                           bg="transparent"
-                          _hover={{ color: "green" }}
+                          _hover={{ color: "main.600" }}
                           gap={2}
                         >
                           {item.icon}

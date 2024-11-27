@@ -21,7 +21,6 @@ const ProductLayout = () => {
         backgroundImage="url('/fondo_2.png')"
         backgroundSize="cover"
         backgroundPosition="center"
-        p={4}
       >
         <Outlet />
       </Box>

@@ -17,8 +17,7 @@ import {
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductCard = ({ producto }) => {
   const [quantity, setQuantity] = useState(1);
@@ -32,11 +31,11 @@ const ProductCard = ({ producto }) => {
   }, []);
 
   const handleAddToCart = async () => {
-    if(!user){
+    if (!user) {
       toast({
         title: "Debe Iniciar Sesión para realizar la compra",
         status: "error",
-      })
+      });
     }
     const productCard = {
       ...producto,
@@ -55,8 +54,8 @@ const ProductCard = ({ producto }) => {
       transition={{ duration: 0.5 }}
     >
       <Box
-        w="250px"
-        h="300px"
+        w={{ base: "auto", md: "250px" }}
+        h={{ base: "auto", md: "300px" }}
         bg="white"
         shadow="md"
         overflow="hidden"
@@ -100,7 +99,7 @@ const ProductCard = ({ producto }) => {
               }}
             />
           </Flex>
-          <Text 
+          <Text
             fontSize="12px"
             noOfLines={2}
             fontWeight={"normal"}
