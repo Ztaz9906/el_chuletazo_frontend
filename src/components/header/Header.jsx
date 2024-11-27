@@ -71,13 +71,16 @@ const Header = () => {
       icon: <LogOutIcon />,
     },
   ];
+
   const handleModalOpen = (isLoginMode = true) => {
     setIsLogin(isLoginMode);
     onOpen();
   };
+
   const toggleAuthMode = () => {
     setIsLogin((prev) => !prev);
   };
+
   return (
     <>
       <Box bg="blackAlpha.300" p={2} height="56px">
@@ -86,7 +89,7 @@ const Header = () => {
             <Image
               src={logo}
               alt="Logo del negocio"
-              h="3rem"
+              h={{ base: "2rem", md: "3rem" }} // Ajuste de tamaño del logo
               objectFit="contain"
             />
           </Box>
@@ -106,7 +109,7 @@ const Header = () => {
                           color="white"
                           fontWeight="medium"
                           lineHeight="16px"
-                          fontSize="14px"
+                          fontSize={{ base: "sm", md: "14px" }} // Ajuste de tamaño de fuente
                         >
                           {`${user.first_name} ${user.last_name}`}
                         </Text>
@@ -114,7 +117,7 @@ const Header = () => {
                           color="white"
                           fontWeight="normal"
                           lineHeight="12px"
-                          fontSize="10px"
+                          fontSize={{ base: "xs", md: "10px" }} // Ajuste de tamaño de fuente
                         >
                           {user.email}
                         </Text>

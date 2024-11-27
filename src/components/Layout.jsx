@@ -20,8 +20,8 @@ const Layout = () => {
         backgroundImage="url('/fondo_2.png')"
         backgroundSize="cover"
         backgroundPosition="center"
-        py={8}
-        px={14}
+        py={{ base: 4, md: 8 }} // Ajuste de padding vertical
+        px={{ base: 6, md: 14 }} // Ajuste de padding horizontal
       >
         <Outlet />
       </Box>

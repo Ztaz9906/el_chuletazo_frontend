@@ -19,8 +19,8 @@ function NavBar() {
 
   return (
     <Box bg="rgba(0, 0, 0, 0.2)" w="full">
-      <HStack spacing={6} justify="space-between" align="center" px={4}>
-        <HStack spacing={6}>
+      <HStack spacing={{ base: 4, md: 6 }} justify="space-between" align="center" px={4}>
+        <HStack spacing={{ base: 4, md: 6 }}>
           {links.map(({ label, path }, index) => (
             <ChakraLink
               as={Link}

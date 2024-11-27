@@ -16,6 +16,9 @@ import Activate from "../components/auth/activate/Activate";
 import ChangePassword from "../components/home/configuration/change_password/ChangePassword";
 import DatosPersonales from "../components/home/configuration/datos_personales/DatosPersonales";
 import Details from "../components/home/pedidos/details/Details";
+import LayoutAdministracion from "@/components/home/admin/LayoutAdministracion";
+import UserList from "@/components/home/admin/UserList";
+import OrderList from "@/components/home/admin/OrderList";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +51,15 @@ const router = createBrowserRouter([
         element: <InfoPreguntasFrecuentes />,
       },
     ],
+  },
+  {
+    path: "/administracion",
+    element: <LayoutAdministracion />,
+    children: [
+      { path: "usuarios", element: <UserList /> },
+      { path: "orderlist", element: <OrderList /> },
+
+    ]
   },
   {
     path: "pedidos",
