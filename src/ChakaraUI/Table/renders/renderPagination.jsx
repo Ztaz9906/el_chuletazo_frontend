@@ -15,7 +15,7 @@ export function renderPagination(table, isMobile) {
       justifyContent="space-between"
       alignItems={isMobile ? "stretch" : "center"}
       p={4}
-      minHeight={"60px"}
+      minHeight={"30px"}
       position="sticky"
       bottom={0}
       zIndex={1}

@@ -42,8 +42,8 @@ export default function CTable({ data, DynamicFilters, isLoading }) {
   return (
     <Flex
       direction="column"
-      minH={{ base: "calc(100vh - 200px)", md: "calc(100vh - 100px)" }}
-      maxH={{ base: "calc(100vh - 200px)", md: "calc(100vh - 100px)" }}
+      minH={{ base: "calc(100vh - 200px)", md: "calc(100vh - 200px)" }}
+      maxH={{ base: "calc(100vh - 200px)", md: "calc(100vh - 200px)" }}
       width="100%"
       bg={"white"}
       borderRadius={"5px"}

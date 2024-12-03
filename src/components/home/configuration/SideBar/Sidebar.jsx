@@ -18,7 +18,7 @@ const Sidebar = () => {
   const userName = user ? `${user.first_name} ${user.last_name}` : "Usuario";
 
   return (
-    <div className="w-[300px] bg-white rounded-xl shadow-lg p-6 relative overflow-hidden">
+    <div className="w-[300px] min-w-[250px] bg-white rounded-xl shadow-lg p-6 relative overflow-hidden ">
       <div className="absolute top-0 right-0 w-32 h-32 bg-green-100 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-green-100 rounded-full blur-3xl opacity-20 -ml-16 -mb-16"></div>
 
