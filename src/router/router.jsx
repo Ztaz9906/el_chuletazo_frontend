@@ -2,6 +2,7 @@ import Layout from "@/components/Layout.jsx";
 import Login from "@/components/auth/login/Login.jsx";
 import SignUp from "@/components/auth/sing-up/SingUp.jsx";
 import Index from "@/components/home/Productos/index.jsx";
+import LayoutAdministracion from "@/components/home/admin/LayoutAdministracion";
 import LayOutConfiguracion from "@/components/home/configuration/Layout/LayOutConfiguracion";
 import ListaDestinatarios from "@/components/home/configuration/destinatarios/Table/ListaDestinatarios";
 import InfoEnvios from "@/components/home/envíos/envios";
@@ -13,6 +14,8 @@ import ListaPedidos from "@/components/home/pedidos/table/ListaPedidos.jsx";
 import InfoPreguntasFrecuentes from "@/components/home/preguntas_frecuentes/preguntas_frecuentes";
 import { createBrowserRouter } from "react-router-dom";
 import Activate from "../components/auth/activate/Activate";
+import AdminListaPedidos from "../components/home/admin/pedidos/table/AdminListaPedidos";
+import ListaUsuarios from "../components/home/admin/user/table/ListaUsuarios";
 import ChangePassword from "../components/home/configuration/change_password/ChangePassword";
 import DatosPersonales from "../components/home/configuration/datos_personales/DatosPersonales";
 import Details from "../components/home/pedidos/details/Details";
@@ -47,6 +50,14 @@ const router = createBrowserRouter([
         path: "info_preguntas-frecuentes",
         element: <InfoPreguntasFrecuentes />,
       },
+    ],
+  },
+  {
+    path: "/administracion",
+    element: <LayoutAdministracion />,
+    children: [
+      { path: "usuarios", element: <ListaUsuarios /> },
+      { path: "orderlist", element: <AdminListaPedidos /> },
     ],
   },
   {

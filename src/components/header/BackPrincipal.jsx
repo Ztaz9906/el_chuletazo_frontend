@@ -9,7 +9,7 @@ const BackPrincipal = () => {
       backgroundImage={`url(${fondo})`}
       backgroundSize="cover"
       backgroundPosition="center"
-      height="50vh"
+      height={{ base: "40vh", md: "50vh" }} // Ajuste de altura responsiva
       minHeight="300px"
       display="flex"
       flexDirection="column"
@@ -35,14 +35,14 @@ const BackPrincipal = () => {
         <Heading
           as="h1"
           color="white"
-          fontSize={{ base: "xl", sm: "2xl", md: "4xl" }}
+          fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }} // Ajuste de tamaño de fuente
           lineHeight="1.2"
         >
           Adquiere de forma rápida y sencilla
           <br />
           los productos que necesita
         </Heading>
-        <Text color="gray.300" fontSize="14px">
+        <Text color="gray.300" fontSize={{ base: "sm", md: "14px" }}>
           En nuestra tienda online usted podrá comprar y enviar productos a sus
           familiares y amigos en Cuba
         </Text>

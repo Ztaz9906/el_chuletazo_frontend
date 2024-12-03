@@ -22,6 +22,7 @@ const Layout = () => {
         backgroundPosition="center"
         py={{ base: 2, md: 8 }}
         px={{ base: 1, md: 14 }}
+
       >
         <Outlet />
       </Box>

@@ -7,14 +7,16 @@ import {
   Badge,
   IconButton,
   Stack,
+  Text,
   Tooltip,
-  useBreakpointValue,
   useToast,
+  VStack,
 } from "@chakra-ui/react";
-import { CircleDollarSign, CircleX, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CTable from "../../../../ChakaraUI/Table/CTable";
+import CTable from "../../../../../ChakaraUI/Table/CTable";
+import CambiarEstadoPedidoModal from "../EditarEstado/CambiarEstadoPedidoModal";
 
 // Función para obtener el badge del estado
 const getStatusBadge = (status) => {
@@ -60,35 +62,9 @@ const TableActions = ({ row }) => {
       setCheckoutId(null); // Reset ID on error
     }
   }, [data, error, toast]);
-
-  const handlePayment = () => {
-    setCheckoutId(row.original.id);
-  };
-
-  const handleCancelled = async () => {
-    console.log("Cancelando pedido", row.original.id);
-    try {
-      const res = await canelar(row.original.id);
-      console.log("Pedido cancelado:", res);
-      toast({
-        title: "Éxito",
-        description: res.data.message,
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-    } catch (error) {
-      console.error("Error al cancelar:", error);
-      toast({
-        title: "Error",
-        description: "No se pudo cancelar el pedido",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-    }
-  };
-
+  const canChangeState =
+    row.original.estado.toLowerCase() === "pagado" ||
+    row.original.estado.toLowerCase() === "enviado";
   return (
     <Stack direction="row" spacing={2} align={"center"}>
       <Tooltip label="Ver detalles">
@@ -104,77 +80,57 @@ const TableActions = ({ row }) => {
         />
       </Tooltip>
       {/* TODO: Implementar edición de pedidos mas adelante */}
-      <Tooltip label={isLoading ? "Cancelando" : "Cancelar pedido"}>
-        <IconButton
-          onClick={handleCancelled}
-          icon={<CircleX />}
-          size={"20px"}
-          color={"gray"}
-          _hover={{ color: "red.500" }}
-          variant={"none"}
-          aria-label={"Cancelar pedido"}
-          isDisabled={
-            row.original.estado.toLowerCase() !== "pendiente" || isLoading
-          }
-          cursor={"pointer"}
-          isLoading={isLoading}
-        />
-      </Tooltip>
-      <Tooltip label={isFetching ? "Procesando..." : "Pagar pedido"}>
-        <IconButton
-          onClick={handlePayment}
-          icon={<CircleDollarSign />}
-          size={"20px"}
-          color={"gray"}
-          _hover={{ color: "main.500" }}
-          variant={"none"}
-          aria-label={"Pagar pedido"}
-          isDisabled={
-            row.original.estado.toLowerCase() !== "pendiente" || isFetching
-          }
-          cursor={"pointer"}
-          isLoading={isFetching}
-        />
-      </Tooltip>
+      {canChangeState && <CambiarEstadoPedidoModal id={row.original.id} />}
     </Stack>
   );
 };
 
 const columns = [
   {
-    header: "Fecha de Registro",
-    accessorKey: "created_at_date",
+    header: "Pedido",
+    accessorKey: "id",
+  },
 
+  {
+    header: "Fecha",
+    accessorKey: "created_at_date",
     accessorFn: (row) => row.created_at,
     cell: ({ getValue }) => {
       const date = new Date(getValue());
       return date.toLocaleDateString();
     },
   },
-  {
-    header: "Hora de Registro",
-    accessorKey: "created_at_time",
 
-    accessorFn: (row) => row.created_at,
-    cell: ({ getValue }) => {
-      const date = new Date(getValue());
-      return date.toLocaleTimeString();
-    },
-  },
   {
     header: "Destinatario",
     accessorKey: "destinatario",
-
     cell: ({ getValue }) => {
       const dest = getValue();
       return `${dest.nombre_completo}`;
     },
   },
   {
-    header: "Total Pagado",
-    accessorKey: "total",
-    cell: ({ getValue }) => `$${getValue()}`,
+    header: "Remitente",
+    accessorKey: "usuario",
+    cell: ({ row }) => {
+      const usuario = row.original.usuario;
+      return (
+        <VStack spacing={1}>
+          <Text fontSize={"md"}>{usuario.nombre_completo}</Text>
+          <Text fontSize={"xs"}>{usuario.email}</Text>
+        </VStack>
+      );
+    },
     meta: { isNumeric: true },
+  },
+  {
+    header: "Provincia",
+    accessorKey: "destinatario_provincia",
+    cell: ({ row }) => {
+      // Safely access the province name
+      const provincia = row.original.destinatario?.provincia?.name || "N/A";
+      return provincia;
+    },
   },
   {
     header: "Estado",
@@ -191,8 +147,7 @@ const columns = [
   },
 ];
 
-export default function PedidosTable({ pedidos, isLoading }) {
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+export default function AdminPedidosTable({ pedidos, isLoading }) {
   const dataTable = {
     columns,
     rows: pedidos,

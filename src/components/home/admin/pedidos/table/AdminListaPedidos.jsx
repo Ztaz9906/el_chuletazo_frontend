@@ -1,9 +1,9 @@
-import PedidosTable from "@/components/home/pedidos/table/PedidosTable.jsx";
 import { useGetPedidosQuery } from "@/servicios/redux/api/Pedidos/index.js";
 import { Box, Divider, HStack, Link, Text, VStack } from "@chakra-ui/react";
 import { CircleChevronLeft } from "lucide-react";
+import AdminPedidosTable from "./AdminPedidosTable";
 
-export default function ListaPedidos() {
+export default function AdminListaPedidos() {
   const { data, isLoading, isError, error } = useGetPedidosQuery();
 
   if (isError) {
@@ -43,7 +43,7 @@ export default function ListaPedidos() {
       </HStack>
       <Divider mb={4} borderColor="gray.300" />
 
-      <PedidosTable pedidos={data || []} isLoading={isLoading} />
+      <AdminPedidosTable pedidos={data || []} isLoading={isLoading} />
     </VStack>
   );
 }
