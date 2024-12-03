@@ -9,7 +9,11 @@ const AdminSidebar = () => {
   const menuItems = [
     { label: "Usuarios Registrados", href: "/administracion/usuarios" },
     { label: "Pedidos", href: "/administracion/orderlist" },
-    { label: "Modificar Productos"}, //Kikeeeeeee falta ponerle la ruta pra que vaya a Stripe ☻☺☻☺☻☺☻☺
+    {
+      label: "Modificar Productos",
+      href: "https://dashboard.stripe.com/login?redirect=/test/products?active=true",
+      target: "_blank",
+    },
   ];
 
   const userName = user ? `${user.first_name} ${user.last_name}` : "Admin";

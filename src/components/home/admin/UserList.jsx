@@ -1,34 +1,66 @@
-import { useState } from 'react';
-import { Box, VStack, HStack, Text, Input, Button, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Input,
+  Table,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+  VStack,
+} from "@chakra-ui/react";
 import { Edit2, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 const UserList = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [users] = useState([
     { id: 1, nombre: "Pepa", apellidos: "Pig", rol: "Administrador" },
-    { id: 2, nombre: "Thalia de la Caridad", apellidos: "Puente Rodríguez", rol: "Usuario" },
-    { id: 3, nombre: "Esmerejilda de las Mercedes", apellidos: "González Castellanos", rol: "Usuario" },
+    {
+      id: 2,
+      nombre: "Thalia de la Caridad",
+      apellidos: "Puente Rodríguez",
+      rol: "Usuario",
+    },
+    {
+      id: 3,
+      nombre: "Esmerejilda de las Mercedes",
+      apellidos: "González Castellanos",
+      rol: "Usuario",
+    },
   ]);
 
-  const filteredUsers = users.filter(user => 
-    user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.apellidos.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.apellidos.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleEdit = (userId) => {
-    console.log('Editar usuario:', userId);
+    console.log("Editar usuario:", userId);
   };
 
   const handleDelete = (userId) => {
-    console.log('Eliminar usuario:', userId);
+    console.log("Eliminar usuario:", userId);
   };
 
   return (
-    <VStack align="stretch" spacing={4} bg="rgba(255, 255, 255, 0.6)" p={4} boxShadow="lg" mt={4} h="calc(100vh - 100px)">
+    <VStack
+      align="stretch"
+      spacing={4}
+      bg="rgba(255, 255, 255, 0.6)"
+      p={4}
+      boxShadow="lg"
+      mt={4}
+      h="calc(100vh - 100px)"
+    >
       <HStack justify="space-between">
         <Text fontSize="2xl" fontWeight="medium" color="main.600">
-          Mi Cuenta {'>'} Usuarios Registrados
+          Mi Cuenta {">"} Usuarios Registrados
         </Text>
         <Box w="300px">
           <Input
@@ -40,8 +72,14 @@ const UserList = () => {
           />
         </Box>
       </HStack>
-      
-      <Box bg="white" borderRadius="lg" p={4} borderWidth={1} borderColor="gray.200">
+
+      <Box
+        bg="white"
+        borderRadius="lg"
+        p={4}
+        borderWidth={1}
+        borderColor="gray.200"
+      >
         <Text mb={4} color="gray.600">
           {filteredUsers.length} Usuarios Registrados
         </Text>

@@ -7,8 +7,30 @@ import {
   ChevronsRight,
 } from "lucide-react";
 
-// Pagination render function
 export function renderPagination(table, isMobile) {
+  const pageCount = table.getPageCount();
+  const currentPageIndex = table.getState().pagination.pageIndex;
+
+  // Calculate the range of page buttons to display
+  const calculatePageRange = () => {
+    const maxPageButtons = 3;
+    let startPage = Math.max(
+      0,
+      currentPageIndex - Math.floor(maxPageButtons / 2)
+    );
+    let endPage = Math.min(pageCount - 1, startPage + maxPageButtons - 1);
+
+    // Adjust start page if we're near the end
+    if (endPage === pageCount - 1) {
+      startPage = Math.max(0, pageCount - maxPageButtons);
+    }
+
+    return Array.from(
+      { length: Math.min(maxPageButtons, pageCount) },
+      (_, i) => startPage + i
+    );
+  };
+
   return (
     <Flex
       flexDirection={isMobile ? "column" : "row"}
@@ -25,7 +47,7 @@ export function renderPagination(table, isMobile) {
       borderBottomRadius={"5px"}
       gap={isMobile ? 3 : 0}
     >
-      {/* Contenido de paginación similar al original */}
+      {/* Contenido de paginación */}
       <Flex
         alignItems={isMobile ? "stretch" : "center"}
         gap={isMobile ? 2 : 6}
@@ -37,8 +59,7 @@ export function renderPagination(table, isMobile) {
           fontWeight="normal"
           color="#51616D"
         >
-          Página {table.getState().pagination.pageIndex + 1} de{" "}
-          {table.getPageCount()}
+          Página {currentPageIndex + 1} de {pageCount}
         </Text>
 
         <Flex
@@ -96,21 +117,13 @@ export function renderPagination(table, isMobile) {
               onClick={() => table.previousPage()}
               isDisabled={!table.getCanPreviousPage()}
             />
-            {Array.from(
-              { length: Math.min(5, table.getPageCount()) },
-              (_, i) =>
-                i + Math.max(0, table.getState().pagination.pageIndex - 2)
-            ).map((pageIndex) => (
+            {calculatePageRange().map((pageIndex) => (
               <Button
                 key={pageIndex}
                 size={isMobile ? "sm" : "md"}
                 colorScheme={"cart"}
                 borderRadius={"full"}
-                variant={
-                  pageIndex === table.getState().pagination.pageIndex
-                    ? "solid"
-                    : "outline"
-                }
+                variant={pageIndex === currentPageIndex ? "solid" : "outline"}
                 onClick={() => table.setPageIndex(pageIndex)}
                 mb={isMobile ? 1 : 0}
               >
@@ -132,7 +145,7 @@ export function renderPagination(table, isMobile) {
               variant={"link"}
               size={isMobile ? "sm" : "md"}
               icon={<ChevronsRight />}
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              onClick={() => table.setPageIndex(pageCount - 1)}
               isDisabled={!table.getCanNextPage()}
             />
           </Flex>
