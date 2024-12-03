@@ -1,19 +1,27 @@
-import CTable from "@/ChakaraUI/Table/CTable.jsx";
 import DynamicFilter from "@/components/home/pedidos/table/DynamicFilter.jsx";
 import {
   useCancelPedidoMutation,
   useGetCheckOutQuery,
 } from "@/servicios/redux/api/Pedidos/index.js";
-import { Badge, IconButton, Stack, Tooltip, useToast } from "@chakra-ui/react";
+import {
+  Badge,
+  IconButton,
+  Stack,
+  Tooltip,
+  useBreakpointValue,
+  useToast,
+} from "@chakra-ui/react";
 import { CircleDollarSign, CircleX, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CTable from "../../../../ChakaraUI/Table/CTable";
 
 // Función para obtener el badge del estado
 const getStatusBadge = (status) => {
   switch (status.toLowerCase()) {
     case "pendiente":
       return <Badge colorScheme="yellow">{status}</Badge>;
+
     case "pagado":
       return <Badge colorScheme="green">{status}</Badge>;
     case "enviado":
@@ -135,9 +143,8 @@ const TableActions = ({ row }) => {
 const columns = [
   {
     header: "Fecha de Registro",
-    // Usamos un accessorKey único
     accessorKey: "created_at_date",
-    // Pero seguimos accediendo al created_at original
+
     accessorFn: (row) => row.created_at,
     cell: ({ getValue }) => {
       const date = new Date(getValue());
@@ -146,9 +153,8 @@ const columns = [
   },
   {
     header: "Hora de Registro",
-    // Usamos un accessorKey único
     accessorKey: "created_at_time",
-    // Pero seguimos accediendo al created_at original
+
     accessorFn: (row) => row.created_at,
     cell: ({ getValue }) => {
       const date = new Date(getValue());
@@ -158,6 +164,7 @@ const columns = [
   {
     header: "Destinatario",
     accessorKey: "destinatario",
+
     cell: ({ getValue }) => {
       const dest = getValue();
       return `${dest.nombre_completo}`;
@@ -172,20 +179,25 @@ const columns = [
   {
     header: "Estado",
     accessorKey: "estado",
-    cell: ({ getValue }) => getStatusBadge(getValue()),
+    cell: ({ getValue }) => {
+      const isMobile = window.innerWidth <= 768;
+      return getStatusBadge(getValue());
+    },
   },
   {
     header: "Acciones",
+
     cell: TableActions,
   },
 ];
 
 export default function PedidosTable({ pedidos, isLoading }) {
+  const isMobile = useBreakpointValue({ base: true, sm: false });
   const dataTable = {
     columns,
     rows: pedidos,
   };
-
+  console.log(pedidos);
   return (
     <CTable
       data={dataTable}

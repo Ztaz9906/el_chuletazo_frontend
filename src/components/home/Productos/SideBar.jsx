@@ -1,4 +1,12 @@
-import { Box, Button, Checkbox, Divider, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  Text,
+  useBreakpointValue,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const sidebarOptions = {
@@ -16,6 +24,7 @@ const sidebarOptions = {
   prices: {
     title: "Precios",
     options: [
+      { label: "Todos los precios", value: null },
       { label: "Menos de $10", value: { min: 0, max: 999 } },
       { label: "$10 - $30", value: { min: 1000, max: 2999 } },
       { label: "$30 - $50", value: { min: 3000, max: 4999 } },
@@ -28,7 +37,7 @@ const sidebarOptions = {
 export default function SideBar({ setSearchTerm, onClose }) {
   const [selectedOption, setSelectedOption] = useState("Todos los productos");
   const [selectedOptionPrice, setSelectedOptionPrice] = useState(null);
-
+  const isMobile = useBreakpointValue({ base: true, md: false });
   function handleSelect() {
     setSearchTerm({ categories: selectedOption, prices: selectedOptionPrice });
   }
@@ -78,9 +87,11 @@ export default function SideBar({ setSearchTerm, onClose }) {
           ))}
         </VStack>
       </Box>
-      <Button colorScheme={"cart"} onClick={onClose} w="full">
-        Aplicar Filtros
-      </Button>
+      {isMobile && (
+        <Button colorScheme={"cart"} onClick={onClose} w="full">
+          Aplicar Filtros
+        </Button>
+      )}
     </VStack>
   );
 }

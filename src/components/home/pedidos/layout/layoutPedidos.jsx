@@ -21,7 +21,12 @@ const LayoutPedidos = () => {
           backgroundSize="cover"
           backgroundPosition="center"
         >
-          <Box px={8} py={2} w={"full"} h={"100vh"}>
+          <Box
+            px={{ base: 1, md: 8 }}
+            py={{ base: 1, md: 2 }}
+            w={"full"}
+            h={"100vh"}
+          >
             <Outlet />
           </Box>
         </Box>

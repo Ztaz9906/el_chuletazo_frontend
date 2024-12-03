@@ -1,6 +1,6 @@
 import PedidosTable from "@/components/home/pedidos/table/PedidosTable.jsx";
 import { useGetPedidosQuery } from "@/servicios/redux/api/Pedidos/index.js";
-import { Box, Divider, HStack, Text, VStack, Link } from "@chakra-ui/react";
+import { Box, Divider, HStack, Link, Text, VStack } from "@chakra-ui/react";
 import { CircleChevronLeft } from "lucide-react";
 
 export default function ListaPedidos() {
@@ -24,27 +24,26 @@ export default function ListaPedidos() {
           Lista de Pedidos
         </Text>
         <HStack
-            spacing={2}
-            justify={"space-between"}
-            as={Link}
-            href="/productos"
-            transition="transform 0.2s"
-            _hover={{
-              textDecoration: "none",
-              transform: "translateX(-5px)",
-              fontWeight: "bold",
-            }}
-          >
-            <Box as={CircleChevronLeft} size={20} color="main.600" />
-            <Text color="main.600" mr={"4px"}>
-              Atrás
-            </Text>
-          </HStack>
+          spacing={2}
+          justify={"space-between"}
+          as={Link}
+          href="/productos"
+          transition="transform 0.2s"
+          _hover={{
+            textDecoration: "none",
+            transform: "translateX(-5px)",
+            fontWeight: "bold",
+          }}
+        >
+          <Box as={CircleChevronLeft} size={20} color="main.600" />
+          <Text color="main.600" mr={"4px"}>
+            Atrás
+          </Text>
+        </HStack>
       </HStack>
       <Divider mb={4} borderColor="gray.300" />
-      <Box borderWidth={1} borderRadius={"5px"} borderColor={"gray.300"}>
-        <PedidosTable pedidos={data || []} isLoading={isLoading} />
-      </Box>
+
+      <PedidosTable pedidos={data || []} isLoading={isLoading} />
     </VStack>
   );
 }
