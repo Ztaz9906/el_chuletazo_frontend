@@ -25,16 +25,19 @@ const LayOutConfiguracion = () => {
         backgroundSize="cover"
         backgroundPosition="center"
       >
-        {isMobile ? (
-          <CustomDrawer
-            trigger={<Settings size={32} color="#666666" strokeWidth={1.5} />}
-            title={"Configuracion"}
-            menu={<Sidebar />}
-          />
-        ) : (
-          <Sidebar />
-        )}
-        <Box px={8} py={2} w={"full"} h={"100vh"}>
+        {isMobile ? null : <Sidebar />}
+        <Box px={8} py={2} w={"full"} h={"100vh"} position={"absolute"}>
+          {isMobile && (
+            <CustomDrawer
+              trigger={
+                <Box position={"relative"} bottom={"2px"} left={"2px"}>
+                  <Settings size={32} color="#666666" strokeWidth={1.5} />
+                </Box>
+              }
+              title={"Configuracion"}
+              menu={<Sidebar />}
+            />
+          )}
           <Outlet />
         </Box>
       </Flex>

@@ -4,10 +4,8 @@ export default function PedidoProductList({ productos, total }) {
   return (
     <Flex direction="column" h="100%" overflow="hidden">
       <Flex justify="space-between" w="full" align="center">
-        <Text fontSize="xl" mb={4}>
-          Productos
-        </Text>
-        <Text fontSize="xl" fontWeight="bold" color="black">
+        <Text fontSize="xl">Productos</Text>
+        <Text fontSize={["lg", "xl", "2xl"]} fontWeight="bold" color="black">
           Total a Pagar: {total} USD
         </Text>
       </Flex>
