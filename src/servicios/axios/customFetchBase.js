@@ -1,6 +1,6 @@
 import client from "./axios";
 
-const customFetchBase = async ({
+const customFetchBase = async ({    //usando la libreria de Axios, hace las peticiones 
   url,
   method,
   body,

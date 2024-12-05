@@ -15,7 +15,7 @@ import {
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
-import { FilePenLine } from "lucide-react";
+import { Pencil } from "lucide-react";
 import SelectField from "../../../../../ChakaraUI/FormField/SelectField/SelectField";
 import { usePatchPedidoMutation } from "../../../../../servicios/redux/api/Pedidos";
 
@@ -71,7 +71,7 @@ const CambiarEstadoPedidoModal = ({ id }) => {
       <Tooltip label="Cambiar estado del pedido">
         <IconButton
           onClick={onOpen}
-          icon={<FilePenLine />}
+          icon={<Pencil />}
           size={"20px"}
           color={"gray"}
           _hover={{ color: "blue.500" }}

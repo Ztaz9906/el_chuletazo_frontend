@@ -24,3 +24,5 @@ store.subscribe(() => {
 });
 
 export default store;
+
+//Voy a guardar todos los endpoints creados, cada uno se crea con reduser
