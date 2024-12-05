@@ -197,7 +197,6 @@ export default function PedidosTable({ pedidos, isLoading }) {
     columns,
     rows: pedidos,
   };
-  console.log(pedidos);
   return (
     <CTable
       data={dataTable}
