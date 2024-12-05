@@ -80,10 +80,9 @@ export default function ModalCart({ textColor = "white" }) {
           bgImage={`url(${fondo})`}
           bgSize="cover"
           bgPosition="center"
-          mx={4} // Add horizontal margin
-          borderRadius="lg" // Rounded corners
-          maxWidth="calc(100% - 32px)" // Ensure it doesn't touch screen edges
-          width="auto"
+          mx={2}
+          maxH="80vh"
+          maxW="600px"
         >
           <ModalHeader>
             <HStack w="full" justify={"space-between"}>

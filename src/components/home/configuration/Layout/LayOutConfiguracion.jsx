@@ -1,7 +1,9 @@
 import fondo from "@/assets/fondo_1.png";
 import Header from "@/components/header/Header.jsx";
 import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
+import { Settings } from "lucide-react";
 import { Outlet } from "react-router-dom";
+import CustomDrawer from "../../../../ChakaraUI/Drawer/CustomDrawer";
 import Sidebar from "../SideBar/Sidebar";
 
 const LayOutConfiguracion = () => {
@@ -23,7 +25,15 @@ const LayOutConfiguracion = () => {
         backgroundSize="cover"
         backgroundPosition="center"
       >
-        {!isMobile && <Sidebar />}
+        {isMobile ? (
+          <CustomDrawer
+            trigger={<Settings size={32} color="#666666" strokeWidth={1.5} />}
+            title={"Configuracion"}
+            menu={<Sidebar />}
+          />
+        ) : (
+          <Sidebar />
+        )}
         <Box px={8} py={2} w={"full"} h={"100vh"}>
           <Outlet />
         </Box>

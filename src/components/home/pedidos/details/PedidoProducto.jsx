@@ -7,7 +7,7 @@ export default function PedidorProduct({ item }) {
 
   return (
     <Box borderWidth={1} borderRadius="lg" bg="white" shadow="sm">
-      <Box h="200px">
+      <Box h={{ base: "150px", md: "200px" }}>
         <img
           src={producto.image}
           alt={producto.name}

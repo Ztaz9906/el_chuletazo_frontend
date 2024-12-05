@@ -20,7 +20,7 @@ export default function PedidoProductList({ productos, total }) {
           "&::-webkit-scrollbar-thumb": { background: "none" },
         }}
       >
-        <Grid templateColumns="repeat(5, 1fr)" gap={2}>
+        <Grid templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }} gap={2}>
           {productos.map((item) => (
             <PedidorProduct key={item.producto.id} item={item} />
           ))}
