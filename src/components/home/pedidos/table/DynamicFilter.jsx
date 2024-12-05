@@ -1,5 +1,6 @@
 import {
   Flex,
+  HStack,
   Input,
   InputGroup,
   InputLeftElement,
@@ -82,34 +83,35 @@ const DynamicFilter = ({
             _placeholder={{ color: "#51616D", fontWeight: "normal" }}
           />
         </InputGroup>
-        <Input
-          type="date"
-          placeholder="Fecha"
-          minW={{ base: "100%", md: "120px" }}
-          bg="white"
-          borderRadius="md"
-          color="#51616D"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          fontSize="14px"
-          fontWeight="normal"
-          _placeholder={{ color: "#51616D", fontWeight: "normal" }}
-        />
-
-        <Select
-          placeholder="Todos"
-          value={estado}
-          onChange={(e) => setEstado(e.target.value)}
-          fontSize="14px"
-          fontWeight="normal"
-          color="#51616D"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </Select>
+        <HStack spacing={4}>
+          <Input
+            type="date"
+            placeholder="Fecha"
+            minW={{ base: "auto", md: "150px" }}
+            bg="white"
+            borderRadius="md"
+            color="#51616D"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            fontSize="14px"
+            fontWeight="normal"
+            _placeholder={{ color: "#51616D", fontWeight: "normal" }}
+          />
+          <Select
+            placeholder="Todos"
+            value={estado}
+            onChange={(e) => setEstado(e.target.value)}
+            fontSize="14px"
+            fontWeight="normal"
+            color="#51616D"
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </Select>
+        </HStack>
       </Flex>
       <Flex
         direction={{ base: "row", md: "row" }}
