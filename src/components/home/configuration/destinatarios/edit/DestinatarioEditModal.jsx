@@ -18,7 +18,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import { FilePenLine } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { formConfig } from "../../../pedidos/Stepper/schema/formConfig";
 
 export default function DestinatarioEditModal({ row }) {
@@ -72,7 +72,7 @@ export default function DestinatarioEditModal({ row }) {
       <Tooltip label="Editar destinatario">
         <IconButton
           onClick={onOpen}
-          icon={<FilePenLine />}
+          icon={<Pencil />}
           size={"20px"}
           color={"gray"}
           _hover={{ color: "main.500" }}

@@ -17,7 +17,7 @@ client.interceptors.request.use(
 
     // Solo añadimos el token en rutas que lo requieran
     if (
-      config?.url.search(re_login) === -1 &&
+      config?.url.search(re_login) === -1 &&    //endpoint que hay qen el backend para loguear y refrescar
       config?.url.search(re_refresh) === -1
     ) {
       const shouldRefresh = isRefreshNeeded(token);
@@ -31,7 +31,7 @@ client.interceptors.request.use(
               refresh: refreshToken,
             });
 
-            // Guardar los nuevos tokens en localStorage
+            // Guardar los nuevos tokens en localStorage   (para persistencia de datos en el nevegador)
             token = response.data.access;
             localStorage.setItem("token", response.data.access);
             localStorage.setItem("refresh", response.data.refresh);
