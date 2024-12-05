@@ -160,7 +160,7 @@ export default function Index() {
           justify="space-between"
         >
           <Text
-            fontSize="4xl"
+            fontSize={["2xl", "3xl", "4xl"]}
             fontWeight="bold"
             color="green.500"
             textAlign="left"
