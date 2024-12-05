@@ -3,9 +3,9 @@ import PedidorProduct from "./PedidoProducto";
 export default function PedidoProductList({ productos, total }) {
   return (
     <Flex direction="column" h="100%" overflow="hidden">
-      <Flex justify="space-between" w="full" align="center">
-        <Text fontSize="xl">Productos</Text>
-        <Text fontSize={["lg", "xl", "2xl"]} fontWeight="bold" color="black">
+      <Flex justify="space-between" w="full" align="center" gap={2}>
+        <Text fontSize="xl">Productos </Text>
+        <Text fontSize={["md", "xl", "2xl"]} fontWeight="bold" color="black">
           Total a Pagar: {total} USD
         </Text>
       </Flex>
