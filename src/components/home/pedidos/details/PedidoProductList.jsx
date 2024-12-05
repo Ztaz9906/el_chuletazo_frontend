@@ -1,6 +1,15 @@
-import { Box, Divider, Flex, Grid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Grid,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import PedidorProduct from "./PedidoProducto";
+import PedidoProductsMobile from "./PedidoProductsMobile";
 export default function PedidoProductList({ productos, total }) {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   return (
     <Flex direction="column" h="100%" overflow="hidden">
       <Flex justify="space-between" w="full" align="center" gap={2}>
@@ -19,9 +28,13 @@ export default function PedidoProductList({ productos, total }) {
         }}
       >
         <Grid templateColumns={{ base: "1fr", md: "repeat(5, 1fr)" }} gap={2}>
-          {productos.map((item) => (
-            <PedidorProduct key={item.producto.id} item={item} />
-          ))}
+          {productos.map((item) =>
+            isMobile ? (
+              <PedidoProductsMobile key={item.producto.id} item={item} />
+            ) : (
+              <PedidorProduct key={item.producto.id} item={item} />
+            )
+          )}
         </Grid>
       </Box>
     </Flex>
