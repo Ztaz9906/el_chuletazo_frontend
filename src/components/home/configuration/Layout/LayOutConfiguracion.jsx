@@ -8,6 +8,7 @@ import Sidebar from "../SideBar/Sidebar";
 
 const LayOutConfiguracion = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
     <div className="fixed top-0 left-0 right-0 z-10">
       <Box
@@ -24,21 +25,35 @@ const LayOutConfiguracion = () => {
         backgroundImage="url('/fondo_2.png')"
         backgroundSize="cover"
         backgroundPosition="center"
+        position="relative"
       >
         {isMobile ? null : <Sidebar />}
-        <Box px={8} py={2} w={"full"} h={"100vh"} position={"absolute"}>
+
+        <Box px={[4, 8]} py={2} w={"full"} h={"100vh"} position="relative">
+          <Outlet />
+
           {isMobile && (
             <CustomDrawer
               trigger={
-                <Box position={"relative"} bottom={"2px"} left={"2px"}>
-                  <Settings size={32} color="#666666" strokeWidth={1.5} />
+                <Box
+                  bg="main.500"
+                  position="fixed"
+                  bottom="20px"
+                  right="20px"
+                  zIndex={1000}
+                  borderRadius="full"
+                  p={3}
+                  boxShadow="lg"
+                  cursor="pointer"
+                  _hover={{ bg: "gray.100" }}
+                >
+                  <Settings size={24} color="#ffffff" strokeWidth={1.5} />
                 </Box>
               }
               title={"Configuracion"}
               menu={<Sidebar />}
             />
           )}
-          <Outlet />
         </Box>
       </Flex>
     </div>

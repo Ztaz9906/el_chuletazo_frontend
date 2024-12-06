@@ -16,7 +16,7 @@ export default function ListaDestinatarios() {
       borderRadius={"5px"}
     >
       <HStack w="full" justify="space-between" mt={2}>
-        <Text fontSize="2xl" fontWeight="medium" color="main.600">
+        <Text fontSize={["lg", "xl"]} fontWeight="medium" color="main.600">
           Mis Destinatarios
         </Text>
         <DestinatarioModal />

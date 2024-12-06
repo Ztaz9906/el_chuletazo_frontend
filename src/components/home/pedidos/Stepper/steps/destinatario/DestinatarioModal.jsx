@@ -50,8 +50,9 @@ export default function DestinatarioModal() {
         colorScheme={"main"}
         px={4}
         py={2}
-        leftIcon={<UserPlus size={20} color="white" />}
+        leftIcon={<UserPlus size={18} color="white" />}
         onClick={onOpen}
+        fontSize={[12, 14]}
       >
         Agregar Destinatario
       </Button>
