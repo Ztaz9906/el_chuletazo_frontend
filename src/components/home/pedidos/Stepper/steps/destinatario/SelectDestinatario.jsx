@@ -1,48 +1,63 @@
-import { useEffect, useState } from "react";
-import { Box, Center, Grid, HStack, Text, VStack, Flex, Divider } from "@chakra-ui/react";
-import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios/index.js";
 import SelectField from "@/ChakaraUI/FormField/SelectField/SelectField.jsx";
 import { formConfig } from "@/components/home/pedidos/Stepper/schema/formConfig.js";
 import DestinatarioModal from "@/components/home/pedidos/Stepper/steps/destinatario/DestinatarioModal.jsx";
+import { useGetDestinatarioQuery } from "@/servicios/redux/api/Destinatarios/index.js";
+import {
+  Box,
+  Center,
+  Divider,
+  Flex,
+  Grid,
+  Show,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useFormikContext } from "formik";
+import { useEffect, useState } from "react";
 
 const DetailsItem = ({ label, value }) => (
-  <VStack align="start" spacing={0}>
+  <Flex flexDirection={{ base: "row", md: "column" }} align="start" gap={1}>
     <Text fontWeight="bold" fontSize="sm" color="gray.600">
-      {label}
+      {label} <Show below="md">: </Show>
     </Text>
-    <Text fontSize="md">{value}</Text>
-  </VStack>
+    <Text fontSize="md" fontWeight="medium">
+      {value}
+    </Text>
+  </Flex>
 );
 
 const SelectDestinatario = () => {
   const { data } = useGetDestinatarioQuery();
   const { values, errors } = useFormikContext();
   const [selectedDestinatario, setSelectedDestinatario] = useState(null);
+
   useEffect(() => {
-    if (values.destinatario_id) {
+    if (values.destinatario_id && data) {
       const selected = data.find((dest) => dest.id === values.destinatario_id);
       setSelectedDestinatario(selected);
     }
   }, [values.destinatario_id, data]);
 
   return (
-    <Box width="100%" mt={2} > 
-      <Text
-        fontSize={"2xl"}
-        textColor={"main.600"}
-      >Destinatarios</Text>
+    <Box width="full">
+      <Text fontSize={["2xl", "3xl", "4xl"]} textColor={"main.600"}>
+        Destinatarios
+      </Text>
       <Divider mb={4} borderColor="gray.300" />
       {data && data.length === 0 ? (
-        <Center> 
+        <Center>
           <DestinatarioModal />
           {errors.destinatario_id && (
             <Text color="red.500">{errors.destinatario_id}</Text>
           )}
         </Center>
       ) : (
-        <VStack spacing={6} align="stretch" mt={6}>
-          <HStack spacing={6} align="stretch">
+        <VStack spacing={3} align="stretch">
+          <Flex
+            flexDirection={{ base: "column-reverse", md: "row" }}
+            spacing={6}
+            align="stretch"
+          >
             <SelectField
               options={
                 data
@@ -58,17 +73,20 @@ const SelectDestinatario = () => {
             <Center alignItems={"flex-end"}>
               <DestinatarioModal />
             </Center>
-          </HStack>
+          </Flex>
 
           {selectedDestinatario && (
-            <Box borderWidth={1} borderRadius="lg" p={6} mt={6} bg="white" shadow="sm">
+            <Box borderWidth={1} borderRadius="lg" p={3} bg="white" shadow="sm">
               <Flex justify="space-between" align="center" mb={4}>
                 <Text fontSize="xl" fontWeight="bold" color="black">
                   Detalles del Destinatario
                 </Text>
               </Flex>
               <Divider mb={4} borderColor="gray.300" />
-              <Grid templateColumns="repeat(3, 1fr)" gap={5}>
+              <Grid
+                templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+                gap={[3, 5]}
+              >
                 <DetailsItem
                   label="Nombre"
                   value={`${selectedDestinatario.nombre} ${selectedDestinatario.apellidos}`}

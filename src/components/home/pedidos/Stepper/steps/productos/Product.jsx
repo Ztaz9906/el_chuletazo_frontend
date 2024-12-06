@@ -4,16 +4,13 @@ export default function Product({ product }) {
   return (
     <Flex
       w="full"
-      alignItems="center"
-      mb={4}
       border="1px solid"
       borderColor="gray.200"
       borderRadius="md"
       boxShadow="md"
-      p={4}
       bg="white"
     >
-      <Box w="100px" h="60px" mr={3} flexShrink={0}>
+      <Box w="100px" h="auto" mr={3} flexShrink={0}>
         <Image
           objectFit="cover"
           w="100%"
@@ -22,7 +19,7 @@ export default function Product({ product }) {
           alt={product.name}
         />
       </Box>
-      <Box flex={1}>
+      <Box flex={1} p={1}>
         <Text fontWeight="bold" fontSize="sm">
           {product.name}
         </Text>
@@ -34,16 +31,16 @@ export default function Product({ product }) {
           {(product.default_price.unit_amount / 100).toFixed(2)}{" "}
           {product.default_price.currency.toUpperCase()}/unidad
         </Text>
-      </Box>
-      <Box textAlign="right">
-        <Text fontWeight="bold" fontSize="sm">
-          $
-          {(
-            (product.quantity * product.default_price.unit_amount) /
-            100
-          ).toFixed(2)}{" "}
-          {product.default_price.currency.toUpperCase()}
-        </Text>
+        <Box textAlign="right">
+          <Text fontWeight="bold" fontSize="sm">
+            $
+            {(
+              (product.quantity * product.default_price.unit_amount) /
+              100
+            ).toFixed(2)}{" "}
+            {product.default_price.currency.toUpperCase()}
+          </Text>
+        </Box>
       </Box>
     </Flex>
   );
