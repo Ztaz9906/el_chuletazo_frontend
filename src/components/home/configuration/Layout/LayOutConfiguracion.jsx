@@ -5,6 +5,7 @@ import { Settings } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import CustomDrawer from "../../../../ChakaraUI/Drawer/CustomDrawer";
 import Sidebar from "../SideBar/Sidebar";
+import SideBarMovil from "../SideBar/SideBarMovil";
 
 const LayOutConfiguracion = () => {
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -39,19 +40,18 @@ const LayOutConfiguracion = () => {
                   bg="main.500"
                   position="fixed"
                   bottom="20px"
-                  right="20px"
+                  left="20px"
                   zIndex={1000}
                   borderRadius="full"
                   p={3}
                   boxShadow="lg"
                   cursor="pointer"
-                  _hover={{ bg: "gray.100" }}
                 >
                   <Settings size={24} color="#ffffff" strokeWidth={1.5} />
                 </Box>
               }
               title={"Configuracion"}
-              menu={<Sidebar />}
+              menu={<SideBarMovil />}
             />
           )}
         </Box>

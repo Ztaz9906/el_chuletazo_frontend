@@ -9,7 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { cloneElement } from "react";
 
-const CustomDrawer = ({ menu, title, trigger, placement = "right", drawerBgColor = "rgba(0, 0, 0, 0.5)" }) => {
+const CustomDrawer = ({
+  menu,
+  title,
+  trigger,
+  placement = "right",
+  drawerBgColor = "rgba(0, 0, 0, 0.5)",
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const clonedMenu = cloneElement(menu, { onClose });
@@ -21,8 +27,8 @@ const CustomDrawer = ({ menu, title, trigger, placement = "right", drawerBgColor
         <DrawerOverlay />
         <DrawerContent
           bg={drawerBgColor}
-          backdropFilter="blur(10px)" 
-          color="white" 
+          backdropFilter="blur(10px)"
+          color="white"
         >
           <DrawerCloseButton />
           <DrawerHeader>{title}</DrawerHeader>

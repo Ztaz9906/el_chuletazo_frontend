@@ -49,7 +49,12 @@ export default function SideBar({ setSearchTerm, onClose }) {
   return (
     <VStack align="start" spacing={6}>
       <Box width="100%">
-        <Text fontSize="lg" fontWeight="bold" color="green.600" mb={3}>
+        <Text
+          fontSize="lg"
+          fontWeight="bold"
+          color={isMobile ? "white" : "gray.600"}
+          mb={3}
+        >
           {sidebarOptions.categories.title}
         </Text>
         <VStack align="start" spacing={2}>
@@ -59,7 +64,7 @@ export default function SideBar({ setSearchTerm, onClose }) {
               isChecked={selectedOption === option}
               onChange={() => setSelectedOption(option)}
               colorScheme="green"
-              color="#5D5D5D"
+              color={isMobile ? "#ffffff" : "#5D5D5D"}
             >
               {option}
             </Checkbox>
@@ -70,7 +75,12 @@ export default function SideBar({ setSearchTerm, onClose }) {
       <Divider borderColor="gray.300" />
 
       <Box width="100%">
-        <Text fontSize="lg" fontWeight="bold" color="green.600" mb={3}>
+        <Text
+          fontSize="lg"
+          fontWeight="bold"
+          color={isMobile ? "white" : "gray.600"}
+          mb={3}
+        >
           {sidebarOptions.prices.title}
         </Text>
         <VStack align="start" spacing={2}>
@@ -80,7 +90,7 @@ export default function SideBar({ setSearchTerm, onClose }) {
               isChecked={selectedOptionPrice === option.value}
               onChange={() => setSelectedOptionPrice(option.value)}
               colorScheme="green"
-              color="#5D5D5D"
+              color={isMobile ? "#ffffff" : "#5D5D5D"}
             >
               {option.label}
             </Checkbox>
