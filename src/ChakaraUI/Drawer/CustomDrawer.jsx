@@ -9,10 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { cloneElement } from "react";
 
-const CustomDrawer = ({ menu, title, trigger, placement = "right" }) => {
+const CustomDrawer = ({ menu, title, trigger, placement = "right", drawerBgColor = "rgba(0, 0, 0, 0.5)" }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // Clonar el componente del menú y pasarle la propiedad onClose
   const clonedMenu = cloneElement(menu, { onClose });
 
   return (
@@ -20,7 +19,11 @@ const CustomDrawer = ({ menu, title, trigger, placement = "right" }) => {
       {cloneElement(trigger, { onClick: onOpen })}
       <Drawer isOpen={isOpen} placement={placement} onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent
+          bg={drawerBgColor}
+          backdropFilter="blur(10px)" 
+          color="white" 
+        >
           <DrawerCloseButton />
           <DrawerHeader>{title}</DrawerHeader>
           <DrawerBody>{clonedMenu}</DrawerBody>

@@ -35,7 +35,7 @@ function NavBar() {
           {isMobile ? (
             <CustomDrawer
               menu={<DrawerMenu />}
-              title={"Menu"}
+              title={"Menú"}
               trigger={<FaBars size={24} color="white" />}
               placement="left"
             />
