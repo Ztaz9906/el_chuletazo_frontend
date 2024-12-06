@@ -29,7 +29,7 @@ const LabelValue = ({ label, value }) => (
       {""}
       <Show below="md">: </Show>
     </Text>
-    <Text fontSize="md" fontWeight="medium">
+    <Text fontSize="md" fontWeight="medium" color="gray.500">
       {value || "-"}
     </Text>
   </Flex>

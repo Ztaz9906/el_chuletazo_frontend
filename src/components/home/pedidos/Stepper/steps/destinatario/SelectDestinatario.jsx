@@ -16,11 +16,11 @@ import { useFormikContext } from "formik";
 import { useEffect, useState } from "react";
 
 const DetailsItem = ({ label, value }) => (
-  <Flex flexDirection={{ base: "row", md: "column" }} align="start" gap={1}>
+  <Flex flexDirection={{ base: "row", md: "column" }} align="center" gap={1}>
     <Text fontWeight="bold" fontSize="sm" color="gray.600">
       {label} <Show below="md">: </Show>
     </Text>
-    <Text fontSize="md" fontWeight="medium">
+    <Text fontSize="md" fontWeight="medium" color="gray.500">
       {value}
     </Text>
   </Flex>
@@ -78,7 +78,7 @@ const SelectDestinatario = () => {
           {selectedDestinatario && (
             <Box borderWidth={1} borderRadius="lg" p={3} bg="white" shadow="sm">
               <Flex justify="space-between" align="center" mb={4}>
-                <Text fontSize="xl" fontWeight="bold" color="black">
+                <Text fontSize="xl" fontWeight="bold" color="gray.600">
                   Detalles del Destinatario
                 </Text>
               </Flex>

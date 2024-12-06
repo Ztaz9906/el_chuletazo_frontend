@@ -13,6 +13,9 @@ export const validationSchema = [
 
   // Step 2: Conditional validation for remitente
   Yup.object().shape({
-    remitenteValidado: Yup.boolean().oneOf([true], "Debe validar el remitente"),
+    remitenteValidado: Yup.boolean().oneOf(
+      [true],
+      "Debe completar todos los datos del remitente"
+    ),
   }),
 ];

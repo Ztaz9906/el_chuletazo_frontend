@@ -34,7 +34,7 @@ export default function ProductsList({ hasTitle = true }) {
             Productos
           </Text>
         )}
-        <Text fontSize={["lg", "xl", "2xl"]} fontWeight="bold" color="black">
+        <Text fontSize={["lg", "xl", "2xl"]} fontWeight="bold" color="gray.600">
           Total a Pagar: {total.toFixed(2)} US$
         </Text>
       </HStack>

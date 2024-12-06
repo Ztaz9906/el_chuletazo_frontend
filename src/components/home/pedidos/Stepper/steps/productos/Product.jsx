@@ -26,7 +26,12 @@ export default function Product({ product }) {
         </Box>
         <Flex flexDirection={"column"} justify={"space-between"} p={1}>
           <Box flex={1} overflow="hidden">
-            <Text fontWeight="bold" fontSize="xs" noOfLines={1}>
+            <Text
+              fontWeight="bold"
+              fontSize="xs"
+              noOfLines={1}
+              color="gray.600"
+            >
               {product.name}
             </Text>
 
@@ -45,7 +50,12 @@ export default function Product({ product }) {
             </Text>
           </Box>
           <Flex textAlign="right" justify={"flex-end"}>
-            <Text fontWeight="bold" fontSize="xs" noOfLines={1}>
+            <Text
+              fontWeight="bold"
+              fontSize="xs"
+              noOfLines={1}
+              color="gray.600"
+            >
               $
               {(
                 (product.quantity * product.default_price.unit_amount) /

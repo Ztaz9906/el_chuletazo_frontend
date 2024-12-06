@@ -5,7 +5,7 @@ import { RiKeyLine, RiUser6Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
-const SideBarMovil = () => {
+const SideBarMovil = ({ onClose }) => {
   const location = useLocation();
   const user = useSelector((state) => state.user);
 
@@ -101,6 +101,7 @@ const SideBarMovil = () => {
               }}
               transition="all 0.2s"
               w={"full"}
+              onClick={onClose}
             >
               <Icon as={icon} boxSize={5} mr={2} />
               <Text fontSize="md" fontWeight="medium">
