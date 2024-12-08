@@ -136,7 +136,6 @@ const columns = [
     header: "Estado",
     accessorKey: "estado",
     cell: ({ getValue }) => {
-      const isMobile = window.innerWidth <= 768;
       return getStatusBadge(getValue());
     },
   },
@@ -152,7 +151,6 @@ export default function AdminPedidosTable({ pedidos, isLoading }) {
     columns,
     rows: pedidos,
   };
-  console.log(pedidos);
   return (
     <CTable
       data={dataTable}

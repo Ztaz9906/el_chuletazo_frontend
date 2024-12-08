@@ -17,11 +17,11 @@ import * as Yup from "yup";
 
 import { Pencil } from "lucide-react";
 import SelectField from "../../../../../ChakaraUI/FormField/SelectField/SelectField";
-import { usePatchPedidoMutation } from "../../../../../servicios/redux/api/Pedidos";
+import { useUpdateStatusMutation } from "../../../../../servicios/redux/api/Pedidos";
 
 const CambiarEstadoPedidoModal = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [patchPedido, { isLoading }] = usePatchPedidoMutation();
+  const [patchPedido, { isLoading }] = useUpdateStatusMutation();
   const toast = useToast();
 
   const options = [
@@ -40,9 +40,13 @@ const CambiarEstadoPedidoModal = ({ id }) => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const result = await patchPedido(id, {
+      console.log("id q le paso al mutate", id);
+      const data = {
+        id: id,
         estado: values.estado,
-      }).unwrap();
+      };
+      console.log("data", data);
+      const result = await patchPedido(data).unwrap();
 
       toast({
         title: "Estado actualizado",

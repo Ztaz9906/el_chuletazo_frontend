@@ -1,6 +1,7 @@
 import CTable from "@/ChakaraUI/Table/CTable.jsx";
 
 import { Badge, Stack } from "@chakra-ui/react";
+import ActivarUsuario from "./delete/ActivarUsuario";
 import DeleteUsuario from "./delete/DesactivarUsuario";
 import DynamicFilter from "./DynamicFilter";
 
@@ -40,7 +41,11 @@ const columns = [
     header: "Acciones",
     cell: ({ row }) => (
       <Stack direction="row" spacing={2} align={"center"}>
-        {row.original.is_active && <DeleteUsuario id={row.original.id} />}
+        {row.original.is_active ? (
+          <DeleteUsuario id={row.original.id} />
+        ) : (
+          <ActivarUsuario id={row.original.id} />
+        )}
       </Stack>
     ),
   },
