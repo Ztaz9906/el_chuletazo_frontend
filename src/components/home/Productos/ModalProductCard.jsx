@@ -1,4 +1,3 @@
-import { CustomNumberInput } from "@/components/home/Productos/ProductCard.jsx";
 import {
   deleteProduct,
   editQuantity,
@@ -24,6 +23,7 @@ import {
 import { Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import CustomNumberInput from "./CustomNumberInput";
 
 export default function ModalProductCard({ product }) {
   const dispatch = useDispatch();
