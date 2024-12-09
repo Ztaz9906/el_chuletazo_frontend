@@ -76,7 +76,7 @@ const Header = () => {
       onClick: handleLogout,
       icon: <LogOutIcon />,
     },
-  ];
+  ].filter(Boolean);
 
   const handleModalOpen = (isLoginMode = true) => {
     setIsLogin(isLoginMode);
