@@ -112,7 +112,7 @@ export default function MainStepper() {
         >
           <Box flex="1">
             <Box
-              h={["calc(100vh - 150px)", "calc(100vh - 270px)"]}
+              h={["calc(100vh - 270px)", "calc(100vh - 270px)"]}
               overflowY="auto"
               css={{
                 "&::-webkit-scrollbar": {

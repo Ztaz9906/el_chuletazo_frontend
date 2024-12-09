@@ -105,7 +105,7 @@ function MultiStepperForm({
       >
         {(formikProps) => {
           return (
-            <Form style={{ height: "100%", width: "100%" }}>
+            <Form style={{ height: "100dvh", width: "100%" }}>
               {children({ stepper, formikProps })}
             </Form>
           );
