@@ -22,22 +22,25 @@ import SideBar from "./SideBar";
 const ITEMS_PER_PAGE = 10;
 
 export default function Index() {
-  const { isLoading, data, error } = useGetProductoQuery();
   const [showAnimation, setShowAnimation] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [filter, setFilter] = useState(null);
   const isMobile = useBreakpointValue({ base: true, md: false });
+
+  const queryParams =
+    filter?.categories === "more_sales" ? { more_sales: true } : {};
+  const { isLoading, data, error, refetch } = useGetProductoQuery(queryParams);
+
   function CustomFilter(producto) {
     // Si no hay filtro, devolver true
-    console.log(filter);
-
     if (!filter) return true;
 
     // Búsqueda por término
     const contentMatch = !searchTerm
       ? true
       : (() => {
+          console.log(searchTerm);
           // Limpia y divide los términos de búsqueda
           const searchTerms = searchTerm.toLowerCase().trim().split(/\s+/);
 
@@ -52,7 +55,6 @@ export default function Index() {
           // Verifica que todos los términos estén presentes
           return searchTerms.every((term) => productContent.includes(term));
         })();
-    console.log(contentMatch);
 
     // Filtrado por precio
     const priceAmount = producto.default_price?.unit_amount || 0;
@@ -60,9 +62,15 @@ export default function Index() {
       ? true
       : priceAmount >= (filter.prices.min || 0) &&
         (filter.prices.max === null || priceAmount <= filter.prices.max);
-    console.log(priceMatch, priceAmount);
 
-    return contentMatch && priceMatch;
+    //Filtrado por categorias
+    const categoryMatch = !filter.categories
+      ? true
+      : filter.categories === "more_sales"
+        ? true
+        : producto.category === filter.categories;
+
+    return contentMatch && priceMatch && categoryMatch;
   }
 
   useEffect(() => {
@@ -70,7 +78,9 @@ export default function Index() {
       console.log("Products data:", data);
       setShowAnimation(true);
     }
-
+    if (filter?.categories === "more_sales") {
+      refetch();
+    }
     if (error) {
       console.error("Error fetching products:", error);
     }

@@ -13,12 +13,11 @@ const sidebarOptions = {
   categories: {
     title: "Categorías",
     options: [
-      "Todos los productos",
-      "Carne de Cerdo",
-      "Cerdo Ahumado",
-      "Embutidos",
-      "Bebidas",
-      "Los más vendidos",
+      { label: "Todos los productos", value: null },
+      { label: "Carne de Cerdo", value: "carne_cerdo" },
+      { label: "Cerdo Ahumado", value: "cerdo_aumado" },
+      { label: "Embutidos", value: "embutido" },
+      { label: "Los más vendidos", value: "more_sales" },
     ],
   },
   prices: {
@@ -35,7 +34,7 @@ const sidebarOptions = {
 };
 
 export default function SideBar({ setSearchTerm, onClose }) {
-  const [selectedOption, setSelectedOption] = useState("Todos los productos");
+  const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionPrice, setSelectedOptionPrice] = useState(null);
   const isMobile = useBreakpointValue({ base: true, md: false });
   function handleSelect() {
@@ -60,13 +59,13 @@ export default function SideBar({ setSearchTerm, onClose }) {
         <VStack align="start" spacing={2}>
           {sidebarOptions.categories.options.map((option) => (
             <Checkbox
-              key={option}
-              isChecked={selectedOption === option}
-              onChange={() => setSelectedOption(option)}
+              key={option.label}
+              isChecked={selectedOption === option.value}
+              onChange={() => setSelectedOption(option.value)}
               colorScheme="green"
               color={isMobile ? "#ffffff" : "#5D5D5D"}
             >
-              {option}
+              {option.label}
             </Checkbox>
           ))}
         </VStack>
