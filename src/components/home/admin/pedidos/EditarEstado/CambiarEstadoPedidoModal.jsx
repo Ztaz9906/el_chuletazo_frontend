@@ -15,13 +15,13 @@ import {
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
-import { FilePenLine } from "lucide-react";
+import { Pencil } from "lucide-react";
 import SelectField from "../../../../../ChakaraUI/FormField/SelectField/SelectField";
-import { usePatchPedidoMutation } from "../../../../../servicios/redux/api/Pedidos";
+import { useUpdateStatusMutation } from "../../../../../servicios/redux/api/Pedidos";
 
 const CambiarEstadoPedidoModal = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [patchPedido, { isLoading }] = usePatchPedidoMutation();
+  const [patchPedido, { isLoading }] = useUpdateStatusMutation();
   const toast = useToast();
 
   const options = [
@@ -40,9 +40,13 @@ const CambiarEstadoPedidoModal = ({ id }) => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const result = await patchPedido(id, {
+      console.log("id q le paso al mutate", id);
+      const data = {
+        id: id,
         estado: values.estado,
-      }).unwrap();
+      };
+      console.log("data", data);
+      const result = await patchPedido(data).unwrap();
 
       toast({
         title: "Estado actualizado",
@@ -71,7 +75,7 @@ const CambiarEstadoPedidoModal = ({ id }) => {
       <Tooltip label="Cambiar estado del pedido">
         <IconButton
           onClick={onOpen}
-          icon={<FilePenLine />}
+          icon={<Pencil />}
           size={"20px"}
           color={"gray"}
           _hover={{ color: "blue.500" }}

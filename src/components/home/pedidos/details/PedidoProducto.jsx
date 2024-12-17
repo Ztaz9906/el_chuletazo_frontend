@@ -1,13 +1,13 @@
 import { Box, Divider, Grid, Text } from "@chakra-ui/react";
 
-export default function PedidorProduct({ item }) {
+export default function PedidoProduct({ item }) {
   const { producto, cantidad } = item;
   const precioUnitario = producto.default_price.unit_amount / 100;
   const subtotal = precioUnitario * cantidad;
 
   return (
     <Box borderWidth={1} borderRadius="lg" bg="white" shadow="sm">
-      <Box h="200px">
+      <Box h={{ base: "150px", md: "200px" }}>
         <img
           src={producto.image}
           alt={producto.name}

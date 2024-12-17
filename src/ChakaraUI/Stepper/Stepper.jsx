@@ -65,35 +65,37 @@ function MultiStepperForm({
 
   return (
     <Flex direction={isMobile ? "row" : "column"} gap={6}>
-      <Stepper
-        colorScheme="main"
-        index={stepper.activeStep}
-        orientation={isMobile ? "vertical" : "horizontal"}
-        height={isMobile ? "auto" : "100px"}
-        gap="0"
-        px={2}
-        bg={"white"}
-      >
-        {steps.map((step, index) => (
-          <Step key={index} flexShrink={0}>
-            <StepIndicator>
-              <StepStatus
-                complete={<StepIcon />}
-                incomplete={<StepNumber />}
-                active={<StepNumber />}
-              />
-            </StepIndicator>
-            <Box flexShrink={1} minWidth="0" maxWidth="100%">
-              <ResponsiveStepContent
-                title={step.title}
-                description={step.description}
-                isMobile={isMobile}
-              />
-            </Box>
-            {!isMobile && <StepSeparator />}
-          </Step>
-        ))}
-      </Stepper>
+      {!isMobile && (
+        <Stepper
+          colorScheme="main"
+          index={stepper.activeStep}
+          orientation={isMobile ? "vertical" : "horizontal"}
+          height={isMobile ? "auto" : "100px"}
+          gap="0"
+          px={2}
+          bg={"white"}
+        >
+          {steps.map((step, index) => (
+            <Step key={index} flexShrink={0}>
+              <StepIndicator>
+                <StepStatus
+                  complete={<StepIcon />}
+                  incomplete={<StepNumber />}
+                  active={<StepNumber />}
+                />
+              </StepIndicator>
+              <Box flexShrink={1} minWidth="0" maxWidth="100%">
+                <ResponsiveStepContent
+                  title={step.title}
+                  description={step.description}
+                  isMobile={isMobile}
+                />
+              </Box>
+              {!isMobile && <StepSeparator />}
+            </Step>
+          ))}
+        </Stepper>
+      )}
       {/*<Divider />*/}
       <Formik
         initialValues={initialValues}
@@ -103,7 +105,7 @@ function MultiStepperForm({
       >
         {(formikProps) => {
           return (
-            <Form style={{ height: "100%" }}>
+            <Form style={{ height: "100dvh", width: "100%" }}>
               {children({ stepper, formikProps })}
             </Form>
           );

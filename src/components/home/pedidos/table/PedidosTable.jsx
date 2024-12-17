@@ -14,6 +14,7 @@ import {
 import { CircleDollarSign, CircleX, Info } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CustomAlertDialog from "../../../../ChakaraUI/AlertDialog/CustomAlertDialog";
 import CTable from "../../../../ChakaraUI/Table/CTable";
 
 // Función para obtener el badge del estado
@@ -104,22 +105,26 @@ const TableActions = ({ row }) => {
         />
       </Tooltip>
       {/* TODO: Implementar edición de pedidos mas adelante */}
-      <Tooltip label={isLoading ? "Cancelando" : "Cancelar pedido"}>
-        <IconButton
-          onClick={handleCancelled}
-          icon={<CircleX />}
-          size={"20px"}
-          color={"gray"}
-          _hover={{ color: "red.500" }}
-          variant={"none"}
-          aria-label={"Cancelar pedido"}
-          isDisabled={
-            row.original.estado.toLowerCase() !== "pendiente" || isLoading
-          }
-          cursor={"pointer"}
-          isLoading={isLoading}
-        />
-      </Tooltip>
+      <CustomAlertDialog
+        onConfirm={handleCancelled}
+        description="Esta acción es irreversible y cancelara el pedido realizado"
+      >
+        <Tooltip label={isLoading ? "Cancelando" : "Cancelar pedido"}>
+          <IconButton
+            icon={<CircleX />}
+            size={"20px"}
+            color={"gray"}
+            _hover={{ color: "red.500" }}
+            variant={"none"}
+            aria-label={"Cancelar pedido"}
+            isDisabled={
+              row.original.estado.toLowerCase() !== "pendiente" || isLoading
+            }
+            cursor={"pointer"}
+            isLoading={isLoading}
+          />
+        </Tooltip>
+      </CustomAlertDialog>
       <Tooltip label={isFetching ? "Procesando..." : "Pagar pedido"}>
         <IconButton
           onClick={handlePayment}
@@ -197,7 +202,6 @@ export default function PedidosTable({ pedidos, isLoading }) {
     columns,
     rows: pedidos,
   };
-  console.log(pedidos);
   return (
     <CTable
       data={dataTable}

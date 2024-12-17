@@ -1,19 +1,23 @@
 import { IconButton, Tooltip, useToast } from "@chakra-ui/react";
-import { CircleX } from "lucide-react";
+import { CheckCircleIcon } from "lucide-react";
 import CustomAlertDialog from "../../../../../../ChakaraUI/AlertDialog/CustomAlertDialog";
-import { useDeleteUsuariosMutation } from "../../../../../../servicios/redux/api/user";
+import { usePatchUserMutation } from "../../../../../../servicios/redux/api/user";
 
-export default function DeleteUsuario({ id }) {
-  const [deleteUsuario, { isLoading, error, isSuccess }] =
-    useDeleteUsuariosMutation();
+export default function ActivarUsuario({ id }) {
+  const [activarUsuario, { isLoading, error, isSuccess }] =
+    usePatchUserMutation();
   const toast = useToast();
-  async function handleDeleteUsuario() {
+  async function handleActivateUsuario() {
     try {
-      const res = await deleteUsuario(id);
+      const data = {
+        id: id,
+        is_active: true,
+      };
+      const res = await activarUsuario(data);
       if (res.data) {
         toast({
-          title: "Usuario desactivado",
-          description: "El Usuario fue desactivado",
+          title: "Usuario Activado",
+          description: "El Usuario fue activado",
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -22,7 +26,7 @@ export default function DeleteUsuario({ id }) {
       if (res.error) {
         toast({
           title: "Error",
-          description: res.error || "Error al desactivar el Usuario",
+          description: res.error || "Error al activar el Usuario",
           status: "error",
           duration: 5000,
           isClosable: true,
@@ -40,17 +44,17 @@ export default function DeleteUsuario({ id }) {
   }
   return (
     <CustomAlertDialog
-      onConfirm={handleDeleteUsuario}
-      description="Esta acción desactivara al usuario en el sistema y no lo podra usar mas"
+      onConfirm={handleActivateUsuario}
+      description="Esta acción reactivara al usuario en el sistema"
     >
-      <Tooltip label={isLoading ? "Desactivando..." : "Desactivar Usuario"}>
+      <Tooltip label={isLoading ? "Activando..." : "Activar Usuario"}>
         <IconButton
-          icon={<CircleX />}
+          icon={<CheckCircleIcon />}
           size={"20px"}
           color={"gray"}
-          _hover={{ color: "red.500" }}
+          _hover={{ color: "main.500" }}
           variant={"none"}
-          aria-label={"Desactivar Usuario"}
+          aria-label={"Activar Usuario"}
           cursor={"pointer"}
           isLoading={isLoading}
         />

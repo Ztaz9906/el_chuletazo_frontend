@@ -17,7 +17,7 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import { LogOutIcon, Settings } from "lucide-react";
+import { LogOutIcon, Settings, ShieldIcon } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -65,12 +65,18 @@ const Header = () => {
       onClick: () => navigate("/configuracion"),
       icon: <Settings />,
     },
+    user &&
+      user.is_staff && {
+        label: "Administracion",
+        onClick: () => navigate("/administracion"),
+        icon: <ShieldIcon />,
+      },
     {
       label: "Desconectarse",
       onClick: handleLogout,
       icon: <LogOutIcon />,
     },
-  ];
+  ].filter(Boolean);
 
   const handleModalOpen = (isLoginMode = true) => {
     setIsLogin(isLoginMode);

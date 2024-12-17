@@ -1,32 +1,38 @@
-import {
-  Box,
-  Button,
-  Grid,
-  HStack,
-  Text,
-  Tooltip,
-  VStack,
-  Divider,
-} from "@chakra-ui/react";
-import { Edit, Save } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { Formik, useFormikContext } from "formik";
-import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
 import CheckboxField from "@/ChakaraUI/FormField/CheckBox/CheckBox.jsx";
-import React, { useEffect, useState } from "react";
+import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
+import { formConfig as mainFormConfig } from "@/components/home/pedidos/Stepper/schema/formConfig.js";
+import { formConfig } from "@/components/home/pedidos/Stepper/steps/remitente/schema/formConfig.js";
 import { validationSchema } from "@/components/home/pedidos/Stepper/steps/remitente/schema/validations.js";
 import { usePatchUserMutation } from "@/servicios/redux/api/user/index.js";
 import { setUser } from "@/servicios/redux/slices/userSlice.js";
-import { formConfig } from "@/components/home/pedidos/Stepper/steps/remitente/schema/formConfig.js";
-import { formConfig as mainFormConfig } from "@/components/home/pedidos/Stepper/schema/formConfig.js";
+import {
+  Box,
+  Button,
+  Divider,
+  Flex,
+  Grid,
+  HStack,
+  Show,
+  Text,
+  Tooltip,
+  VStack,
+} from "@chakra-ui/react";
+import { Formik, useFormikContext } from "formik";
+import { Edit, Save } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const LabelValue = ({ label, value }) => (
-  <Box>
-    <Text fontSize="sm" fontWeight="bold" color="gray.600">
+  <Flex flexDirection={{ base: "row", md: "column" }} align="center" gap={1}>
+    <Text fontWeight="bold" fontSize="sm" color="gray.600">
       {label}
+      {""}
+      <Show below="md">: </Show>
     </Text>
-    <Text fontSize="md">{value || "-"}</Text>
-  </Box>
+    <Text fontSize="md" fontWeight="medium" color="gray.500">
+      {value || "-"}
+    </Text>
+  </Flex>
 );
 
 const RemitenteInputs = () => {
@@ -54,7 +60,7 @@ const RemitenteInputs = () => {
       if (error.data && error.data.phone) {
         setFieldError(
           formConfig.usuarioEnvio.telefono.name,
-          "Ya existe un usuario con ese numero de telefono",
+          "Ya existe un usuario con ese numero de telefono"
         );
       } else {
         console.log(error);
@@ -67,7 +73,7 @@ const RemitenteInputs = () => {
       apellidosEnvio: user.last_name || "",
       telefonoEnvio: user.phone || "",
     }),
-    [user],
+    [user]
   );
   return (
     <VStack>
@@ -87,11 +93,11 @@ const RemitenteInputs = () => {
             setFieldValue(formConfig.usuarioEnvio.nombre.name, user.first_name);
             setFieldValue(
               formConfig.usuarioEnvio.apellidos.name,
-              user.last_name,
+              user.last_name
             );
             setFieldValue(
               formConfig.usuarioEnvio.telefono.name,
-              user.phone || "",
+              user.phone || ""
             );
           }, [user, setFieldValue, editing]);
           return (
@@ -141,44 +147,56 @@ const RemitenteInputs = () => {
                 </Tooltip>
               </HStack>
               <Divider mb={4} borderColor="gray.300" />
-              <Box borderWidth={1} borderRadius="lg" w="full" p={4} bg="white" shadow="sm">
-              <Grid templateColumns="repeat(3, 1fr)" gap={2} w="full"margin={2}>
-                {editing ? (
-                  <>
-                    <InputField
-                      name={formConfig.usuarioEnvio.nombre.name}
-                      label={formConfig.usuarioEnvio.nombre.label}
-                    />
-                    <InputField
-                      name={formConfig.usuarioEnvio.apellidos.name}
-                      label={formConfig.usuarioEnvio.apellidos.label}
-                    />
-                    <InputField
-                      name={formConfig.usuarioEnvio.telefono.name}
-                      label={formConfig.usuarioEnvio.telefono.label}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <LabelValue
-                      label={formConfig.usuarioEnvio.nombre.label}
-                      value={values[formConfig.usuarioEnvio.nombre.name]}
-                    />
-                    <LabelValue
-                      label={formConfig.usuarioEnvio.apellidos.label}
-                      value={values[formConfig.usuarioEnvio.apellidos.name]}
-                    />
-                    <LabelValue
-                      label={formConfig.usuarioEnvio.telefono.label}
-                      value={values[formConfig.usuarioEnvio.telefono.name]}
-                    />
-                  </>
-                )}
-              </Grid>
-              <CheckboxField
-                name={mainFormConfig.direccionFacturacionIgual.name}
-                label={mainFormConfig.direccionFacturacionIgual.label}
-              />
+              <Box
+                borderWidth={1}
+                borderRadius="lg"
+                w="full"
+                p={4}
+                bg="white"
+                shadow="sm"
+              >
+                <Grid
+                  templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+                  gap={2}
+                  w="full"
+                  margin={2}
+                >
+                  {editing ? (
+                    <>
+                      <InputField
+                        name={formConfig.usuarioEnvio.nombre.name}
+                        label={formConfig.usuarioEnvio.nombre.label}
+                      />
+                      <InputField
+                        name={formConfig.usuarioEnvio.apellidos.name}
+                        label={formConfig.usuarioEnvio.apellidos.label}
+                      />
+                      <InputField
+                        name={formConfig.usuarioEnvio.telefono.name}
+                        label={formConfig.usuarioEnvio.telefono.label}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <LabelValue
+                        label={formConfig.usuarioEnvio.nombre.label}
+                        value={values[formConfig.usuarioEnvio.nombre.name]}
+                      />
+                      <LabelValue
+                        label={formConfig.usuarioEnvio.apellidos.label}
+                        value={values[formConfig.usuarioEnvio.apellidos.name]}
+                      />
+                      <LabelValue
+                        label={formConfig.usuarioEnvio.telefono.label}
+                        value={values[formConfig.usuarioEnvio.telefono.name]}
+                      />
+                    </>
+                  )}
+                </Grid>
+                <CheckboxField
+                  name={mainFormConfig.direccionFacturacionIgual.name}
+                  label={mainFormConfig.direccionFacturacionIgual.label}
+                />
               </Box>
               {errors.remitenteValidado && (
                 <Box
@@ -200,7 +218,6 @@ const RemitenteInputs = () => {
           );
         }}
       </Formik>
-      
     </VStack>
   );
 };

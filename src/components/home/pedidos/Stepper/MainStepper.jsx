@@ -24,7 +24,7 @@ const getActiveStep = (activeStep) => {
       return <ConfirmationStep />;
     default:
       return (
-        <Center flexDirection={"column"} gap={2}>
+        <Center flexDirection={"column"} gap={2} h={"100%"}>
           <Box
             rounded={"full"}
             borderColor={"green.200"}
@@ -106,14 +106,13 @@ export default function MainStepper() {
       {({ stepper, formikProps }) => (
         <Flex
           direction="column"
-          h="calc(100vh - 200px)"
           p={4}
           bg="rgba(255, 255, 255, 0.6)"
           boxShadow="lg"
         >
-          <Box flex="1" overflow="hidden">
+          <Box flex="1">
             <Box
-              h="100%"
+              h={["calc(100vh - 270px)", "calc(100vh - 270px)"]}
               overflowY="auto"
               css={{
                 "&::-webkit-scrollbar": {

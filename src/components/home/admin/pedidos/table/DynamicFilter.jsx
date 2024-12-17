@@ -59,7 +59,7 @@ const DynamicFilter = ({
     { value: "pendiente", label: "Pendiente" },
     { value: "pagado", label: "Pagado" },
     { value: "enviado", label: "Enviado" },
-    { value: "completado", label: "Completado" },
+    { value: "entregado", label: "Entregado" },
     { value: "cancelado", label: "Cancelado" },
   ];
   return (

@@ -1,4 +1,3 @@
-import fondo from "/fondo_2.png";
 import ModalProductCard from "@/components/home/Productos/ModalProductCard.jsx";
 import { clearCart } from "@/servicios/redux/slices/productSliece.js";
 import {
@@ -21,6 +20,7 @@ import {
 import { ShoppingCart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import fondo from "/fondo_2.png";
 
 export default function ModalCart({ textColor = "white" }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,13 +73,14 @@ export default function ModalCart({ textColor = "white" }) {
           </Badge>
         )}
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent
           p={3}
           bgImage={`url(${fondo})`}
           bgSize="cover"
           bgPosition="center"
+          mx={2}
           maxH="80vh"
           maxW="600px"
         >
