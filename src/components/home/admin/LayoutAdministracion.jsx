@@ -1,13 +1,16 @@
 import fondo from "@/assets/fondo_1.png";
 import Header from "@/components/header/Header.jsx";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useBreakpointValue } from "@chakra-ui/react";
+import { Shield } from "lucide-react";
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import AdminSidebar from "./AdminSidebar";
+import CustomDrawer from "../../../ChakaraUI/Drawer/CustomDrawer";
+import AdminSidebar from "./Sidebar/AdminSidebar";
+import AdminSidebarMovil from "./Sidebar/AdminSidebarMovil";
 
 const LayoutAdministracion = () => {
   const user = useSelector((state) => state.user);
-  console.log("ProtectedRoute -> user", user);
+  const isMobile = useBreakpointValue({ base: true, md: false });
   // Check if user exists and is a superadmin (using is_staff)
   const isAllowed = user && user.is_staff;
 
@@ -37,9 +40,30 @@ const LayoutAdministracion = () => {
           backgroundSize="cover"
           backgroundPosition="center"
         >
-          <AdminSidebar />
-          <Box px={8} py={2} w={"full"} h={"100vh"}>
+          {!isMobile && <AdminSidebar />}
+          <Box px={8} py={2} w={"full"} h={"100vh"} position={"relative"}>
             <Outlet />
+            {isMobile && (
+              <CustomDrawer
+                trigger={
+                  <Box
+                    bg="main.500"
+                    position="fixed"
+                    bottom="20px"
+                    left="20px"
+                    zIndex={1000}
+                    borderRadius="full"
+                    p={3}
+                    boxShadow="lg"
+                    cursor="pointer"
+                  >
+                    <Shield size={24} color="#ffffff" strokeWidth={1.5} />
+                  </Box>
+                }
+                title={"Administracion"}
+                menu={<AdminSidebarMovil />}
+              />
+            )}
           </Box>
         </Flex>
       </div>

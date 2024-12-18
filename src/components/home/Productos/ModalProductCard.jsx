@@ -80,7 +80,11 @@ export default function ModalProductCard({ product }) {
             boxSize="full"
             objectFit="cover"
           />
-          <Text fontSize="md" fontWeight="bold" textColor={"green"}>
+          <Text
+            fontSize={["14px", "16px"]}
+            fontWeight="bold"
+            textColor={"green"}
+          >
             ${(product.default_price.unit_amount / 100).toFixed(2)}{" "}
             {product.default_price.currency.toUpperCase()}/lb
           </Text>
@@ -88,7 +92,7 @@ export default function ModalProductCard({ product }) {
 
         <VStack align="start" spacing={4} flex={2}>
           <Text
-            fontSize="16px"
+            fontSize={["14px", "16px", "18px"]}
             color="#5D5D5D"
             fontWeight="medium"
             isTruncated
@@ -98,7 +102,7 @@ export default function ModalProductCard({ product }) {
           </Text>
           <Divider color={"#7A7A7A"} borderWidth={"1px"} />
           <Text
-            fontSize="14px"
+            fontSize={["12px", "14px", "16px"]}
             noOfLines={2}
             fontWeight={"normal"}
             textAlign="center"
@@ -127,22 +131,35 @@ export default function ModalProductCard({ product }) {
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
         onClose={onClose}
+        isCentered
       >
         <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+          <AlertDialogContent mx={2}>
+            <AlertDialogHeader
+              fontSize={["16px", "18px", "20px"]}
+              fontWeight="bold"
+            >
               Eliminar Producto del Carrito
             </AlertDialogHeader>
 
-            <AlertDialogBody>
+            <AlertDialogBody fontSize={["14px", "16px"]}>
               ¿Está seguro de que desea eliminar este producto del carrito?
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={handleKeepProduct}>
+              <Button
+                ref={cancelRef}
+                onClick={handleKeepProduct}
+                fontSize={["12px", "14px"]}
+              >
                 Mantener
               </Button>
-              <Button colorScheme="red" onClick={handleRemoveProduct} ml={3}>
+              <Button
+                colorScheme="red"
+                onClick={handleRemoveProduct}
+                ml={3}
+                fontSize={["12px", "14px"]}
+              >
                 Eliminar
               </Button>
             </AlertDialogFooter>

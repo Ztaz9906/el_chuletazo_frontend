@@ -58,6 +58,7 @@ export default function ModalCart({ textColor = "white" }) {
         h="10"
         leftIcon={<Icon as={ShoppingCart} />}
         position="relative"
+        fontSize={["14px", "16px", "18px"]} // Responsivo
       >
         Mi Carrito
         {cart.length > 0 && (
@@ -67,7 +68,7 @@ export default function ModalCart({ textColor = "white" }) {
             position="absolute"
             top="-1"
             left="-1"
-            fontSize="0.8em"
+            fontSize={["0.6em", "0.8em"]} // Responsivo
           >
             {cart.length}
           </Badge>
@@ -88,6 +89,7 @@ export default function ModalCart({ textColor = "white" }) {
             <HStack w="full" justify={"space-between"}>
               <Text
                 fontWeight="bold"
+                fontSize={["14px", "16px", "18px"]} // Responsivo
                 color={"#494949"}
               >{`Mi Carrito > Productos`}</Text>
               {cart.length > 0 && (
@@ -98,8 +100,9 @@ export default function ModalCart({ textColor = "white" }) {
                   mr={3}
                   w={"120px"}
                   h={"35px"}
+                  fontSize={["12px", "14px", "16px"]} // Responsivo
                 >
-                  Vaciar Carriro
+                  Vaciar Carrito
                 </Button>
               )}
             </HStack>
@@ -108,7 +111,9 @@ export default function ModalCart({ textColor = "white" }) {
           <ModalBody p={2} overflowY="auto">
             <VStack spacing={2}>
               {cart.length === 0 ? (
-                <Text>No tienes productos en tu carrito</Text>
+                <Text fontSize={["14px", "16px"]}>
+                  No tienes productos en tu carrito
+                </Text>
               ) : (
                 cart.map((product) => (
                   <ModalProductCard key={product.id} product={product} />
@@ -118,10 +123,18 @@ export default function ModalCart({ textColor = "white" }) {
           </ModalBody>
           <ModalFooter>
             <HStack w="full">
-              <Text fontWeight="bold" color={"#494949"}>
+              <Text
+                fontWeight="bold"
+                color={"#494949"}
+                fontSize={["14px", "16px"]}
+              >
                 Total:
               </Text>
-              <Text fontWeight="bold" color={"#494949"}>
+              <Text
+                fontWeight="bold"
+                color={"#494949"}
+                fontSize={["14px", "16px"]}
+              >
                 ${total.toFixed(2)}
               </Text>
               <Spacer />
@@ -130,6 +143,7 @@ export default function ModalCart({ textColor = "white" }) {
                 colorScheme="cart"
                 mr={3}
                 onClick={onClose}
+                fontSize={["12px", "14px", "16px"]} // Responsivo
               >
                 Cerrar
               </Button>
@@ -137,6 +151,7 @@ export default function ModalCart({ textColor = "white" }) {
                 colorScheme="main"
                 textColor={"white"}
                 onClick={handleComprarClick}
+                fontSize={["12px", "14px", "16px"]} // Responsivo
               >
                 Comprar
               </Button>

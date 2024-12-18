@@ -1,12 +1,15 @@
 import {
   Drawer,
   DrawerBody,
-  DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  HStack,
+  IconButton,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { X } from "lucide-react";
 import { cloneElement } from "react";
 
 const CustomDrawer = ({
@@ -30,8 +33,19 @@ const CustomDrawer = ({
           backdropFilter="blur(10px)"
           color="white"
         >
-          <DrawerCloseButton />
-          <DrawerHeader>{title}</DrawerHeader>
+          <DrawerHeader>
+            <HStack justify={"space-between"} w={"full"}>
+              <Text>{title}</Text>
+              <IconButton
+                icon={<X />}
+                onClick={onClose}
+                color={"white"}
+                variant="ghost"
+                aria-label="Close"
+                zIndex={1000}
+              />
+            </HStack>
+          </DrawerHeader>
           <DrawerBody>{clonedMenu}</DrawerBody>
         </DrawerContent>
       </Drawer>

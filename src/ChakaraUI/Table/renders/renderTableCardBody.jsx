@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { flexRender } from "@tanstack/react-table";
 // Modular body rendering for card view
 export const renderCardBody = (table, isLoading, columns, isMobile) => {
@@ -38,7 +38,9 @@ export const renderCardBody = (table, isLoading, columns, isMobile) => {
   return (
     <Flex direction="column" gap={4} p={4}>
       {table.getRowModel().rows.map((row) => (
-        <Box
+        <Flex
+          flexDirection={"column"}
+          justify={"flex-start"}
           key={row.id}
           border="1px solid"
           borderColor="gray.200"
@@ -53,8 +55,9 @@ export const renderCardBody = (table, isLoading, columns, isMobile) => {
               mb={2}
               alignItems="center"
               fontSize={isMobile ? "12px" : "14px"}
+              lineHeight="1.5"
             >
-              <Text fontWeight="bold" mr={2} minWidth="150px" color="#51616D">
+              <Text fontWeight="bold" mr={2} color="#51616D">
                 {cell.column.columnDef.header}:
               </Text>
               <Text color="#51616D">
@@ -62,7 +65,7 @@ export const renderCardBody = (table, isLoading, columns, isMobile) => {
               </Text>
             </Flex>
           ))}
-        </Box>
+        </Flex>
       ))}
     </Flex>
   );
