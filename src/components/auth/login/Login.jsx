@@ -80,7 +80,7 @@ const Login = ({ onClose, toggleAuthMode }) => {
                   isLoading={isSubmitting}
                   loadingText="Iniciando sesión"
                   spinner={<Spinner />}
-                  w="40%"
+                  w="80%"
                   bg={buttonColors.elegant.bg}
                   color="white"
                   _hover={{
