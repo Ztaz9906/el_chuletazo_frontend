@@ -1,6 +1,6 @@
-import { Grid } from "@chakra-ui/react";
 import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
 import { formConfig } from "@/components/auth/sing-up/schema/form.js";
+import { Grid } from "@chakra-ui/react";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -44,13 +44,13 @@ const SingUpForm = () => {
         rightIcon={
           showPassword ? (
             <EyeOffIcon
-              color={"#FFFFFF80"}
+              color={"#000000"}
               onClick={() => setShowPassword(!showPassword)}
               cursor="pointer"
             />
           ) : (
             <EyeIcon
-              color={"grey"}
+              color={"#000000"}
               onClick={() => setShowPassword(!showPassword)}
               cursor="pointer"
             />
@@ -70,13 +70,13 @@ const SingUpForm = () => {
         rightIcon={
           showConfirmPassword ? (
             <EyeOffIcon
-              color={"#FFFFFF80"}
+              color={"#000000"}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               cursor="pointer"
             />
           ) : (
             <EyeIcon
-              color={"grey"}
+              color={"#000000"}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               cursor="pointer"
             />

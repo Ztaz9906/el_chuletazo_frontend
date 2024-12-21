@@ -1,6 +1,6 @@
-import { Grid } from "@chakra-ui/react";
 import InputField from "@/ChakaraUI/FormField/InputField/InputField.jsx";
 import { formConfig } from "@/components/auth/login/schema/form.js";
+import { Grid } from "@chakra-ui/react";
 import { EyeIcon, EyeOffIcon, LockIcon, User } from "lucide-react";
 import { useState } from "react";
 
@@ -32,13 +32,13 @@ const LoginForm = () => {
         rightIcon={
           showPassword ? (
             <EyeIcon
-              color={"#FFFFFF80"}
+              color={"#000000"}
               onClick={() => setShowPassword(!showPassword)}
               cursor="pointer"
             />
           ) : (
             <EyeOffIcon
-              color={"#FFFFFF80"}
+              color={"#000000"}
               onClick={() => setShowPassword(!showPassword)}
               cursor="pointer"
             />

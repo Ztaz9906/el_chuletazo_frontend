@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { CircleChevronLeft } from "lucide-react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import CanceledBanner from "./CanceledBanner";
 import PedidoProductList from "./PedidoProductList";
 
@@ -30,6 +31,9 @@ const LabelValue = ({ label, value }) => {
 
 export default function PedidoDetails({ data, isLoading }) {
   const user = useSelector((state) => state.user);
+  const location = useLocation();
+  const previousUrl = location.state?.previousUrl || "/pedidos";
+  console.log(previousUrl);
   if (!data) {
     return <Text>No hay datos disponibles</Text>;
   }
@@ -45,7 +49,7 @@ export default function PedidoDetails({ data, isLoading }) {
             spacing={2}
             justify={"space-between"}
             as={Link}
-            href="/pedidos"
+            href={previousUrl}
             transition="transform 0.2s"
             _hover={{
               textDecoration: "none",

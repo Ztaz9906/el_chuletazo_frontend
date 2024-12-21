@@ -161,12 +161,12 @@ const Activate = () => {
           </>
         ) : (
           <Link
-            href="/login"
+            href="/"
             color="main.500"
             fontSize={"14px"}
             fontWeight={"medium"}
           >
-            Iniciar sesión
+            Ir al inicio
           </Link>
         )}
       </VStack>
