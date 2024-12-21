@@ -1,4 +1,3 @@
-import DynamicFilter from "@/components/home/pedidos/table/DynamicFilter.jsx";
 import {
   useCancelPedidoMutation,
   useGetCheckOutQuery,
@@ -17,6 +16,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CTable from "../../../../../ChakaraUI/Table/CTable";
 import CambiarEstadoPedidoModal from "../EditarEstado/CambiarEstadoPedidoModal";
+import DynamicFilter from "./DynamicFilter";
 
 // Función para obtener el badge del estado
 const getStatusBadge = (status) => {
