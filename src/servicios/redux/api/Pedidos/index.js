@@ -4,6 +4,7 @@ export {
   useLazyGetPedidoByIdQuery,
 } from "@/servicios/redux/api/Pedidos/get/getById.js";
 export { useGetCheckOutQuery } from "@/servicios/redux/api/Pedidos/get/getCheckOut.js";
+export { useGetPdfDataQuery } from "@/servicios/redux/api/Pedidos/get/getPdfData.js";
 export { useCancelPedidoMutation } from "@/servicios/redux/api/Pedidos/patch/canelled";
 export { usePatchPedidoMutation } from "@/servicios/redux/api/Pedidos/patch/patch.js";
 export { useUpdateStatusMutation } from "@/servicios/redux/api/Pedidos/patch/status.js";
