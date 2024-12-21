@@ -153,7 +153,12 @@ const columns = [
     accessorFn: (row) => row.created_at,
     cell: ({ getValue }) => {
       const date = new Date(getValue());
-      return date.toLocaleDateString();
+      return date.toLocaleDateString("es-ES", {
+        timeZone: "UTC",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
     },
   },
   {

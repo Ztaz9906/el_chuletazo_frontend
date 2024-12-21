@@ -31,8 +31,17 @@ const DynamicFilter = ({
 
       const searchMatch = rowValues.includes(searchValue);
       const estadoMatch = !estado || row.original.estado === estado;
-      const rowDate = new Date(row.original.created_at);
-      const dateMatch = !date || rowDate.toISOString().split("T")[0] === date;
+      // Normalizar fechas (solo día, mes y año)
+      const normalizeDate = (date) => {
+        console.log("antes de normalizar la fecha", date);
+        const d = new Date(date);
+        return `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`;
+      };
+
+      const rowDate = normalizeDate(row.original.created_at);
+      const filterDate = date ? normalizeDate(date) : null;
+      console.log(rowDate, filterDate);
+      const dateMatch = !filterDate || rowDate === filterDate;
 
       return searchMatch && dateMatch && estadoMatch;
     },

@@ -9,6 +9,7 @@ import {
 
 import { SearchIcon } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { useGetPdfDataQuery } from "../../../../../servicios/redux/api/Pedidos";
 
 const DynamicFilter = ({
   setGlobalFilterFunction,
@@ -20,7 +21,8 @@ const DynamicFilter = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [date, setDate] = useState("");
   const [estado, setEstado] = useState("");
-
+  const { data } = useGetPdfDataQuery({ fecha: date });
+  console.log("Datos para el PDF", data);
   const globalFilterFn = useCallback(
     (row) => {
       const searchValue = searchTerm.toLowerCase();
@@ -34,6 +36,7 @@ const DynamicFilter = ({
 
       // Normalizar fechas (solo día, mes y año)
       const normalizeDate = (date) => {
+        console.log("antes de normalizar la fecha", date);
         const d = new Date(date);
         return `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`;
       };

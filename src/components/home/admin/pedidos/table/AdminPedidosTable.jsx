@@ -69,7 +69,11 @@ const TableActions = ({ row }) => {
     <Stack direction="row" spacing={2} align={"center"}>
       <Tooltip label="Ver detalles">
         <IconButton
-          onClick={() => navigation(`/pedidos/detalles/${row.original.id}`)}
+          onClick={() =>
+            navigation(`/pedidos/detalles/${row.original.id}`, {
+              state: { previousUrl: "/administracion/orderlist" },
+            })
+          }
           icon={<Info />}
           size={"20px"}
           colorScheme={"gray"}
@@ -97,7 +101,12 @@ const columns = [
     accessorFn: (row) => row.created_at,
     cell: ({ getValue }) => {
       const date = new Date(getValue());
-      return date.toLocaleDateString();
+      return date.toLocaleDateString("es-ES", {
+        timeZone: "UTC",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
     },
   },
 
