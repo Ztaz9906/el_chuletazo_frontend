@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#ignore magnament packages
+package-lock.json
+yarn.lock
