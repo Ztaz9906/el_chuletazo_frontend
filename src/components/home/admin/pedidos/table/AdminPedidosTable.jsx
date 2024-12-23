@@ -1,9 +1,12 @@
+// src/components/home/pedidos/table/AdminPedidosTable.jsx
+
 import {
   useCancelPedidoMutation,
   useGetCheckOutQuery,
 } from "@/servicios/redux/api/Pedidos/index.js";
 import {
   Badge,
+  Button,
   IconButton,
   Stack,
   Text,
@@ -17,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import CTable from "../../../../../ChakaraUI/Table/CTable";
 import CambiarEstadoPedidoModal from "../EditarEstado/CambiarEstadoPedidoModal";
 import DynamicFilter from "./DynamicFilter";
+import generatePDF from "@/utils/generateOrderPDF"; 
 
 // Función para obtener el badge del estado
 const getStatusBadge = (status) => {
@@ -41,12 +45,11 @@ const TableActions = ({ row }) => {
   const toast = useToast();
   const [checkoutId, setCheckoutId] = useState(null);
   const navigation = useNavigate();
-  // Use the query hook with conditional fetching
   const { data, error, isFetching } = useGetCheckOutQuery(checkoutId, {
-    skip: !checkoutId, // Only fetch when we have an ID
+    skip: !checkoutId,
   });
   const [canelar, { isLoading }] = useCancelPedidoMutation();
-  // Handle data and error effects
+  
   useEffect(() => {
     if (data?.checkout_url) {
       window.location.href = data.checkout_url;
@@ -59,12 +62,14 @@ const TableActions = ({ row }) => {
         duration: 5000,
         isClosable: true,
       });
-      setCheckoutId(null); // Reset ID on error
+      setCheckoutId(null);
     }
   }, [data, error, toast]);
+
   const canChangeState =
     row.original.estado.toLowerCase() === "pagado" ||
     row.original.estado.toLowerCase() === "enviado";
+
   return (
     <Stack direction="row" spacing={2} align={"center"}>
       <Tooltip label="Ver detalles">
@@ -83,7 +88,6 @@ const TableActions = ({ row }) => {
           cursor={"pointer"}
         />
       </Tooltip>
-      {/* TODO: Implementar edición de pedidos mas adelante */}
       {canChangeState && <CambiarEstadoPedidoModal id={row.original.id} />}
     </Stack>
   );
@@ -94,7 +98,6 @@ const columns = [
     header: "Pedido",
     accessorKey: "id",
   },
-
   {
     header: "Fecha",
     accessorKey: "created_at_date",
@@ -109,7 +112,6 @@ const columns = [
       });
     },
   },
-
   {
     header: "Destinatario",
     accessorKey: "destinatario",
@@ -136,7 +138,6 @@ const columns = [
     header: "Provincia",
     accessorKey: "destinatario_provincia",
     cell: ({ row }) => {
-      // Safely access the province name
       const provincia = row.original.destinatario?.provincia?.name || "N/A";
       return provincia;
     },
@@ -150,7 +151,6 @@ const columns = [
   },
   {
     header: "Acciones",
-
     cell: TableActions,
   },
 ];
@@ -160,11 +160,26 @@ export default function AdminPedidosTable({ pedidos, isLoading }) {
     columns,
     rows: pedidos,
   };
+
+  const handleGeneratePDF = () => {
+    generatePDF(pedidos); // Genera el PDF con todos los pedidos
+    console.log("Generando PDF...");
+  };
+
   return (
-    <CTable
-      data={dataTable}
-      DynamicFilters={DynamicFilter}
-      isLoading={isLoading}
-    />
+    <>
+      <Button 
+        colorScheme="blue" 
+        onClick={handleGeneratePDF} 
+        mb={4}
+      >
+        Generar PDF de Todos los Pedidos
+      </Button>
+      <CTable
+        data={dataTable}
+        DynamicFilters={DynamicFilter}
+        isLoading={isLoading}
+      />
+    </>
   );
 }
