@@ -5,6 +5,7 @@ import {
   InputLeftElement,
   Select,
   Text,
+  Button,
 } from "@chakra-ui/react";
 
 import { SearchIcon } from "lucide-react";
@@ -16,6 +17,7 @@ const DynamicFilter = ({
   setGlobalFilterValue,
   filteredRowsCount,
   totalRowsCount,
+  onExportarPedidos, // Añadir la función como prop
 }) => {
   console.log("Filtro de pedidos en administracion");
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,6 +70,7 @@ const DynamicFilter = ({
     setGlobalFilterFunction,
     setGlobalFilterValue,
   ]);
+  
   const options = [
     { value: "pendiente", label: "Pendiente" },
     { value: "pagado", label: "Pagado" },
@@ -75,6 +78,7 @@ const DynamicFilter = ({
     { value: "entregado", label: "Entregado" },
     { value: "cancelado", label: "Cancelado" },
   ];
+  
   return (
     <>
       <Flex direction={{ base: "column", md: "row" }} gap={4} mb={4}>
@@ -139,6 +143,12 @@ const DynamicFilter = ({
             ? `${totalRowsCount} resultados`
             : `${filteredRowsCount} de ${totalRowsCount} resultados`}
         </Text>
+        <Button 
+          colorScheme="green" 
+          onClick={onExportarPedidos} 
+        >
+          Exportar Pedidos
+        </Button>
       </Flex>
     </>
   );
