@@ -89,7 +89,7 @@ const SignUp = ({ onClose, toggleAuthMode }) => {
                 <Button
                   type="submit"
                   mt={3}
-                  w="40%"
+                  w="80%"
                   isLoading={isSubmitting}
                   loadingText="Registrando"
                   spinner={<Spinner />}
