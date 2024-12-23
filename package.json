@@ -36,6 +36,10 @@
     "yup": "^1.4.0",
     "serve": "^14.0.0"
   },
+  "packageManager": "pnpm@9.6.0",
+  "engines": {
+    "node": "20.13.1"
+  },
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
