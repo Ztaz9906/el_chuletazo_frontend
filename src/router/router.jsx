@@ -1,6 +1,4 @@
 import Layout from "@/components/Layout.jsx";
-import Login from "@/components/auth/login/Login.jsx";
-import SignUp from "@/components/auth/sing-up/SingUp.jsx";
 import Index from "@/components/home/Productos/index.jsx";
 import LayoutAdministracion from "@/components/home/admin/LayoutAdministracion";
 import LayOutConfiguracion from "@/components/home/configuration/Layout/LayOutConfiguracion";
@@ -21,6 +19,10 @@ import DatosPersonales from "../components/home/configuration/datos_personales/D
 import Details from "../components/home/pedidos/details/Details";
 
 const router = createBrowserRouter([
+  {
+    path: "activate/:token",
+    element: <Activate />,
+  },
   {
     path: "",
     children: [
@@ -103,18 +105,6 @@ const router = createBrowserRouter([
         element: <DatosPersonales />,
       },
     ],
-  },
-  {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "activate/:token",
-    element: <Activate />,
-  },
-  {
-    path: "sign-up",
-    element: <SignUp />,
   },
 ]);
 

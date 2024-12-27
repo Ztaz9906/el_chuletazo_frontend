@@ -1,9 +1,7 @@
 // src/components/home/pedidos/table/AdminPedidosTable.jsx
 
-import {
-  useCancelPedidoMutation,
-  useGetCheckOutQuery,
-} from "@/servicios/redux/api/Pedidos/index.js";
+import { useGetCheckOutQuery } from "@/servicios/redux/api/Pedidos/index.js";
+import generatePDF from "@/utils/generateOrderPDF";
 import {
   Badge,
   Button,
@@ -20,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import CTable from "../../../../../ChakaraUI/Table/CTable";
 import CambiarEstadoPedidoModal from "../EditarEstado/CambiarEstadoPedidoModal";
 import DynamicFilter from "./DynamicFilter";
-import generatePDF from "@/utils/generateOrderPDF"; 
 
 // Función para obtener el badge del estado
 const getStatusBadge = (status) => {
@@ -48,8 +45,7 @@ const TableActions = ({ row }) => {
   const { data, error, isFetching } = useGetCheckOutQuery(checkoutId, {
     skip: !checkoutId,
   });
-  const [canelar, { isLoading }] = useCancelPedidoMutation();
-  
+
   useEffect(() => {
     if (data?.checkout_url) {
       window.location.href = data.checkout_url;
@@ -168,11 +164,7 @@ export default function AdminPedidosTable({ pedidos, isLoading }) {
 
   return (
     <>
-      <Button 
-        colorScheme="blue" 
-        onClick={handleGeneratePDF} 
-        mb={4}
-      >
+      <Button colorScheme="blue" onClick={handleGeneratePDF} mb={4}>
         Generar PDF de Todos los Pedidos
       </Button>
       <CTable
