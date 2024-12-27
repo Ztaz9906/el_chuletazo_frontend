@@ -1,16 +1,14 @@
-// src/components/home/pedidos/table/AdminPedidosTable.jsx
-
 import { useGetCheckOutQuery } from "@/servicios/redux/api/Pedidos/index.js";
 import generatePDF from "@/utils/generateOrderPDF";
+
 import {
   Badge,
-  Button,
   IconButton,
   Stack,
   Text,
   Tooltip,
-  useToast,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import { Info } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -19,12 +17,10 @@ import CTable from "../../../../../ChakaraUI/Table/CTable";
 import CambiarEstadoPedidoModal from "../EditarEstado/CambiarEstadoPedidoModal";
 import DynamicFilter from "./DynamicFilter";
 
-// Función para obtener el badge del estado
 const getStatusBadge = (status) => {
   switch (status.toLowerCase()) {
     case "pendiente":
       return <Badge colorScheme="yellow">{status}</Badge>;
-
     case "pagado":
       return <Badge colorScheme="green">{status}</Badge>;
     case "enviado":
@@ -164,12 +160,14 @@ export default function AdminPedidosTable({ pedidos, isLoading }) {
 
   return (
     <>
-      <Button colorScheme="blue" onClick={handleGeneratePDF} mb={4}>
-        Generar PDF de Todos los Pedidos
-      </Button>
       <CTable
         data={dataTable}
-        DynamicFilters={DynamicFilter}
+        DynamicFilters={(props) => (
+          <DynamicFilter
+            {...props}
+            onExportarPedidos={handleGeneratePDF} // Pasar la función aquí
+          />
+        )}
         isLoading={isLoading}
       />
     </>
