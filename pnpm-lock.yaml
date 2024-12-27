@@ -80,6 +80,9 @@ importers:
       serve:
         specifier: ^14.0.0
         version: 14.2.4
+      vite:
+        specifier: ^5.3.4
+        version: 5.4.11
       yup:
         specifier: ^1.4.0
         version: 1.6.1
@@ -114,9 +117,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.7
         version: 3.4.17
-      vite:
-        specifier: ^5.3.4
-        version: 5.4.11
 
 packages:
 
